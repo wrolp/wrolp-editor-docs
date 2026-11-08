@@ -252,6 +252,22 @@ function rewriteLinks(html, { lang, slug, from, assets }) {
   });
 }
 
+function rewriteImgs(html, { assets }) {
+  // The READMEs embed screenshots from the editor repo's branding/shots/; on the site they
+  // live under assets/img/shots/. The logo keeps its existing mapping.
+  return html.replace(/(<img\s[^>]*?src=")([^"]*)(")/g, (whole, pre, src, post) => {
+    if (/^(https?:)?\/\//i.test(src) || src.startsWith('data:')) return whole;
+    const base = src.replace(/^\.\//, '');
+    if (/^branding\/shots\//i.test(base)) {
+      return `${pre}${assets}img/shots/${base.slice('branding/shots/'.length)}${post}`;
+    }
+    if (/^branding\//i.test(base)) {
+      return `${pre}${assets}img/${base.slice('branding/'.length).replace(/^logo\./, 'logo.')}${post}`;
+    }
+    return whole;
+  });
+}
+
 function injectHeadingIds(html, headings) {
   let i = 0;
   return html.replace(/<h([1-6])(?:\s[^>]*)?>([\s\S]*?)<\/h\1>/g, (whole, depth, inner) => {
@@ -421,6 +437,7 @@ for (const lang of LANGS) {
 
     let content = rawHtml[lang].get(page.slug);
     content = rewriteLinks(content, { lang, slug: page.slug, from, assets });
+    content = rewriteImgs(content, { assets });
     content = injectHeadingIds(content, headings);
     content = decorate(content);
 

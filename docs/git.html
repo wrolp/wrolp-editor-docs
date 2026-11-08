@@ -104,11 +104,13 @@
         <p class="doc-description">Staging, commits, branches, three-way merge, and fetch/pull/push over HTTPS or SSH.</p>
       </header>
       
-      <div class="prose"><p>The fourth sidebar view is the set of real git repositories behind the group&#39;s folder: the one
+      <div class="prose"><p><img src="../assets/img/shots/source-panel.png" alt="The Source Control panel: changes, commit box and history"></p>
+<p>The fourth sidebar view is the set of real git repositories behind the group&#39;s folder: the one
 the folder sits in (possibly above it), the ones found in its subdirectories, and any added by
 hand. A compact list at the top switches between them; the panel below is the single-repository
 panel described here. This is the opposite of <a href="history.html">Version history</a>, which is a
 private store per file and never touches the folders you edit.</p>
+<p><img src="../assets/img/shots/source-diff.png" alt="The working tree of a changed file diffed against its index"></p>
 <ul>
 <li><strong>Repositories.</strong> Settings → Git → <em>Subdirectory depth</em> bounds the scan (0–5, default 2). The
 scan does not enter a repository it has found, skips <code>node_modules</code>, <code>target</code>, <code>dist</code>, bare

@@ -105,6 +105,7 @@
       </header>
       
       <div class="prose"><p>一个加密文件是<strong>一个自描述的容器</strong>，不是「加了密的 txt」：靠 magic 字节识别，与扩展名无关。</p>
+<p><img src="../../assets/img/shots/encrypt-dialog.png" alt="为新建加密文件设置口令的对话框"></p>
 <blockquote>
 <p><strong>口令丢了，文件就丢了。</strong> 没有主口令、没有恢复码、没有后门。密钥由口令加上每个文件自己的随机 salt
 经 Argon2id 派生，我们只存密文，不存任何能反推出口令的东西。</p>
@@ -170,6 +171,7 @@
 不算脏。这类标签也不会被「从磁盘重新载入」清屏。</li>
 <li>会话恢复时加密标签排队问口令，一个对话框逐个来；输错就地重试，不出队。</li>
 </ul>
+<p><img src="../../assets/img/shots/unlock-dialog.png" alt="会话恢复时为加密标签弹出的解锁对话框"></p>
 <h2 id="记住口令可选默认不记">记住口令（可选，默认不记）<a class="anchor-link" href="#%E8%AE%B0%E4%BD%8F%E5%8F%A3%E4%BB%A4%E5%8F%AF%E9%80%89%E9%BB%98%E8%AE%A4%E4%B8%8D%E8%AE%B0">#</a></h2>
 <ul>
 <li>只有勾了「在这台电脑上记住口令」才存，存进 <strong>Windows 凭据管理器</strong>：service 是 <code>com.wrolp.editor</code>，

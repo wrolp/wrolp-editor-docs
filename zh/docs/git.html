@@ -104,9 +104,11 @@
         <p class="doc-description">暂存、提交、分支、三栏合并，以及 HTTPS / SSH 上的 fetch、pull、push。</p>
       </header>
       
-      <div class="prose"><p>侧栏第四个视图是分组目录背后的一组真实 git 仓库：分组目录所在的仓库（可能位于更上层）、在子目录里
+      <div class="prose"><p><img src="../../assets/img/shots/source-panel.png" alt="源码管理面板：改动列表、提交框与历史"></p>
+<p>侧栏第四个视图是分组目录背后的一组真实 git 仓库：分组目录所在的仓库（可能位于更上层）、在子目录里
 扫描到的仓库，以及手动添加的仓库。顶部列表用于切换；下方仍是这里描述的单仓库面板。这一点与
 <a href="history.html">版本记录</a>相反：后者是按文件存起来的私有历史，从不写入你编辑的目录。</p>
+<p><img src="../../assets/img/shots/source-diff.png" alt="改动文件的工作区内容与索引做 diff"></p>
 <ul>
 <li><strong>仓库列表</strong>。设置 → Git → <em>子目录深度</em> 控制扫描范围（0–5，默认 2）。扫描遇到仓库就不再进入，
 并跳过 <code>node_modules</code>、<code>target</code>、<code>dist</code>、裸仓库以及符号链接/联接点；子模块与链接工作树请用

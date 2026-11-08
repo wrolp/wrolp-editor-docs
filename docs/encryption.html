@@ -106,6 +106,7 @@
       
       <div class="prose"><p>An encrypted file is a <strong>self-describing container</strong>, not a &quot;txt that happens to be encrypted&quot;:
 it is recognised by its magic bytes, never by its extension.</p>
+<p><img src="../assets/img/shots/encrypt-dialog.png" alt="The dialog that sets the password of a new encrypted file"></p>
 <blockquote>
 <p><strong>Lose the password, lose the file.</strong> There is no master password, no recovery code and no
 back door. The key is derived from the password plus a per-file random salt with Argon2id, and
@@ -187,6 +188,7 @@ of the dirty flag; a reload from disk cannot wipe it either.</li>
 <li>On session restore, encrypted tabs queue for their passwords and one dialog asks them in turn. A
 wrong password is retried in place rather than dropping the question.</li>
 </ul>
+<p><img src="../assets/img/shots/unlock-dialog.png" alt="The unlock dialog shown for an encrypted tab on session restore"></p>
 <h2 id="remembering-passwords-opt-in-off-by-default">Remembering passwords (opt-in, off by default)<a class="anchor-link" href="#remembering-passwords-opt-in-off-by-default">#</a></h2>
 <ul>
 <li>Only ticking &quot;Remember this password on this computer&quot; stores anything, and it goes into the

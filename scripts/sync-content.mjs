@@ -1,4 +1,4 @@
-import { copyFile, mkdir } from 'node:fs/promises';
+import { copyFile, mkdir, readdir } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -25,4 +25,15 @@ for (const [from, to] of files) {
   await copyFile(join(source, from), target);
   console.log(`${from} -> ${to}`);
 }
+
+// Screenshots the READMEs embed as branding/shots/*.png land under assets/img/shots/.
+const shotsSource = join(source, 'branding', 'shots');
+const shotsTarget = join(root, 'assets', 'img', 'shots');
+await mkdir(shotsTarget, { recursive: true });
+for (const file of await readdir(shotsSource)) {
+  if (!file.endsWith('.png')) continue;
+  await copyFile(join(shotsSource, file), join(shotsTarget, file));
+  console.log(`branding/shots/${file} -> assets/img/shots/${file}`);
+}
+
 console.log(`\nSynced from ${source}`);
