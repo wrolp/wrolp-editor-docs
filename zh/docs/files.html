@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>文件操作 · WROLP Editor</title>
+<meta name="description" content="批量重命名、配置备份快照与只读并排对比。">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0d0e13">
+<link rel="icon" href="../../assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../../assets/icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../../assets/icons/icon-256.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>
+(function(){try{var s=localStorage.getItem('wrolp-theme');var t=s||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
+</head>
+<body class="is-docs">
+<a class="skip-link" href="#main">跳到正文</a>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2.4"/><circle cx="6" cy="19" r="2.4"/><circle cx="18" cy="9" r="2.4"/><path d="M6 7.4v9.2M18 11.4c0 3.2-3.6 3.4-6 4.2-1.6.5-3.4 1-3.4 2.4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7M12 14.6v2.2"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24"><path d="M3.6 12a8.4 8.4 0 1 0 2.6-6.1M3.4 4.6v4.2h4.2"/><path d="M12 7.8V12l3 1.9"/></symbol>
+  <symbol id="i-markdown" viewBox="0 0 24 24"><rect x="2.6" y="5.4" width="18.8" height="13.2" rx="2.2"/><path d="M6 15.4V8.6l3 3.6 3-3.6v6.8M16.4 8.6v6.8M16.4 15.4l2-2.2M16.4 15.4l-2-2.2"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M13.4 2.8H7a2 2 0 0 0-2 2v14.4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.4z"/><path d="M13.2 2.9v5.3h5.5M8.4 13h1.2a1.5 1.5 0 0 1 0 3H8.4v-3zM8.4 16v2.4M13.4 13v5.4h1.2a1.6 1.6 0 0 0 1.6-1.6v-2.2a1.6 1.6 0 0 0-1.6-1.6z"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M4.6 5.4A1.8 1.8 0 0 1 6.4 3.6h9.4L20.4 8v10.6a1.8 1.8 0 0 1-1.8 1.8H6.4a1.8 1.8 0 0 1-1.8-1.8z"/><path d="M8 3.8v5h7v-5M8 20.2v-6h8v6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.2A8.4 8.4 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.6v11M7.6 10.2L12 14.6l4.4-4.4M4.4 18.4v1.2a.8.8 0 0 0 .8.8h13.6a.8.8 0 0 0 .8-.8v-1.2"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.6-4.5 4.9.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.2z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.6h6a3 3 0 0 1 3 3v11.8a2.4 2.4 0 0 0-2.4-2.4H4z"/><path d="M20 4.6h-6a3 3 0 0 0-3 3v11.8a2.4 2.4 0 0 1 2.4-2.4H20z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8.4 6.4h11M8.4 12h11M8.4 17.6h11M4.4 6.4h.01M4.4 12h.01M4.4 17.6h.01"/></symbol>
+</svg>
+
+<header class="site-header" data-header>
+  <div class="shell header-inner">
+    <a class="brand" href="../index.html" aria-label="WROLP Editor">
+      <img class="brand-mark" src="../../assets/img/logo.svg" alt="" width="32" height="32">
+      <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <a class="nav-link" href="../index.html#features">功能特性</a>
+      <a class="nav-link" aria-current=&quot;page&quot; href="index.html">文档</a>
+      <a class="nav-link" href="changelog.html">更新日志</a>
+      <a class="nav-link nav-link-icon" href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span>GitHub</span>
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="lang-switch" href="../../docs/files.html" hreflang="en" lang="en">English</a>
+      <button class="icon-btn" type="button" data-theme-toggle data-label-dark="切换到深色主题" data-label-light="切换到浅色主题" aria-label="切换到浅色主题" title="切换到浅色主题">
+        <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm header-download" href="https://github.com/wrolp/wrolp-editor/releases/latest" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span>下载</span>
+      </a>
+      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="打开导航">
+        <svg class="icon icon-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<div class="docs-layout">
+  <button class="docs-nav-toggle" type="button" data-docs-toggle aria-expanded="false" aria-controls="docs-sidebar">
+    <svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>文档目录
+    <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+  </button>
+
+  <aside class="docs-sidebar" id="docs-sidebar" data-docs-sidebar>
+    <nav class="docs-nav" aria-label="文档目录">
+      <div class="docs-nav-group"><p class="docs-nav-heading">使用指南</p><ul class="docs-nav-list"><li><a href="index.html">概览</a></li><li><a href="editor.html">编辑器与窗口</a></li><li><a href="preview.html">PDF 与图片</a></li><li><a href="files.html" aria-current="page">文件操作</a></li><li><a href="history.html">版本记录</a></li><li><a href="git.html">源码管理</a></li><li><a href="encryption.html">加密文件</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">参考</p><ul class="docs-nav-list"><li><a href="data.html">数据存放位置</a></li><li><a href="development.html">开发指南</a></li><li><a href="changelog.html">发行说明</a></li><li><a href="license.html">许可证</a></li></ul></div>
+    </nav>
+  </aside>
+  <div class="docs-backdrop" data-docs-backdrop hidden></div>
+
+  <div class="docs-main">
+    <div class="docs-toolbar">
+      <nav class="breadcrumb" aria-label="面包屑">
+        <a href="../index.html">首页</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <a href="index.html">文档</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <span aria-current="page">文件操作</span>
+      </nav>
+      <a class="source-link" href="https://github.com/wrolp/wrolp-editor/blob/main/README.zh.md" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>在 GitHub 上查看源文件
+      </a>
+    </div>
+
+    <article class="doc-article">
+      <header class="doc-header">
+        <h1>文件操作</h1>
+        <p class="doc-description">批量重命名、配置备份快照与只读并排对比。</p>
+      </header>
+      
+      <div class="prose"><h2 id="批量重命名">批量重命名<a class="anchor-link" href="#%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D">#</a></h2>
+<p>在资源管理器里一次改很多个名字：<code>Ctrl+点击</code> 选中多行（<code>Shift+点击</code> 选连续一段），再点行菜单里的「批量重命名 N 项…」。整个文件夹不必先选中——文件夹自己的菜单、以及文件菜单里（作用于它所在的文件夹）都有「批量重命名此文件夹…」，资源管理器当前目录则在空白处的菜单里。</p>
+<p>所有名字都先算好、检查过才动磁盘，被拒绝时文件夹保持原样。对话框一边输入一边列出每行的新名字，与同批另一行撞名的会标出来。</p>
+<p>两种规则：</p>
+<ul>
+<li><strong>规则</strong> —— 把名字拆成 token：<code>{name}</code> 是原名（不含扩展名），<code>{ext}</code> 是扩展名（含点），<code>{n}</code> 是序号。<code>{name}{ext}</code> 什么都不改；<code>photo-{n}{ext}</code> 给整个目录编号；<code>{name}-backup{ext}</code> 给每个名字加后缀。序号从「起始序号」开始，按「补零位数」补零，得到 <code>01</code>、<code>02</code>… 而不是 <code>1</code>、<code>2</code>…。</li>
+<li><strong>正则</strong> —— 对完整文件名（含扩展名）匹配，再替换。<code>$1</code> 引用分组，勾上「忽略大小写」等价于加 <code>i</code>，没有匹配到的行保持原名。替换串里同样可以用 <code>{name}</code>、<code>{ext}</code>、<code>{n}</code>，所以分组和序号能一起用：<code>^(.+)\.jpe?g$</code> → <code>photo-{n}-$1.jpg</code>。</li>
+</ul>
+<p>序号按<strong>列表里的行</strong>计数，不按匹配到的行：正则模式下没匹配上的行也占一个号，这样只改一部分文件时编号不会乱跳。</p>
+<p>应用之前可以先排序——原顺序、名称（数字按数值比较，<code>photo-9</code> 在 <code>photo-10</code> 前）、扩展名、修改时间、手动——并在升序、降序之间切换。拖动整行，或用悬停时出现的箭头微调顺序，<code>{n}</code> 跟着屏幕上的顺序走，可以一直调到编号读起来正确为止。与批外已有条目撞名的，后端会拒绝并提示，而不是覆盖；一个文件夹和它里面的条目不能在同一批里一起改。</p>
+<p>改名后，正在显示该文件的标签会保留文本、光标和未保存的编辑。该文档的撤销栈会从头开始，因为 Monaco 没有把缓冲区换到另一个路径的接口。预览里太长而被截断的名字，鼠标悬停会显示完整名称。</p>
+<h2 id="配置备份">配置备份<a class="anchor-link" href="#%E9%85%8D%E7%BD%AE%E5%A4%87%E4%BB%BD">#</a></h2>
+<p>设置 → 备份 会保存配置的时间戳副本——分组记录丢了就等于标签会话丢了，而这件事没有撤销。默认目录是
+<code>%APPDATA%\com.wrolp.editor\wrolp\backups</code>；「更改…」可选别的目录，「改用默认目录」回到默认。目录与
+保留数量都存在 <code>settings.json</code>（<code>backupDir</code>、<code>backupRetain</code>）。</p>
+<ul>
+<li><strong>一份快照一个文件。</strong> 文件名是 <code>wrolp-backup-&lt;YYYYMMDD-HHMMSS-mmm&gt;-&lt;类型&gt;.json</code>，类型为 <code>auto</code>、
+<code>manual</code> 或 <code>pre-restore</code>。把几个文件打进一条记录而不是逐个复制，是因为分组和它的文件夹菜单由
+分组 id 绑在一起：只恢复其中一个，就可能让菜单指向一个已经不存在的分组。</li>
+<li><strong>里面有什么：</strong> <code>settings.json</code>、<code>groups.json</code>、<code>file-settings.json</code>、<code>history.json</code> 和
+<code>folder-history.json</code>，每个都按它当时的原始文本保存。<strong>不含草稿和版本历史</strong>——那些是用户数据而不是
+配置，复制它们会让快照涨到它所保护的工作那么大。快照本身和它复制的文件一样，是明文 JSON。</li>
+<li><strong>自动与手动。</strong> 当天的自动快照在应用打开和关闭时各刷新一次，所以它总停在那次切换时的配置。每次刷新
+会替换当天更早的自动快照，手动快照不受影响；窗口跨夜一直开着时，由每小时的检查补上。「立即备份」随时
+可以另存一份手动快照。「保留快照数」（1–100，默认 20）在写下一份快照时执行，所以调低数字不会立刻
+删除旧文件。</li>
+<li><strong>恢复。</strong> 列表按新的在前，显示时间、类型、所含分组/标签数量和大小。选中一份会再确认一次，然后先
+冲刷草稿与分组、为当前状态做一份 <code>pre-restore</code> 安全快照、替换那五个文件并重新加载窗口。草稿不在
+快照里，所以它能挺过恢复和重载。恢复不碰 <code>window.json</code>，窗口停在原地。</li>
+<li><strong>只认这个目录、这种名字。</strong> 后端会拒绝备份目录之外的路径、名字不是 <code>wrolp-backup-*.json</code> 的文件、
+比它认识的格式更新的快照，以及损坏的快照——列表直接不显示损坏的那些，而不是提供恢复。</li>
+</ul>
+<h2 id="文件对比">文件对比<a class="anchor-link" href="#%E6%96%87%E4%BB%B6%E5%AF%B9%E6%AF%94">#</a></h2>
+<p>任选两个内容做只读并排 diff，落在一个独立的比对标签页里（标题形如 <code>a.txt ↔ b.txt</code>）。</p>
+<ul>
+<li><strong>任一侧都可以是未保存的内容。</strong> 标签的 buffer（含未命名标签）与磁盘文件完全同权：未保存 vs 已保存、
+未保存 vs 未保存都能比。左侧是你发起比对的那个标签——比的是它<strong>当前</strong>的内容，不是磁盘；右侧从选择器里
+已打开的内容中挑，或用「浏览文件…」选一个没打开的文件。</li>
+<li><strong>同一个文件的未保存版本</strong>走标签右键的「与已保存版本比对」：左 = 磁盘新读、右 = 编辑器里的 buffer，
+侧名带「· 磁盘上 / · 未保存」，与文件被外部改写时的冲突对比取向一致。</li>
+<li><strong>快照语义。</strong> 比对打开那一刻两侧的文本被冻进标签页，之后继续编辑源内容不会更新它；<strong>重跑同一次比对</strong>
+（同一对来源、同一顺序）即为刷新。比对标签页右键可以交换左右。默认只保留一个比对标签页：新的对比替换
+屏幕上的那一个（重跑同一对仍是原地刷新）；在 设置 → 通用 关闭「比对复用同一个标签页」后，改为每次对比
+单独开一个标签。</li>
+<li><strong>只看变更。</strong> 头部的折叠按钮只保留改动行及其前后各几行上下文，隐藏未改动的段落，旁边写明隐藏了
+多少行。标签里的快照不受影响，展开即恢复全文；但折叠状态下行号属于折叠后的文本，编辑器内的查找与
+复制也只能覆盖可见片段。</li>
+<li><strong>只读。</strong> 比对视图不能编辑；要改哪个文件就打开哪个文件。</li>
+<li><strong>选择器徽标：</strong>「未保存」= 该标签有没落盘的编辑；「未命名」= 背后没有文件。图片、设置页和比对标签页
+不作为任何一侧出现；同一个来源不会同时出现在左右（磁盘 vs 磁盘、buffer vs buffer 会被拒，
+buffer vs 磁盘放行——这正是「与已保存版本比对」）。</li>
+<li>比对标签页是临时的：不进分组存储，重开应用不复活。关闭源标签不影响已打开的比对（它拿着自己的快照），
+只是再也无法刷新；此时重跑会提示「那个标签页已关闭」。</li>
+</ul>
+</div>
+    </article>
+
+    <nav class="doc-pager" aria-label="文档翻页"><a class="pager-link is-prev" href="preview.html">
+      <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>上一页</span>
+      <span class="pager-name">PDF 与图片</span>
+    </a><a class="pager-link is-next" href="history.html">
+      <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>下一页</span>
+      <span class="pager-name">版本记录</span>
+    </a></nav>
+  </div>
+
+  <aside class="docs-toc" aria-label="本页目录">
+    <div class="toc-inner">
+      <p class="toc-title">本页目录</p>
+      <ul class="toc-list"><li class="toc-h2"><a href="#%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D">批量重命名</a></li><li class="toc-h2"><a href="#%E9%85%8D%E7%BD%AE%E5%A4%87%E4%BB%BD">配置备份</a></li><li class="toc-h2"><a href="#%E6%96%87%E4%BB%B6%E5%AF%B9%E6%AF%94">文件对比</a></li></ul>
+      <a class="toc-top" href="#main">回到顶部</a>
+    </div>
+  </aside>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../index.html" aria-label="WROLP Editor">
+        <img class="brand-mark" src="../../assets/img/logo.svg" alt="" width="28" height="28">
+        <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+      </a>
+      <p class="footer-tagline">一款 Windows 本地文本编辑器。</p>
+      <p class="footer-copy">MIT © 2026 wrolp</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h2 class="footer-heading">产品</h2>
+        <a href="../index.html#features">功能特性</a>
+        <a href="../index.html#download">下载</a>
+        <a href="changelog.html">更新日志</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">资源</h2>
+        <a href="index.html">文档</a>
+        <a href="license.html">MIT 许可证</a>
+        <a href="https://github.com/wrolp/wrolp-editor/issues" rel="noopener noreferrer" target="_blank">问题反馈</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">源码</h2>
+        <a href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="https://github.com/wrolp/wrolp-editor/releases" rel="noopener noreferrer" target="_blank">Releases</a>
+        <a href="https://github.com/wrolp/wrolp-editor.github.io" rel="noopener noreferrer" target="_blank">本站源码</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>

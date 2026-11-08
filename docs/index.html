@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview · WROLP Editor</title>
+<meta name="description" content="What WROLP Editor is, and what each module does.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0d0e13">
+<link rel="icon" href="../assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../assets/icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/icons/icon-256.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+(function(){try{var s=localStorage.getItem('wrolp-theme');var t=s||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
+</head>
+<body class="is-docs">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2.4"/><circle cx="6" cy="19" r="2.4"/><circle cx="18" cy="9" r="2.4"/><path d="M6 7.4v9.2M18 11.4c0 3.2-3.6 3.4-6 4.2-1.6.5-3.4 1-3.4 2.4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7M12 14.6v2.2"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24"><path d="M3.6 12a8.4 8.4 0 1 0 2.6-6.1M3.4 4.6v4.2h4.2"/><path d="M12 7.8V12l3 1.9"/></symbol>
+  <symbol id="i-markdown" viewBox="0 0 24 24"><rect x="2.6" y="5.4" width="18.8" height="13.2" rx="2.2"/><path d="M6 15.4V8.6l3 3.6 3-3.6v6.8M16.4 8.6v6.8M16.4 15.4l2-2.2M16.4 15.4l-2-2.2"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M13.4 2.8H7a2 2 0 0 0-2 2v14.4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.4z"/><path d="M13.2 2.9v5.3h5.5M8.4 13h1.2a1.5 1.5 0 0 1 0 3H8.4v-3zM8.4 16v2.4M13.4 13v5.4h1.2a1.6 1.6 0 0 0 1.6-1.6v-2.2a1.6 1.6 0 0 0-1.6-1.6z"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M4.6 5.4A1.8 1.8 0 0 1 6.4 3.6h9.4L20.4 8v10.6a1.8 1.8 0 0 1-1.8 1.8H6.4a1.8 1.8 0 0 1-1.8-1.8z"/><path d="M8 3.8v5h7v-5M8 20.2v-6h8v6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.2A8.4 8.4 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.6v11M7.6 10.2L12 14.6l4.4-4.4M4.4 18.4v1.2a.8.8 0 0 0 .8.8h13.6a.8.8 0 0 0 .8-.8v-1.2"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.6-4.5 4.9.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.2z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.6h6a3 3 0 0 1 3 3v11.8a2.4 2.4 0 0 0-2.4-2.4H4z"/><path d="M20 4.6h-6a3 3 0 0 0-3 3v11.8a2.4 2.4 0 0 1 2.4-2.4H20z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8.4 6.4h11M8.4 12h11M8.4 17.6h11M4.4 6.4h.01M4.4 12h.01M4.4 17.6h.01"/></symbol>
+</svg>
+
+<header class="site-header" data-header>
+  <div class="shell header-inner">
+    <a class="brand" href="../index.html" aria-label="WROLP Editor">
+      <img class="brand-mark" src="../assets/img/logo.svg" alt="" width="32" height="32">
+      <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <a class="nav-link" href="../index.html#features">Features</a>
+      <a class="nav-link" aria-current=&quot;page&quot; href="index.html">Docs</a>
+      <a class="nav-link" href="changelog.html">Changelog</a>
+      <a class="nav-link nav-link-icon" href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span>GitHub</span>
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="lang-switch" href="../zh/docs/index.html" hreflang="zh-CN" lang="zh-CN">中文</a>
+      <button class="icon-btn" type="button" data-theme-toggle data-label-dark="Switch to dark theme" data-label-light="Switch to light theme" aria-label="Switch to light theme" title="Switch to light theme">
+        <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm header-download" href="https://github.com/wrolp/wrolp-editor/releases/latest" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span>Download</span>
+      </a>
+      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+        <svg class="icon icon-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<div class="docs-layout">
+  <button class="docs-nav-toggle" type="button" data-docs-toggle aria-expanded="false" aria-controls="docs-sidebar">
+    <svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>Documentation pages
+    <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+  </button>
+
+  <aside class="docs-sidebar" id="docs-sidebar" data-docs-sidebar>
+    <nav class="docs-nav" aria-label="Documentation pages">
+      <div class="docs-nav-group"><p class="docs-nav-heading">Guides</p><ul class="docs-nav-list"><li><a href="index.html" aria-current="page">Overview</a></li><li><a href="editor.html">Editor &amp; window</a></li><li><a href="preview.html">PDFs &amp; pictures</a></li><li><a href="files.html">Working with files</a></li><li><a href="history.html">Version history</a></li><li><a href="git.html">Source control</a></li><li><a href="encryption.html">Encrypted files</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">Reference</p><ul class="docs-nav-list"><li><a href="data.html">Where data lives</a></li><li><a href="development.html">Development</a></li><li><a href="changelog.html">Release notes</a></li><li><a href="license.html">License</a></li></ul></div>
+    </nav>
+  </aside>
+  <div class="docs-backdrop" data-docs-backdrop hidden></div>
+
+  <div class="docs-main">
+    <div class="docs-toolbar">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <a href="index.html">Documentation</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <span aria-current="page">Overview</span>
+      </nav>
+      <a class="source-link" href="https://github.com/wrolp/wrolp-editor/blob/main/README.md" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>View source on GitHub
+      </a>
+    </div>
+
+    <article class="doc-article">
+      <header class="doc-header">
+        <h1>Overview</h1>
+        <p class="doc-description">What WROLP Editor is, and what each module does.</p>
+      </header>
+      <p class="hub-lead">Everything below comes from the project README and release notes, and tracks the release.</p><div class="hub-grid"><a class="hub-card" href="editor.html">
+      <span class="hub-card-title">Editor &amp; window<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>Keyboard shortcuts, tab groups, window state and interface language.</p>
+    </a><a class="hub-card" href="preview.html">
+      <span class="hub-card-title">PDFs &amp; pictures<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>PDF paper, bookmarks and auto-scroll, plus the four views of the folder gallery.</p>
+    </a><a class="hub-card" href="files.html">
+      <span class="hub-card-title">Working with files<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>Batch rename, configuration backup snapshots and read-only side-by-side comparison.</p>
+    </a><a class="hub-card" href="history.html">
+      <span class="hub-card-title">Version history<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>Per-file private history: recording, comparing, restoring, and how it differs from git.</p>
+    </a><a class="hub-card" href="git.html">
+      <span class="hub-card-title">Source control<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>Staging, commits, branches, three-way merge, and fetch/pull/push over HTTPS or SSH.</p>
+    </a><a class="hub-card" href="encryption.html">
+      <span class="hub-card-title">Encrypted files<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>The AES-256-GCM container, the three ways in, unlocking, the idle lock, passwords and drafts.</p>
+    </a><a class="hub-card" href="data.html">
+      <span class="hub-card-title">Where data lives<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>Every file under the configuration directory, and the Tauri commands the frontend calls.</p>
+    </a><a class="hub-card" href="development.html">
+      <span class="hub-card-title">Development<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>Requirements, local development, building an installer, release gates and scripts.</p>
+    </a><a class="hub-card" href="changelog.html">
+      <span class="hub-card-title">Release notes<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>Features, fixes and internal changes in v0.0.3, v0.0.2 and v0.0.1.</p>
+    </a><a class="hub-card" href="license.html">
+      <span class="hub-card-title">License<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>WROLP Editor is released under the MIT license.</p>
+    </a></div>
+      <div class="prose"><p>A small local text editor for Windows.</p>
+<p>Built on Tauri v2 + React + TypeScript, with Monaco Editor as the editing surface.</p>
+<h2 id="feature-overview">Feature overview<a class="anchor-link" href="#feature-overview">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tabs</td>
+<td>One window, many files; per-tab dirty marker, tab list dropdown, right-click menu on a tab with close all / close to the left / close to the right</td>
+</tr>
+<tr>
+<td>Editing</td>
+<td>Monaco: syntax highlighting by extension, minimap, multi-model per file, cursor restored per tab</td>
+</tr>
+<tr>
+<td>Saving</td>
+<td><code>Ctrl+S</code> writes the file and clears its draft; a never-saved <code>Untitled-N</code> tab goes through Save As. Two cleanups are optional and off by default: trimming trailing whitespace, and adding a final line break a file is missing — both are applied to the buffer first, so the screen ends up showing the bytes written</td>
+</tr>
+<tr>
+<td>Unsaved changes</td>
+<td>Lines that differ from the file on disk are tinted — green where text was added, amber where saved text was replaced — and the marks clear on save. The workbench has this built in; the standalone editor needs the comparison, which is <code>src/lib/dirtyDiff.ts</code></td>
+</tr>
+<tr>
+<td>Line endings</td>
+<td>Read from the file and written back as they are. One file can be forced to LF or CRLF from that tab&#39;s File settings, and a document with no breaks yet — a new file above all — takes what Settings → General names. The status bar shows the ending a save will write. A lone CR is not offered: Monaco&#39;s model joins lines with LF or CRLF and nothing else</td>
+</tr>
+<tr>
+<td>Drafts</td>
+<td>Debounced ~500 ms after each edit; also flushed on tab switch, tab close and window blur</td>
+</tr>
+<tr>
+<td>Auto-save</td>
+<td>Off by default. On, the file <strong>on screen</strong> is written once it has gone N seconds without an edit — typing restarts that file&#39;s countdown, so the write lands on a pause rather than mid-sentence. A tab you are not looking at neither starts a countdown nor loses one already running, and its unsaved text stays held by its draft. Untitled buffers, locked files, pictures, and anything the disk check already has a question about are left alone. Its writes record no version unless Settings → Versions says otherwise</td>
+</tr>
+<tr>
+<td>Restore</td>
+<td>On open, disk content is compared with the draft; a differing draft is loaded back and the tab stays marked unsaved. Settings can switch this to a per-file Restore / Discard dialog</td>
+</tr>
+<tr>
+<td>Sidebar</td>
+<td>Explorer file tree (lazy folders, refresh button, folders first and names in natural order — <code>2.txt</code> before <code>10.txt</code>), a History list of recently opened files, a Versions view, and a Source Control view. Drag the divider to resize (180–640 px, double-click resets); the width is persisted. The tree&#39;s text size is a setting, 11–20 px</td>
+</tr>
+<tr>
+<td>Markdown preview</td>
+<td>A <code>.md</code> tab renders beside its source: GitHub-flavoured markdown, a table of contents, code coloured by Monaco, <code>mermaid</code> / <code>plantuml</code> / <code>graphviz</code> fences drawn as SVG, and pictures that sit beside the document loaded through the asset protocol. What the document spells in HTML is rendered too, within an allow-list: the tags that mean something in a document, inline <code>style</code> filtered down to presentational properties, and no script, event handler, <code>&lt;style&gt;</code> block or <code>id</code></td>
+</tr>
+<tr>
+<td>PDF reading</td>
+<td>A <code>.pdf</code> is drawn by pdf.js in place of the text editor: pages in one continuous column, fitted to the pane or at a typed size (25–400 %), on white, warm, green or night paper, or a colour of your own. The document&#39;s own bookmarks open in a column from a corner tab, on either edge (Settings → Preview), folding a branch at a time or the whole tree at once and jumping to the page a title names. Automatic scroll runs at a pace you set and stops on a wheel or a double click. The page you leave comes back per file</td>
+</tr>
+<tr>
+<td>Picture gallery</td>
+<td>A whole folder in one tab, in natural order (<code>IMG_2</code> before <code>IMG_10</code>): stacked, one at a time, slideshow, or a grid. Subfolders are opt-in and walked four levels deep; one listing stops at 2,000 pictures and says so. Pictures are drawn through the asset protocol, so the editor&#39;s text-size limit does not apply. HEIC and TIFF are listed and marked as formats this renderer cannot draw</td>
+</tr>
+<tr>
+<td>Batch rename</td>
+<td>Multi-select rows or rename a whole folder at once; one pattern (<code>{name}</code>, <code>{ext}</code>, <code>{n}</code>) or a regular expression with a replacement, a live preview, and an order — name, extension, modified time or manual — that <code>{n}</code> counts. See <a href="files.html#batch-rename">Batch rename</a></td>
+</tr>
+<tr>
+<td>Version history</td>
+<td>Off by default. On, every save by hand records what the file said, and any two of them — a version against a version, or either against what is open — can be compared side by side, folded down to the changes, or put back into the editor. One file&#39;s saves can be excluded, or forced in, from its tab menu. See <a href="history.html">Version history</a></td>
+</tr>
+<tr>
+<td>Source control</td>
+<td>Explorer rows carry their git letter — a dimmed <code>!</code> for paths git ignores, with the row and its icon stepped back — and folders the count of changes beneath them. A fourth sidebar view for the real repositories behind the group&#39;s folder — found in subdirectories up to a configurable depth, added by hand, or cloned into it — with staged and unstaged changes, per-file diffs, stage / unstage / discard, commits with history, branches, conflict resolution including a three-pane merge editor. See <a href="git.html">Source control</a></td>
+</tr>
+<tr>
+<td>Remotes</td>
+<td>Fetch, pull (fast-forward or merge) and push over HTTPS or SSH, with progress and a Cancel button. Remote addresses can be added, edited and removed from the panel. Credentials live in <code>state/git.json</code>, never in Settings or its backups</td>
+</tr>
+<tr>
+<td>Single instance</td>
+<td>Launching a second time hands the path to the running window, adds a tab and focuses it</td>
+</tr>
+<tr>
+<td>Settings</td>
+<td>Context-menu switch, editor font size, minimap, UI language; persisted and applied live. The context-menu page also shows the command the entry currently launches, and warns when it points at a different build or when this is a debug build</td>
+</tr>
+<tr>
+<td>Language</td>
+<td><em>Follow the system</em> by default — 中文 on a Chinese Windows, English elsewhere — and either language can be fixed from a dropdown in Settings. All strings, including messages coming from the Rust side, resolve through one key table</td>
+</tr>
+<tr>
+<td>Updates</td>
+<td>Settings → About checks the latest GitHub release on request, and the app also checks after startup and every six hours, announcing a new version without installing it. Installing downloads the signed NSIS package and hands it to the passive installer, which restarts the app. The automatic check can be turned off in Settings → About</td>
+</tr>
+<tr>
+<td>Tab groups</td>
+<td>A group is a <strong>named set of open tabs plus the folder the Explorer shows</strong>. The chip in the title bar switches between them inside the same window — tabs, caret positions and the tree come back with it</td>
+</tr>
+<tr>
+<td>Move / copy tabs</td>
+<td>A tab can be re-homed into another group from its context menu. This changes <em>which group lists the tab</em>, never the file on disk</td>
+</tr>
+<tr>
+<td>Configuration backups</td>
+<td>Timestamped snapshots of groups, settings, recent files and folder history, refreshed when the app opens and closes and on demand; older ones are pruned to a count you set, and any snapshot can be restored from Settings → Backups. Drafts and version history are not included</td>
+</tr>
+<tr>
+<td>Comparison</td>
+<td>A read-only side-by-side diff of any two contents. Either side may be a file on disk or an unsaved buffer (an untitled tab included); a file against its own unsaved text has an entry of its own, and re-running a comparison refreshes its snapshot. One comparison tab by default, switchable to a new tab per comparison. Unchanged stretches collapse into a numbered row that opens again, and a narrow pane falls back to one column — the header has a switch between split and unified view</td>
+</tr>
+<tr>
+<td>Encrypted files</td>
+<td>A self-describing AES-256-GCM container keyed from a password. Save as encrypted, new encrypted file, change password, remove encryption; an idle lock drops the keys; remembering a password in the Windows credential store is opt-in; drafts are sealed with the same key</td>
+</tr>
+<tr>
+<td>Window</td>
+<td>Size, position and the maximized flag come back on the next start. A window left on a monitor that is no longer connected is pulled back onto a screen you still have, and says so</td>
+</tr>
+</tbody></table></div>
+</div>
+    </article>
+
+    <nav class="doc-pager" aria-label="Documentation pages"><span class="pager-spacer"></span><a class="pager-link is-next" href="editor.html">
+      <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Next</span>
+      <span class="pager-name">Editor &amp; window</span>
+    </a></nav>
+  </div>
+
+  <aside class="docs-toc" aria-label="On this page">
+    <div class="toc-inner">
+      <p class="toc-title">On this page</p>
+      <ul class="toc-list"><li class="toc-h2"><a href="#feature-overview">Feature overview</a></li></ul>
+      <a class="toc-top" href="#main">Back to top</a>
+    </div>
+  </aside>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../index.html" aria-label="WROLP Editor">
+        <img class="brand-mark" src="../assets/img/logo.svg" alt="" width="28" height="28">
+        <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+      </a>
+      <p class="footer-tagline">A small local text editor for Windows.</p>
+      <p class="footer-copy">MIT © 2026 wrolp</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h2 class="footer-heading">Product</h2>
+        <a href="../index.html#features">Features</a>
+        <a href="../index.html#download">Download</a>
+        <a href="changelog.html">Changelog</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Resources</h2>
+        <a href="index.html">Docs</a>
+        <a href="license.html">MIT licence</a>
+        <a href="https://github.com/wrolp/wrolp-editor/issues" rel="noopener noreferrer" target="_blank">Issues</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Source</h2>
+        <a href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="https://github.com/wrolp/wrolp-editor/releases" rel="noopener noreferrer" target="_blank">Releases</a>
+        <a href="https://github.com/wrolp/wrolp-editor.github.io" rel="noopener noreferrer" target="_blank">Site source</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

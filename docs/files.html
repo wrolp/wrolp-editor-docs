@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Working with files · WROLP Editor</title>
+<meta name="description" content="Batch rename, configuration backup snapshots and read-only side-by-side comparison.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0d0e13">
+<link rel="icon" href="../assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../assets/icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/icons/icon-256.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+(function(){try{var s=localStorage.getItem('wrolp-theme');var t=s||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
+</head>
+<body class="is-docs">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2.4"/><circle cx="6" cy="19" r="2.4"/><circle cx="18" cy="9" r="2.4"/><path d="M6 7.4v9.2M18 11.4c0 3.2-3.6 3.4-6 4.2-1.6.5-3.4 1-3.4 2.4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7M12 14.6v2.2"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24"><path d="M3.6 12a8.4 8.4 0 1 0 2.6-6.1M3.4 4.6v4.2h4.2"/><path d="M12 7.8V12l3 1.9"/></symbol>
+  <symbol id="i-markdown" viewBox="0 0 24 24"><rect x="2.6" y="5.4" width="18.8" height="13.2" rx="2.2"/><path d="M6 15.4V8.6l3 3.6 3-3.6v6.8M16.4 8.6v6.8M16.4 15.4l2-2.2M16.4 15.4l-2-2.2"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M13.4 2.8H7a2 2 0 0 0-2 2v14.4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.4z"/><path d="M13.2 2.9v5.3h5.5M8.4 13h1.2a1.5 1.5 0 0 1 0 3H8.4v-3zM8.4 16v2.4M13.4 13v5.4h1.2a1.6 1.6 0 0 0 1.6-1.6v-2.2a1.6 1.6 0 0 0-1.6-1.6z"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M4.6 5.4A1.8 1.8 0 0 1 6.4 3.6h9.4L20.4 8v10.6a1.8 1.8 0 0 1-1.8 1.8H6.4a1.8 1.8 0 0 1-1.8-1.8z"/><path d="M8 3.8v5h7v-5M8 20.2v-6h8v6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.2A8.4 8.4 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.6v11M7.6 10.2L12 14.6l4.4-4.4M4.4 18.4v1.2a.8.8 0 0 0 .8.8h13.6a.8.8 0 0 0 .8-.8v-1.2"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.6-4.5 4.9.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.2z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.6h6a3 3 0 0 1 3 3v11.8a2.4 2.4 0 0 0-2.4-2.4H4z"/><path d="M20 4.6h-6a3 3 0 0 0-3 3v11.8a2.4 2.4 0 0 1 2.4-2.4H20z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8.4 6.4h11M8.4 12h11M8.4 17.6h11M4.4 6.4h.01M4.4 12h.01M4.4 17.6h.01"/></symbol>
+</svg>
+
+<header class="site-header" data-header>
+  <div class="shell header-inner">
+    <a class="brand" href="../index.html" aria-label="WROLP Editor">
+      <img class="brand-mark" src="../assets/img/logo.svg" alt="" width="32" height="32">
+      <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <a class="nav-link" href="../index.html#features">Features</a>
+      <a class="nav-link" aria-current=&quot;page&quot; href="index.html">Docs</a>
+      <a class="nav-link" href="changelog.html">Changelog</a>
+      <a class="nav-link nav-link-icon" href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span>GitHub</span>
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="lang-switch" href="../zh/docs/files.html" hreflang="zh-CN" lang="zh-CN">中文</a>
+      <button class="icon-btn" type="button" data-theme-toggle data-label-dark="Switch to dark theme" data-label-light="Switch to light theme" aria-label="Switch to light theme" title="Switch to light theme">
+        <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm header-download" href="https://github.com/wrolp/wrolp-editor/releases/latest" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span>Download</span>
+      </a>
+      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+        <svg class="icon icon-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<div class="docs-layout">
+  <button class="docs-nav-toggle" type="button" data-docs-toggle aria-expanded="false" aria-controls="docs-sidebar">
+    <svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>Documentation pages
+    <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+  </button>
+
+  <aside class="docs-sidebar" id="docs-sidebar" data-docs-sidebar>
+    <nav class="docs-nav" aria-label="Documentation pages">
+      <div class="docs-nav-group"><p class="docs-nav-heading">Guides</p><ul class="docs-nav-list"><li><a href="index.html">Overview</a></li><li><a href="editor.html">Editor &amp; window</a></li><li><a href="preview.html">PDFs &amp; pictures</a></li><li><a href="files.html" aria-current="page">Working with files</a></li><li><a href="history.html">Version history</a></li><li><a href="git.html">Source control</a></li><li><a href="encryption.html">Encrypted files</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">Reference</p><ul class="docs-nav-list"><li><a href="data.html">Where data lives</a></li><li><a href="development.html">Development</a></li><li><a href="changelog.html">Release notes</a></li><li><a href="license.html">License</a></li></ul></div>
+    </nav>
+  </aside>
+  <div class="docs-backdrop" data-docs-backdrop hidden></div>
+
+  <div class="docs-main">
+    <div class="docs-toolbar">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <a href="index.html">Documentation</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <span aria-current="page">Working with files</span>
+      </nav>
+      <a class="source-link" href="https://github.com/wrolp/wrolp-editor/blob/main/README.md" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>View source on GitHub
+      </a>
+    </div>
+
+    <article class="doc-article">
+      <header class="doc-header">
+        <h1>Working with files</h1>
+        <p class="doc-description">Batch rename, configuration backup snapshots and read-only side-by-side comparison.</p>
+      </header>
+      
+      <div class="prose"><h2 id="batch-rename">Batch rename<a class="anchor-link" href="#batch-rename">#</a></h2>
+<p>Rename many entries at once from the Explorer: <code>Ctrl+click</code> rows (or <code>Shift+click</code> for a run of them), then <strong>Rename N items…</strong> in the row menu. A folder can be renamed whole without selecting anything — <strong>Rename everything in this folder…</strong> is on the folder&#39;s own menu and on a file&#39;s menu (for the folder holding it), and the blank area&#39;s menu offers the same command for the folder the Explorer is showing.</p>
+<p>Every name is worked out and checked before anything on disk changes, so a refused name leaves the folder as it was. The dialog shows the new name of every row as it is typed, and marks a row that would collide with another row of the same batch.</p>
+<p>Two rules are offered:</p>
+<ul>
+<li><strong>Pattern</strong> — tokens for the parts of a name: <code>{name}</code> is the old name without its extension, <code>{ext}</code> the extension including its dot, and <code>{n}</code> a counter. <code>{name}{ext}</code> changes nothing, <code>photo-{n}{ext}</code> numbers a folder, and <code>{name}-backup{ext}</code> appends to every name. The counter starts at <em>Start at</em> and is padded to <em>Digits</em>, so <code>01</code>, <code>02</code>, … rather than <code>1</code>, <code>2</code>, ….</li>
+<li><strong>Regex</strong> — a regular expression matched against the whole name, extension included, plus a replacement. <code>$1</code> refers to a capture group, <em>Ignore case</em> adds the <code>i</code> flag, and rows the expression does not match keep their name. The replacement takes <code>{name}</code>, <code>{ext}</code> and <code>{n}</code> as well, so a group and a counter can be combined: <code>^(.+)\.jpe?g$</code> → <code>photo-{n}-$1.jpg</code>.</li>
+</ul>
+<p>The counter counts rows in the list, not matches: under a regular expression, a row that does not match still takes its number, which keeps a sequence stable when only some of the files are affected.</p>
+<p>Before applying, the list can be ordered — <em>As given</em>, <em>Name</em> (numbers read as numbers, so <code>photo-9</code> comes before <code>photo-10</code>), <em>Extension</em>, <em>Modified</em>, or <em>Manual</em> — and flipped between ascending and descending. Dragging a row, or the arrows that appear on hover, fine-tunes the order, and <code>{n}</code> follows whatever is on screen, so the numbering can be nudged until it reads the way it should. A name already taken by an entry outside the batch is refused by the backend with a message rather than overwriting it; a folder and something inside it cannot move in one batch.</p>
+<p>A renamed file keeps its text, its caret and any unsaved edits in the tab that is showing it. The undo stack of that document starts over, because Monaco has no way to move a buffer to another path. A name in the preview that is too long to fit keeps its full text as a tooltip.</p>
+<h2 id="configuration-backups">Configuration backups<a class="anchor-link" href="#configuration-backups">#</a></h2>
+<p>Settings → Backups keeps timestamped copies of the configuration, because losing the group store
+takes the tab session with it and there is no undo for that. The default folder is
+<code>%APPDATA%\com.wrolp.editor\wrolp\backups</code>; <em>Change…</em> picks another one and <em>Use the default
+folder</em> returns to it. The folder and the retention count are stored in <code>settings.json</code>
+(<code>backupDir</code>, <code>backupRetain</code>).</p>
+<ul>
+<li><strong>One file per snapshot.</strong> Each is named <code>wrolp-backup-&lt;YYYYMMDD-HHMMSS-mmm&gt;-&lt;kind&gt;.json</code>, with
+kind <code>auto</code>, <code>manual</code> or <code>pre-restore</code>. The files are bundled into one record rather than copied
+one by one, because a group and its folder menu are tied together by the group id: restoring one
+without the other can leave the menu pointing at a group that is no longer there.</li>
+<li><strong>What is inside:</strong> <code>settings.json</code>, <code>groups.json</code>, <code>file-settings.json</code>, <code>history.json</code> and
+<code>folder-history.json</code>, each kept as the exact text it had. <strong>Drafts and version history are not
+included</strong> — those are user data rather than configuration, and copying them would let a snapshot
+grow to the size of the work it protects. A snapshot is plain JSON, like the files it copies.</li>
+<li><strong>Automatic and manual.</strong> The day&#39;s automatic snapshot is refreshed when the app opens and when
+it closes, so it holds the configuration as it stood at that transition. Each refresh replaces
+the earlier automatic one from the same day, while manual snapshots stay; a window left open
+past midnight gets one from the hourly check. <em>Back up now</em> takes a manual snapshot at any time.
+<em>Snapshots to keep</em> (1–100, default 20) is enforced when the next snapshot is written, so
+lowering it does not delete anything until then.</li>
+<li><strong>Restoring.</strong> The list is newest first and shows when each snapshot was taken, its kind, the
+group and tab counts it holds, and its size. Picking one asks once, then flushes drafts and
+groups, takes a <code>pre-restore</code> safety snapshot of the current state, replaces the five files and
+reloads the window. Drafts are not part of a snapshot, so they survive the restore and the
+reload. <code>window.json</code> is not touched, and the window stays where it is.</li>
+<li><strong>Only this folder, only these names.</strong> A restore is refused for a path outside the configured
+backup folder, a file not named <code>wrolp-backup-*.json</code>, a snapshot newer than the format this
+build knows, and a damaged bundle — the list leaves those out rather than offering them.</li>
+</ul>
+<h2 id="file-comparison">File comparison<a class="anchor-link" href="#file-comparison">#</a></h2>
+<p>A read-only side-by-side diff of any two contents, in a tab of its own (titled <code>a.txt ↔ b.txt</code>).</p>
+<ul>
+<li><strong>Either side may be unsaved.</strong> A tab&#39;s buffer — an untitled one included — is a side like any other:
+unsaved vs saved and unsaved vs unsaved both work. The left side is the tab you started from, comparing
+its <strong>current</strong> text rather than what is on disk; the right side is picked from what is already open, or
+browsed from a file that is not.</li>
+<li><strong>A file against its own unsaved text</strong> is the tab menu&#39;s <em>Compare with saved version</em>: the disk side is
+read fresh on the left, the buffer on the right, the sides labelled &quot;· on disk&quot; / &quot;· unsaved&quot; — the same
+orientation the conflict prompt uses when another program has written the file.</li>
+<li><strong>Snapshot.</strong> Both texts are frozen into the tab when it opens; later edits to either source do not
+change it. <strong>Re-running the same comparison</strong> (same pair of sources, same order) refreshes it. The tab&#39;s
+context menu can swap the two sides. By default there is one comparison tab: a new comparison replaces
+the one on screen (re-running the same pair still refreshes in place); turn off <em>Reuse one comparison
+tab</em> in Settings → General to give every comparison a tab of its own.</li>
+<li><strong>Show only the changes.</strong> The fold button in the header keeps the changed lines and a few lines
+of context around each, hiding the stretches that did not change, and says how many lines it
+dropped. The tab&#39;s snapshot is not touched, so unfolding gives the whole text back — but while
+folded the line numbers are those of the folded text, and find and copy reach only what is shown.</li>
+<li><strong>Read-only.</strong> Open either file to edit it.</li>
+<li><strong>Picker badges:</strong> &quot;unsaved&quot; means the tab holds edits that were never saved; &quot;untitled&quot; means there is
+no file behind it. Pictures, the settings panel and other comparisons are never offered as a side, and a
+source is never both sides at once — disk vs disk and buffer vs buffer are refused, while buffer vs disk
+is allowed (that is the same-file case above).</li>
+<li>A comparison tab is temporary: it is not part of the group store and does not come back on the next
+start. Closing a source tab leaves an open comparison alone (it holds its own snapshot) — it just cannot
+be refreshed, and re-running it then says the tab was closed.</li>
+</ul>
+</div>
+    </article>
+
+    <nav class="doc-pager" aria-label="Documentation pages"><a class="pager-link is-prev" href="preview.html">
+      <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Previous</span>
+      <span class="pager-name">PDFs &amp; pictures</span>
+    </a><a class="pager-link is-next" href="history.html">
+      <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Next</span>
+      <span class="pager-name">Version history</span>
+    </a></nav>
+  </div>
+
+  <aside class="docs-toc" aria-label="On this page">
+    <div class="toc-inner">
+      <p class="toc-title">On this page</p>
+      <ul class="toc-list"><li class="toc-h2"><a href="#batch-rename">Batch rename</a></li><li class="toc-h2"><a href="#configuration-backups">Configuration backups</a></li><li class="toc-h2"><a href="#file-comparison">File comparison</a></li></ul>
+      <a class="toc-top" href="#main">Back to top</a>
+    </div>
+  </aside>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../index.html" aria-label="WROLP Editor">
+        <img class="brand-mark" src="../assets/img/logo.svg" alt="" width="28" height="28">
+        <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+      </a>
+      <p class="footer-tagline">A small local text editor for Windows.</p>
+      <p class="footer-copy">MIT © 2026 wrolp</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h2 class="footer-heading">Product</h2>
+        <a href="../index.html#features">Features</a>
+        <a href="../index.html#download">Download</a>
+        <a href="changelog.html">Changelog</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Resources</h2>
+        <a href="index.html">Docs</a>
+        <a href="license.html">MIT licence</a>
+        <a href="https://github.com/wrolp/wrolp-editor/issues" rel="noopener noreferrer" target="_blank">Issues</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Source</h2>
+        <a href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="https://github.com/wrolp/wrolp-editor/releases" rel="noopener noreferrer" target="_blank">Releases</a>
+        <a href="https://github.com/wrolp/wrolp-editor.github.io" rel="noopener noreferrer" target="_blank">Site source</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

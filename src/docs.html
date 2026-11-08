@@ -1,0 +1,47 @@
+<div class="docs-layout">
+  <button class="docs-nav-toggle" type="button" data-docs-toggle aria-expanded="false" aria-controls="docs-sidebar">
+    <svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>{{docsNavLabel}}
+    <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+  </button>
+
+  <aside class="docs-sidebar" id="docs-sidebar" data-docs-sidebar>
+    <nav class="docs-nav" aria-label="{{docsNavLabel}}">
+      {{{sidebarNav}}}
+    </nav>
+  </aside>
+  <div class="docs-backdrop" data-docs-backdrop hidden></div>
+
+  <div class="docs-main">
+    <div class="docs-toolbar">
+      <nav class="breadcrumb" aria-label="{{breadcrumbLabel}}">
+        <a href="{{homeHref}}">{{breadcrumbHome}}</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <a href="{{docsHref}}">{{docsTitle}}</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <span aria-current="page">{{docTitle}}</span>
+      </nav>
+      <a class="source-link" href="{{sourceHref}}" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>{{editOnGithub}}
+      </a>
+    </div>
+
+    <article class="doc-article">
+      <header class="doc-header">
+        <h1>{{docTitle}}</h1>
+        <p class="doc-description">{{docDescription}}</p>
+      </header>
+      {{{hub}}}
+      <div class="prose">{{{content}}}</div>
+    </article>
+
+    <nav class="doc-pager" aria-label="{{pagerLabel}}">{{{pager}}}</nav>
+  </div>
+
+  <aside class="docs-toc" aria-label="{{tocLabel}}">
+    <div class="toc-inner">
+      {{{tocHead}}}
+      {{{toc}}}
+      <a class="toc-top" href="#main">{{backToTop}}</a>
+    </div>
+  </aside>
+</div>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editor &amp; window · WROLP Editor</title>
+<meta name="description" content="Keyboard shortcuts, tab groups, window state and interface language.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0d0e13">
+<link rel="icon" href="../assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../assets/icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/icons/icon-256.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+(function(){try{var s=localStorage.getItem('wrolp-theme');var t=s||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
+</head>
+<body class="is-docs">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2.4"/><circle cx="6" cy="19" r="2.4"/><circle cx="18" cy="9" r="2.4"/><path d="M6 7.4v9.2M18 11.4c0 3.2-3.6 3.4-6 4.2-1.6.5-3.4 1-3.4 2.4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7M12 14.6v2.2"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24"><path d="M3.6 12a8.4 8.4 0 1 0 2.6-6.1M3.4 4.6v4.2h4.2"/><path d="M12 7.8V12l3 1.9"/></symbol>
+  <symbol id="i-markdown" viewBox="0 0 24 24"><rect x="2.6" y="5.4" width="18.8" height="13.2" rx="2.2"/><path d="M6 15.4V8.6l3 3.6 3-3.6v6.8M16.4 8.6v6.8M16.4 15.4l2-2.2M16.4 15.4l-2-2.2"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M13.4 2.8H7a2 2 0 0 0-2 2v14.4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.4z"/><path d="M13.2 2.9v5.3h5.5M8.4 13h1.2a1.5 1.5 0 0 1 0 3H8.4v-3zM8.4 16v2.4M13.4 13v5.4h1.2a1.6 1.6 0 0 0 1.6-1.6v-2.2a1.6 1.6 0 0 0-1.6-1.6z"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M4.6 5.4A1.8 1.8 0 0 1 6.4 3.6h9.4L20.4 8v10.6a1.8 1.8 0 0 1-1.8 1.8H6.4a1.8 1.8 0 0 1-1.8-1.8z"/><path d="M8 3.8v5h7v-5M8 20.2v-6h8v6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.2A8.4 8.4 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.6v11M7.6 10.2L12 14.6l4.4-4.4M4.4 18.4v1.2a.8.8 0 0 0 .8.8h13.6a.8.8 0 0 0 .8-.8v-1.2"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.6-4.5 4.9.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.2z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.6h6a3 3 0 0 1 3 3v11.8a2.4 2.4 0 0 0-2.4-2.4H4z"/><path d="M20 4.6h-6a3 3 0 0 0-3 3v11.8a2.4 2.4 0 0 1 2.4-2.4H20z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8.4 6.4h11M8.4 12h11M8.4 17.6h11M4.4 6.4h.01M4.4 12h.01M4.4 17.6h.01"/></symbol>
+</svg>
+
+<header class="site-header" data-header>
+  <div class="shell header-inner">
+    <a class="brand" href="../index.html" aria-label="WROLP Editor">
+      <img class="brand-mark" src="../assets/img/logo.svg" alt="" width="32" height="32">
+      <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <a class="nav-link" href="../index.html#features">Features</a>
+      <a class="nav-link" aria-current=&quot;page&quot; href="index.html">Docs</a>
+      <a class="nav-link" href="changelog.html">Changelog</a>
+      <a class="nav-link nav-link-icon" href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span>GitHub</span>
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="lang-switch" href="../zh/docs/editor.html" hreflang="zh-CN" lang="zh-CN">中文</a>
+      <button class="icon-btn" type="button" data-theme-toggle data-label-dark="Switch to dark theme" data-label-light="Switch to light theme" aria-label="Switch to light theme" title="Switch to light theme">
+        <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm header-download" href="https://github.com/wrolp/wrolp-editor/releases/latest" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span>Download</span>
+      </a>
+      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+        <svg class="icon icon-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<div class="docs-layout">
+  <button class="docs-nav-toggle" type="button" data-docs-toggle aria-expanded="false" aria-controls="docs-sidebar">
+    <svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>Documentation pages
+    <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+  </button>
+
+  <aside class="docs-sidebar" id="docs-sidebar" data-docs-sidebar>
+    <nav class="docs-nav" aria-label="Documentation pages">
+      <div class="docs-nav-group"><p class="docs-nav-heading">Guides</p><ul class="docs-nav-list"><li><a href="index.html">Overview</a></li><li><a href="editor.html" aria-current="page">Editor &amp; window</a></li><li><a href="preview.html">PDFs &amp; pictures</a></li><li><a href="files.html">Working with files</a></li><li><a href="history.html">Version history</a></li><li><a href="git.html">Source control</a></li><li><a href="encryption.html">Encrypted files</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">Reference</p><ul class="docs-nav-list"><li><a href="data.html">Where data lives</a></li><li><a href="development.html">Development</a></li><li><a href="changelog.html">Release notes</a></li><li><a href="license.html">License</a></li></ul></div>
+    </nav>
+  </aside>
+  <div class="docs-backdrop" data-docs-backdrop hidden></div>
+
+  <div class="docs-main">
+    <div class="docs-toolbar">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <a href="index.html">Documentation</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <span aria-current="page">Editor &amp; window</span>
+      </nav>
+      <a class="source-link" href="https://github.com/wrolp/wrolp-editor/blob/main/README.md" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>View source on GitHub
+      </a>
+    </div>
+
+    <article class="doc-article">
+      <header class="doc-header">
+        <h1>Editor &amp; window</h1>
+        <p class="doc-description">Keyboard shortcuts, tab groups, window state and interface language.</p>
+      </header>
+      
+      <div class="prose"><h2 id="keyboard-shortcuts">Keyboard shortcuts<a class="anchor-link" href="#keyboard-shortcuts">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Ctrl+S</code></td>
+<td>Save (Save As for untitled tabs)</td>
+</tr>
+<tr>
+<td><code>Ctrl+O</code></td>
+<td>Open file(s)</td>
+</tr>
+<tr>
+<td><code>Ctrl+N</code></td>
+<td>New untitled tab</td>
+</tr>
+<tr>
+<td><code>Ctrl+W</code></td>
+<td>Close the current tab (its draft is kept)</td>
+</tr>
+<tr>
+<td><code>Ctrl+B</code></td>
+<td>Toggle the sidebar</td>
+</tr>
+</tbody></table></div>
+<p>Scrolling the mouse wheel over the tab strip scrolls it sideways.</p>
+<h2 id="tab-groups">Tab groups<a class="anchor-link" href="#tab-groups">#</a></h2>
+<p>A group is a <strong>named set of open tabs</strong> plus the <strong>folder the Explorer shows</strong> while it is on
+screen. The chip in the title bar shows the current name and switches between groups inside the
+same window; the tree switches with it. A group may still hold files from several folders — the
+folder is where the next file is picked from, not where the open ones came from.</p>
+<ul>
+<li><strong>There is always a group.</strong> A window with no groups starts with one called <em>Default</em>, so tabs are
+persisted from the first moment without the user having to create anything. <em>New group…</em> asks for a
+name and refuses an empty one or a name already in use — two rows reading the same thing could not be
+told apart. Renaming the default group is allowed; if you remove every group, the next start creates
+a fresh default.</li>
+<li><strong>Files join the group on screen.</strong> Opening a file from the Explorer context menu adds it to the
+current group; a right-click never changes your context under you. <em>Open folder…</em> and <em>Show folder
+in sidebar</em> move the Explorer and record the folder in that group — they do not create or switch
+a group. A new group starts where the window already is, and can move on its own after that.</li>
+<li><strong>What is remembered:</strong> the tab order, which tab was selected, the caret position per tab
+(<code>Settings → Reopen tabs from last time</code> turns this off), and the Explorer folder, plus the text
+of untitled tabs, which have no draft file so the group is their only copy. Capped at 32 groups,
+200 tabs each, 64 KB of
+scratch text per tab.</li>
+<li><strong>Content is never duplicated.</strong> File-backed tabs store only path + caret; unsaved text stays in
+the draft file, keyed by path. That is why a tab can be moved to another group without touching
+its draft, and why the draft follows the file there.</li>
+<li><strong>Move / copy tab</strong> (tab context menu) re-homes a tab between groups. It never renames or moves
+the file on disk — that would orphan the draft keyed to its path.</li>
+<li><strong>Deleted files</strong> are skipped on restore with one aggregated notice and dropped from the group.
+<em>Remove from list</em> deletes only the record: files and drafts are left alone.</li>
+</ul>
+<p><code>groups.json</code> is whole-store, single-writer (the app is single instance) and written through a temp
+file + rename. Tab paths use the same normalized form the drafts hash, so one file cannot appear
+twice inside a group. A build that still has the older <code>workspaces.json</code> and no <code>groups.json</code> migrates
+on <strong>read</strong>: the legacy file is parsed, written out under the new name, and only then deleted — so a
+corrupt or unreadable legacy file is never destroyed by a later save. Unknown fields in old records
+(<code>root</code>, <code>autoName</code>, <code>sidebarView</code>) are ignored, which is why the rename needed no migration step.</p>
+<h2 id="window-state">Window state<a class="anchor-link" href="#window-state">#</a></h2>
+<p>The window reopens where you left it: same size, same spot, same maximized-or-not.</p>
+<ul>
+<li><strong>Physical pixels.</strong> <code>window.json</code> stores <code>outerPosition</code>/<code>outerSize</code>, which are physical, not
+DIPs. On a 200 % display a 1193×748 window is recorded as 2386×1495.</li>
+<li><strong>Maximized keeps two facts.</strong> While maximized only the flag is written; the last un-maximized
+rectangle is kept from before the maximize. Unmaximizing therefore returns to the size you chose,
+and a window that was maximized comes back maximized.</li>
+<li><strong>A moved/connected monitor is handled.</strong> The saved rectangle is checked against the monitors that
+exist <em>now</em> before it is applied: only the top strip needs to be reachable, because the frameless
+window is dragged by that strip. A rectangle that no longer intersects any monitor is clamped back
+onto the primary at its saved size and a notice says why. Junk or absurdly large sizes fall back to
+the size a first run gets (1180×740, the same value as <code>tauri.conf.json</code>, duplicated as a Rust
+constant — change one, change the other), clamped to fit the screen.</li>
+<li><strong>Applied before the window is shown.</strong> The window is created hidden, placed in Rust during
+setup, and only then shown, so the saved size is the first frame painted. Restoring from the page
+instead showed the configured 1180×740 window for as long as the webview took to boot and then
+resized it — a maximized window flashed up small before filling the screen.</li>
+<li><strong>When it is written:</strong> a ~600 ms debounce after moving or resizing, and a synchronous flush in the
+close sequence alongside drafts and groups.</li>
+<li><strong>First run</strong> keeps the size from <code>tauri.conf.json</code> and centers the window — no saved file, no
+surprise position.</li>
+</ul>
+<h2 id="interface-language">Interface language<a class="anchor-link" href="#interface-language">#</a></h2>
+<p>English is the default and the fallback; Settings → General → <em>UI language</em> is a dropdown, so
+adding a language does not change any layout.</p>
+<p>Strings never live in components. <code>src/lib/i18n.ts</code> holds one flat key table per language and
+exposes <code>t(key, params)</code> with <code>{placeholder}</code> substitution:</p>
+<pre data-lang="ts"><code class="language-ts">{ &quot;status.cursor&quot;: &quot;Ln {line} · Col {column}&quot; }        // en
+{ &quot;status.cursor&quot;: &quot;第 {line} 行 · 第 {column} 列&quot; }    // zh
+</code></pre>
+<p>The Rust side does not translate. Commands fail with a stable <strong>code</strong>, optionally followed by
+the raw detail after the first <code>:</code>, e.g. <code>file_too_large:8</code>, <code>file_read:os error 5</code>,
+<code>path_empty</code>. <code>translateError()</code> splits on that first <code>:</code>, looks up <code>err.&lt;code&gt;</code> and injects the
+detail as <code>{detail}</code>, so an unknown code still shows something readable instead of nothing.</p>
+<p>To add a language:</p>
+<ol>
+<li>Add a table in <code>src/lib/i18n.ts</code> and register it in <code>TABLES</code> plus <code>LANGUAGES</code> (native name as
+its own label). Key sets must stay identical — <code>t()</code> falls back to English for missing keys.</li>
+<li>Nothing else. <code>Settings.language</code> is an opaque string stored as-is, and the dropdown,
+the fallback and the error mapping pick the new entry up automatically.</li>
+<li>Localize the app description if you ship it (<code>tauri.conf.json</code> → <code>bundle.shortDescription</code>);
+the Windows context-menu entry stays English on purpose, since it is registered once and
+shared by every language.</li>
+</ol>
+</div>
+    </article>
+
+    <nav class="doc-pager" aria-label="Documentation pages"><a class="pager-link is-prev" href="index.html">
+      <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Previous</span>
+      <span class="pager-name">Overview</span>
+    </a><a class="pager-link is-next" href="preview.html">
+      <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Next</span>
+      <span class="pager-name">PDFs &amp; pictures</span>
+    </a></nav>
+  </div>
+
+  <aside class="docs-toc" aria-label="On this page">
+    <div class="toc-inner">
+      <p class="toc-title">On this page</p>
+      <ul class="toc-list"><li class="toc-h2"><a href="#keyboard-shortcuts">Keyboard shortcuts</a></li><li class="toc-h2"><a href="#tab-groups">Tab groups</a></li><li class="toc-h2"><a href="#window-state">Window state</a></li><li class="toc-h2"><a href="#interface-language">Interface language</a></li></ul>
+      <a class="toc-top" href="#main">Back to top</a>
+    </div>
+  </aside>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../index.html" aria-label="WROLP Editor">
+        <img class="brand-mark" src="../assets/img/logo.svg" alt="" width="28" height="28">
+        <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+      </a>
+      <p class="footer-tagline">A small local text editor for Windows.</p>
+      <p class="footer-copy">MIT © 2026 wrolp</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h2 class="footer-heading">Product</h2>
+        <a href="../index.html#features">Features</a>
+        <a href="../index.html#download">Download</a>
+        <a href="changelog.html">Changelog</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Resources</h2>
+        <a href="index.html">Docs</a>
+        <a href="license.html">MIT licence</a>
+        <a href="https://github.com/wrolp/wrolp-editor/issues" rel="noopener noreferrer" target="_blank">Issues</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Source</h2>
+        <a href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="https://github.com/wrolp/wrolp-editor/releases" rel="noopener noreferrer" target="_blank">Releases</a>
+        <a href="https://github.com/wrolp/wrolp-editor.github.io" rel="noopener noreferrer" target="_blank">Site source</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

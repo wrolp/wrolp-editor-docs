@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>开发指南 · WROLP Editor</title>
+<meta name="description" content="环境要求、本地开发、打安装包、发布闸门与脚本。">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0d0e13">
+<link rel="icon" href="../../assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../../assets/icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../../assets/icons/icon-256.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>
+(function(){try{var s=localStorage.getItem('wrolp-theme');var t=s||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
+</head>
+<body class="is-docs">
+<a class="skip-link" href="#main">跳到正文</a>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2.4"/><circle cx="6" cy="19" r="2.4"/><circle cx="18" cy="9" r="2.4"/><path d="M6 7.4v9.2M18 11.4c0 3.2-3.6 3.4-6 4.2-1.6.5-3.4 1-3.4 2.4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7M12 14.6v2.2"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24"><path d="M3.6 12a8.4 8.4 0 1 0 2.6-6.1M3.4 4.6v4.2h4.2"/><path d="M12 7.8V12l3 1.9"/></symbol>
+  <symbol id="i-markdown" viewBox="0 0 24 24"><rect x="2.6" y="5.4" width="18.8" height="13.2" rx="2.2"/><path d="M6 15.4V8.6l3 3.6 3-3.6v6.8M16.4 8.6v6.8M16.4 15.4l2-2.2M16.4 15.4l-2-2.2"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M13.4 2.8H7a2 2 0 0 0-2 2v14.4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.4z"/><path d="M13.2 2.9v5.3h5.5M8.4 13h1.2a1.5 1.5 0 0 1 0 3H8.4v-3zM8.4 16v2.4M13.4 13v5.4h1.2a1.6 1.6 0 0 0 1.6-1.6v-2.2a1.6 1.6 0 0 0-1.6-1.6z"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M4.6 5.4A1.8 1.8 0 0 1 6.4 3.6h9.4L20.4 8v10.6a1.8 1.8 0 0 1-1.8 1.8H6.4a1.8 1.8 0 0 1-1.8-1.8z"/><path d="M8 3.8v5h7v-5M8 20.2v-6h8v6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.2A8.4 8.4 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.6v11M7.6 10.2L12 14.6l4.4-4.4M4.4 18.4v1.2a.8.8 0 0 0 .8.8h13.6a.8.8 0 0 0 .8-.8v-1.2"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.6-4.5 4.9.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.2z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.6h6a3 3 0 0 1 3 3v11.8a2.4 2.4 0 0 0-2.4-2.4H4z"/><path d="M20 4.6h-6a3 3 0 0 0-3 3v11.8a2.4 2.4 0 0 1 2.4-2.4H20z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8.4 6.4h11M8.4 12h11M8.4 17.6h11M4.4 6.4h.01M4.4 12h.01M4.4 17.6h.01"/></symbol>
+</svg>
+
+<header class="site-header" data-header>
+  <div class="shell header-inner">
+    <a class="brand" href="../index.html" aria-label="WROLP Editor">
+      <img class="brand-mark" src="../../assets/img/logo.svg" alt="" width="32" height="32">
+      <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <a class="nav-link" href="../index.html#features">功能特性</a>
+      <a class="nav-link" aria-current=&quot;page&quot; href="index.html">文档</a>
+      <a class="nav-link" href="changelog.html">更新日志</a>
+      <a class="nav-link nav-link-icon" href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span>GitHub</span>
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="lang-switch" href="../../docs/development.html" hreflang="en" lang="en">English</a>
+      <button class="icon-btn" type="button" data-theme-toggle data-label-dark="切换到深色主题" data-label-light="切换到浅色主题" aria-label="切换到浅色主题" title="切换到浅色主题">
+        <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm header-download" href="https://github.com/wrolp/wrolp-editor/releases/latest" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span>下载</span>
+      </a>
+      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="打开导航">
+        <svg class="icon icon-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<div class="docs-layout">
+  <button class="docs-nav-toggle" type="button" data-docs-toggle aria-expanded="false" aria-controls="docs-sidebar">
+    <svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>文档目录
+    <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+  </button>
+
+  <aside class="docs-sidebar" id="docs-sidebar" data-docs-sidebar>
+    <nav class="docs-nav" aria-label="文档目录">
+      <div class="docs-nav-group"><p class="docs-nav-heading">使用指南</p><ul class="docs-nav-list"><li><a href="index.html">概览</a></li><li><a href="editor.html">编辑器与窗口</a></li><li><a href="preview.html">PDF 与图片</a></li><li><a href="files.html">文件操作</a></li><li><a href="history.html">版本记录</a></li><li><a href="git.html">源码管理</a></li><li><a href="encryption.html">加密文件</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">参考</p><ul class="docs-nav-list"><li><a href="data.html">数据存放位置</a></li><li><a href="development.html" aria-current="page">开发指南</a></li><li><a href="changelog.html">发行说明</a></li><li><a href="license.html">许可证</a></li></ul></div>
+    </nav>
+  </aside>
+  <div class="docs-backdrop" data-docs-backdrop hidden></div>
+
+  <div class="docs-main">
+    <div class="docs-toolbar">
+      <nav class="breadcrumb" aria-label="面包屑">
+        <a href="../index.html">首页</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <a href="index.html">文档</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <span aria-current="page">开发指南</span>
+      </nav>
+      <a class="source-link" href="https://github.com/wrolp/wrolp-editor/blob/main/README.zh.md" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>在 GitHub 上查看源文件
+      </a>
+    </div>
+
+    <article class="doc-article">
+      <header class="doc-header">
+        <h1>开发指南</h1>
+        <p class="doc-description">环境要求、本地开发、打安装包、发布闸门与脚本。</p>
+      </header>
+      
+      <div class="prose"><h2 id="环境要求">环境要求<a class="anchor-link" href="#%E7%8E%AF%E5%A2%83%E8%A6%81%E6%B1%82">#</a></h2>
+<ul>
+<li>Windows 10/11，带 WebView2 运行时（近年的 Windows 已内置）</li>
+<li>Rust 的 MSVC 工具链（<code>x86_64-pc-windows-msvc</code>）+ Visual Studio 的 C++ 生成工具工作负载</li>
+<li>Node.js <code>^20.19</code> 或 <code>&gt;=22.12</code>（Vite 8 的要求）与 npm</li>
+</ul>
+<h2 id="开发">开发<a class="anchor-link" href="#%E5%BC%80%E5%8F%91">#</a></h2>
+<pre data-lang="bash"><code class="language-bash">npm install
+npm run tauri dev
+</code></pre>
+<p>debug 构建加载的是 Vite 在 <code>localhost:1520</code> 提供的页面。若右键菜单那条注册表指向 <code>target/debug/wrolp-editor.exe</code>，只有在 dev server 运行时右键才能打开文件，否则窗口会显示「拒绝连接」页面。日常使用请把菜单指向安装版（设置页会显示当前注册的实际命令）。</p>
+<h2 id="打安装包">打安装包<a class="anchor-link" href="#%E6%89%93%E5%AE%89%E8%A3%85%E5%8C%85">#</a></h2>
+<pre data-lang="bash"><code class="language-bash">npm run tauri build
+# -&gt; src-tauri/target/release/bundle/nsis/WROLP Editor_&lt;version&gt;_x64-setup.exe
+</code></pre>
+<p>只配置了 NSIS 目标（<code>bundle.targets: [&quot;nsis&quot;]</code>）。</p>
+<h2 id="发布">发布<a class="anchor-link" href="#%E5%8F%91%E5%B8%83">#</a></h2>
+<pre data-lang="bash"><code class="language-bash">npm run release   # 先清理 target/ 与 dist/，再打安装包；三个版本号不一致、工作树不干净、或 v&lt;version&gt; 不是指向 HEAD 的本地 tag，就直接退出
+npm run upload    # 发布 v&lt;version&gt;：同样再查一遍，还要求版本号高于线上已发布的最新一个
+# 或：npm run publish
+</code></pre>
+<p>发布出去的东西事后必须说得清楚，所以两个脚本在做任何事之前就先停下。工作树要干净，连未跟踪的文件也算——它们会被编进安装包却不属于任何提交；<code>v&lt;version&gt;</code> 必须已是指向 HEAD 的本地 tag，这样 tag、源码和二进制才是同一个发布。<code>upload</code> 还会读 GitHub 上已有的 release，版本号不高于最新的一个就拒绝：客户端是比版本号的，同号即&quot;已最新&quot;，而上传会把它们正要下载的那份文件换掉。改好版本号并提交之后打 tag（<code>git tag -a v0.0.2 -m &quot;0.0.2&quot; &amp;&amp; git push origin v0.0.2</code>）。本地自己构建不用受这些约束，走 <code>npm run tauri build</code> 就行——它既不签名也不发布。</p>
+<p><code>upload</code> 需要 <code>gh</code> CLI，并用对仓库有写权限的账号登录；仓库地址取自 <code>git remote get-url origin</code>（可用 <code>--repo owner/name</code> 覆盖），还接受 <code>--tag</code>、<code>--notes</code>、<code>--draft</code>、<code>--pre</code> 和 <code>--dry-run</code>。需要新建 release 时带上 <code>--target</code> 指向 tag 自己的提交，免得二进制来自某处、release 却落在默认分支当时的那个提交上。</p>
+<p>构建用 <code>.tauri/priv.key</code> 签名（该文件不入库；用 <code>npx tauri signer generate -w .tauri/priv.key</code> 生成并务必备份——丢了它，已安装的版本就无法再接受更新）。<code>release</code> 会在安装包旁写出 <code>latest.json</code>，<code>upload</code> 把两者一起上传；应用从 <code>https://github.com/wrolp/wrolp-editor/releases/latest/download/latest.json</code> 读取。</p>
+<p>发布说明按语言分成两份手写文件，放在仓库根目录：<code>RELEASE_NOTES.md</code>（English）和 <code>RELEASE_NOTES.zh.md</code>（简体中文）。<code>release</code> 写 <code>latest.json</code> 的 <code>notes</code>、<code>upload</code> 写 GitHub release 的正文时，会先读这两份、英文在上中文在下合并成一段；某个版本只想补一句时，用 <code>--notes &quot;...&quot;</code> 临时覆盖。</p>
+<h2 id="脚本">脚本<a class="anchor-link" href="#%E8%84%9A%E6%9C%AC">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>脚本</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>npm run dev</code></td>
+<td>在 1520 端口起 Vite dev server（供 <code>tauri dev</code> 使用）</td>
+</tr>
+<tr>
+<td><code>npm run build</code></td>
+<td>先做类型检查，再产出 <code>dist/</code> 生产包</td>
+</tr>
+<tr>
+<td><code>npm run tauri</code></td>
+<td>Tauri CLI 透传（<code>dev</code>、<code>build</code>、<code>icon</code> 等）</td>
+</tr>
+<tr>
+<td><code>npm run release</code></td>
+<td>过闸门（三处版本号一致、工作树干净、<code>v&lt;version&gt;</code> 在 HEAD 上），签名构建并写出 <code>latest.json</code></td>
+</tr>
+<tr>
+<td><code>npm run upload</code></td>
+<td>再过一遍闸门并核对线上版本，然后把安装包与 <code>latest.json</code> 传到该提交对应的 release</td>
+</tr>
+<tr>
+<td><code>npm run publish</code></td>
+<td>依次执行 <code>release</code> 与 <code>upload</code></td>
+</tr>
+</tbody></table></div>
+</div>
+    </article>
+
+    <nav class="doc-pager" aria-label="文档翻页"><a class="pager-link is-prev" href="data.html">
+      <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>上一页</span>
+      <span class="pager-name">数据存放位置</span>
+    </a><a class="pager-link is-next" href="changelog.html">
+      <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>下一页</span>
+      <span class="pager-name">发行说明</span>
+    </a></nav>
+  </div>
+
+  <aside class="docs-toc" aria-label="本页目录">
+    <div class="toc-inner">
+      <p class="toc-title">本页目录</p>
+      <ul class="toc-list"><li class="toc-h2"><a href="#%E7%8E%AF%E5%A2%83%E8%A6%81%E6%B1%82">环境要求</a></li><li class="toc-h2"><a href="#%E5%BC%80%E5%8F%91">开发</a></li><li class="toc-h2"><a href="#%E6%89%93%E5%AE%89%E8%A3%85%E5%8C%85">打安装包</a></li><li class="toc-h2"><a href="#%E5%8F%91%E5%B8%83">发布</a></li><li class="toc-h2"><a href="#%E8%84%9A%E6%9C%AC">脚本</a></li></ul>
+      <a class="toc-top" href="#main">回到顶部</a>
+    </div>
+  </aside>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../index.html" aria-label="WROLP Editor">
+        <img class="brand-mark" src="../../assets/img/logo.svg" alt="" width="28" height="28">
+        <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+      </a>
+      <p class="footer-tagline">一款 Windows 本地文本编辑器。</p>
+      <p class="footer-copy">MIT © 2026 wrolp</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h2 class="footer-heading">产品</h2>
+        <a href="../index.html#features">功能特性</a>
+        <a href="../index.html#download">下载</a>
+        <a href="changelog.html">更新日志</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">资源</h2>
+        <a href="index.html">文档</a>
+        <a href="license.html">MIT 许可证</a>
+        <a href="https://github.com/wrolp/wrolp-editor/issues" rel="noopener noreferrer" target="_blank">问题反馈</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">源码</h2>
+        <a href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="https://github.com/wrolp/wrolp-editor/releases" rel="noopener noreferrer" target="_blank">Releases</a>
+        <a href="https://github.com/wrolp/wrolp-editor.github.io" rel="noopener noreferrer" target="_blank">本站源码</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>概览 · WROLP Editor</title>
+<meta name="description" content="WROLP Editor 是什么，以及各模块的行为一览。">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0d0e13">
+<link rel="icon" href="../../assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../../assets/icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../../assets/icons/icon-256.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>
+(function(){try{var s=localStorage.getItem('wrolp-theme');var t=s||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
+</head>
+<body class="is-docs">
+<a class="skip-link" href="#main">跳到正文</a>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2.4"/><circle cx="6" cy="19" r="2.4"/><circle cx="18" cy="9" r="2.4"/><path d="M6 7.4v9.2M18 11.4c0 3.2-3.6 3.4-6 4.2-1.6.5-3.4 1-3.4 2.4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7M12 14.6v2.2"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24"><path d="M3.6 12a8.4 8.4 0 1 0 2.6-6.1M3.4 4.6v4.2h4.2"/><path d="M12 7.8V12l3 1.9"/></symbol>
+  <symbol id="i-markdown" viewBox="0 0 24 24"><rect x="2.6" y="5.4" width="18.8" height="13.2" rx="2.2"/><path d="M6 15.4V8.6l3 3.6 3-3.6v6.8M16.4 8.6v6.8M16.4 15.4l2-2.2M16.4 15.4l-2-2.2"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M13.4 2.8H7a2 2 0 0 0-2 2v14.4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.4z"/><path d="M13.2 2.9v5.3h5.5M8.4 13h1.2a1.5 1.5 0 0 1 0 3H8.4v-3zM8.4 16v2.4M13.4 13v5.4h1.2a1.6 1.6 0 0 0 1.6-1.6v-2.2a1.6 1.6 0 0 0-1.6-1.6z"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M4.6 5.4A1.8 1.8 0 0 1 6.4 3.6h9.4L20.4 8v10.6a1.8 1.8 0 0 1-1.8 1.8H6.4a1.8 1.8 0 0 1-1.8-1.8z"/><path d="M8 3.8v5h7v-5M8 20.2v-6h8v6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.2A8.4 8.4 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.6v11M7.6 10.2L12 14.6l4.4-4.4M4.4 18.4v1.2a.8.8 0 0 0 .8.8h13.6a.8.8 0 0 0 .8-.8v-1.2"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.6-4.5 4.9.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.2z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.6h6a3 3 0 0 1 3 3v11.8a2.4 2.4 0 0 0-2.4-2.4H4z"/><path d="M20 4.6h-6a3 3 0 0 0-3 3v11.8a2.4 2.4 0 0 1 2.4-2.4H20z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8.4 6.4h11M8.4 12h11M8.4 17.6h11M4.4 6.4h.01M4.4 12h.01M4.4 17.6h.01"/></symbol>
+</svg>
+
+<header class="site-header" data-header>
+  <div class="shell header-inner">
+    <a class="brand" href="../index.html" aria-label="WROLP Editor">
+      <img class="brand-mark" src="../../assets/img/logo.svg" alt="" width="32" height="32">
+      <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <a class="nav-link" href="../index.html#features">功能特性</a>
+      <a class="nav-link" aria-current=&quot;page&quot; href="index.html">文档</a>
+      <a class="nav-link" href="changelog.html">更新日志</a>
+      <a class="nav-link nav-link-icon" href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span>GitHub</span>
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="lang-switch" href="../../docs/index.html" hreflang="en" lang="en">English</a>
+      <button class="icon-btn" type="button" data-theme-toggle data-label-dark="切换到深色主题" data-label-light="切换到浅色主题" aria-label="切换到浅色主题" title="切换到浅色主题">
+        <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm header-download" href="https://github.com/wrolp/wrolp-editor/releases/latest" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span>下载</span>
+      </a>
+      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="打开导航">
+        <svg class="icon icon-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<div class="docs-layout">
+  <button class="docs-nav-toggle" type="button" data-docs-toggle aria-expanded="false" aria-controls="docs-sidebar">
+    <svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>文档目录
+    <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+  </button>
+
+  <aside class="docs-sidebar" id="docs-sidebar" data-docs-sidebar>
+    <nav class="docs-nav" aria-label="文档目录">
+      <div class="docs-nav-group"><p class="docs-nav-heading">使用指南</p><ul class="docs-nav-list"><li><a href="index.html" aria-current="page">概览</a></li><li><a href="editor.html">编辑器与窗口</a></li><li><a href="preview.html">PDF 与图片</a></li><li><a href="files.html">文件操作</a></li><li><a href="history.html">版本记录</a></li><li><a href="git.html">源码管理</a></li><li><a href="encryption.html">加密文件</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">参考</p><ul class="docs-nav-list"><li><a href="data.html">数据存放位置</a></li><li><a href="development.html">开发指南</a></li><li><a href="changelog.html">发行说明</a></li><li><a href="license.html">许可证</a></li></ul></div>
+    </nav>
+  </aside>
+  <div class="docs-backdrop" data-docs-backdrop hidden></div>
+
+  <div class="docs-main">
+    <div class="docs-toolbar">
+      <nav class="breadcrumb" aria-label="面包屑">
+        <a href="../index.html">首页</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <a href="index.html">文档</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <span aria-current="page">概览</span>
+      </nav>
+      <a class="source-link" href="https://github.com/wrolp/wrolp-editor/blob/main/README.zh.md" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>在 GitHub 上查看源文件
+      </a>
+    </div>
+
+    <article class="doc-article">
+      <header class="doc-header">
+        <h1>概览</h1>
+        <p class="doc-description">WROLP Editor 是什么，以及各模块的行为一览。</p>
+      </header>
+      <p class="hub-lead">下面的内容来自项目 README 与发行说明，随版本同步。</p><div class="hub-grid"><a class="hub-card" href="editor.html">
+      <span class="hub-card-title">编辑器与窗口<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>快捷键、标签分组、窗口状态还原与界面语言。</p>
+    </a><a class="hub-card" href="preview.html">
+      <span class="hub-card-title">PDF 与图片<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>PDF 阅读器的纸张、书签与自动滚动，以及目录级图片画廊的四种视图。</p>
+    </a><a class="hub-card" href="files.html">
+      <span class="hub-card-title">文件操作<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>批量重命名、配置备份快照与只读并排对比。</p>
+    </a><a class="hub-card" href="history.html">
+      <span class="hub-card-title">版本记录<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>按文件保存的私有历史：记录、比对、取回，以及与 git 的区别。</p>
+    </a><a class="hub-card" href="git.html">
+      <span class="hub-card-title">源码管理<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>暂存、提交、分支、三栏合并，以及 HTTPS / SSH 上的 fetch、pull、push。</p>
+    </a><a class="hub-card" href="encryption.html">
+      <span class="hub-card-title">加密文件<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>AES-256-GCM 容器格式、三个入口、解锁与空闲锁、记住口令与草稿。</p>
+    </a><a class="hub-card" href="data.html">
+      <span class="hub-card-title">数据存放位置<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>配置目录下的各个文件，以及前端可调用的 Tauri 命令。</p>
+    </a><a class="hub-card" href="development.html">
+      <span class="hub-card-title">开发指南<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>环境要求、本地开发、打安装包、发布闸门与脚本。</p>
+    </a><a class="hub-card" href="changelog.html">
+      <span class="hub-card-title">发行说明<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>v0.0.3、v0.0.2 与 v0.0.1 的新特性、修复与内部变更。</p>
+    </a><a class="hub-card" href="license.html">
+      <span class="hub-card-title">许可证<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>WROLP Editor 以 MIT 许可证发布。</p>
+    </a></div>
+      <div class="prose"><p>一款 Windows 本地文本编辑器。</p>
+<p>技术栈：Tauri v2 + React + TypeScript，编辑区用 Monaco Editor。</p>
+<h2 id="功能一览">功能一览<a class="anchor-link" href="#%E5%8A%9F%E8%83%BD%E4%B8%80%E8%A7%88">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>多标签</td>
+<td>单窗口多文件；标签脏标记、已打开文件下拉列表、标签右键菜单（可关闭所有 / 关闭左侧 / 关闭右侧）</td>
+</tr>
+<tr>
+<td>编辑</td>
+<td>Monaco：按扩展名高亮、minimap、每个文件独立 model、切回标签还原光标</td>
+</tr>
+<tr>
+<td>保存</td>
+<td><code>Ctrl+S</code> 写回文件并清除该草稿；未落盘过的 <code>Untitled-N</code> 走另存为。另有两项默认关闭的整理：去除行尾空格、补上缺失的行末换行——都先写回缓冲区，所以屏幕上看到的就是写进文件的字节</td>
+</tr>
+<tr>
+<td>未保存的修改</td>
+<td>与磁盘上那份不一致的行会被染色：新增的行偏绿，改掉了原有文字的行偏黄，保存后标记消失。比对在 <code>src/lib/dirtyDiff.ts</code>：工作台自带这套，独立版 Monaco 没有</td>
+</tr>
+<tr>
+<td>换行符</td>
+<td>读到什么就按什么写回。想强制某个文件用 LF 或 CRLF，去那个标签的「文件设置」；本来没有换行符的文档（新建文件最常见）用设置 → 常规 里选的。状态栏显示的就是保存会写入的换行符。不单独提供 CR：Monaco 的模型只会用 LF 或 CRLF 拼接行</td>
+</tr>
+<tr>
+<td>草稿</td>
+<td>编辑后约 500ms 防抖落盘；切标签、关标签、窗口失焦时立即冲刷</td>
+</tr>
+<tr>
+<td>自动保存</td>
+<td>默认关闭。打开后，<strong>当前</strong>磁盘上已存在、又有未保存改动的文件，在连续 N 秒没有再被编辑时静默写回；你再打字，这个文件的倒计时会重来，所以保存落在一次停顿之后而不是句子中间。没在看的标签既不会起新的倒计时，也不会作废正在跑的，它未保存的文本由草稿兜着。未命名标签、锁定的文件、图片，以及磁盘检查正在询问的文件都不动。它的写入默认不记版本，要在「设置 → 版本」里另外打开</td>
+</tr>
+<tr>
+<td>恢复</td>
+<td>打开文件时把磁盘内容与草稿比对，不一致就直接把草稿装回去，标签保持未保存状态；设置里可以改成每个文件弹「恢复草稿 / 丢弃」询问</td>
+</tr>
+<tr>
+<td>侧边栏</td>
+<td>资源管理器目录树（子目录懒加载 + 刷新按钮，文件夹在前、名字按自然序，<code>2.txt</code> 在 <code>10.txt</code> 前）、最近打开的历史列表，以及版本视图和源码管理视图。拖动分隔条可调宽（180–640 px，双击复位），宽度会持久化。树的文字大小可在设置里调，11–20 px</td>
+</tr>
+<tr>
+<td>Markdown 预览</td>
+<td><code>.md</code> 标签在源码右侧渲染：GitHub 风格语法、目录、Monaco 上色的代码块、<code>mermaid</code> / <code>plantuml</code> / <code>graphviz</code> 围栏画成 SVG，文档旁的图片走 asset 协议加载。文档自己写的 HTML 也渲染，但受白名单约束：只放行文档中有语义的标签，行内 <code>style</code> 只留表现类属性，脚本、事件处理器、<code>&lt;style&gt;</code> 块和 <code>id</code> 一律不要</td>
+</tr>
+<tr>
+<td>PDF 阅读</td>
+<td><code>.pdf</code> 由 pdf.js 绘制，不走文本编辑器：整篇连续滚动，按窗格宽度适应或输入 25–400 % 的缩放；纸张可选白纸、米黄、护眼绿、夜间（反相）或自选颜色。文档自带书签从角落按钮展开成一列，左右侧在「设置 → 预览」里选，可单支折叠、也可一键展开或收起整棵树，点标题跳到对应页。自动滚动按设定速度推进，滚轮或双击停下。上次读到哪一页会按文件记住</td>
+</tr>
+<tr>
+<td>图片浏览</td>
+<td>整个目录在一个标签里按自然序查看（<code>IMG_2</code> 排在 <code>IMG_10</code> 前）：上下排列、一张张、轮播、整页网格。子文件夹默认不含，打开后最多走四层；单次列表最多 2000 张并明确提示。图片走 asset 协议显示，不受编辑器文本大小上限约束。HEIC 与 TIFF 会被列出，并标明本渲染器画不出来</td>
+</tr>
+<tr>
+<td>批量重命名</td>
+<td>多选若干行，或整个目录一次改完；用一条规则（<code>{name}</code>、<code>{ext}</code>、<code>{n}</code>）或正则加替换，逐行预览；可按名称、扩展名、修改时间或手动排序，<code>{n}</code> 按这个顺序编号。详见<a href="files.html#%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D">批量重命名</a></td>
+</tr>
+<tr>
+<td>版本记录</td>
+<td>默认关闭。打开后每次手动保存都记下文件当时的内容；任意两条可以并排比对（版本与版本、或任一版本与当前编辑区），可以只看变更，也可以取回编辑器。单个文件可在标签右键菜单里排除或强制纳入，详见<a href="history.html">版本记录</a></td>
+</tr>
+<tr>
+<td>源码管理</td>
+<td>资源管理器行上显示 git 字母——被 git 忽略的路径是一个变暗的 <code>!</code>，整行与图标一起退到背景里——文件夹显示其下改动数；侧栏第四个视图，操作分组目录背后的一组真实仓库——按可配置深度扫描子目录，也可手动添加，或直接把远程仓库克隆进该目录——支持暂存与未暂存改动、逐文件 diff、暂存 / 取消暂存 / 丢弃、提交与历史、分支、冲突解决（含三栏合并编辑器）。详见<a href="git.html">源码管理</a></td>
+</tr>
+<tr>
+<td>远程同步</td>
+<td>通过 HTTPS 或 SSH 执行 fetch / pull（快进或合并）/ push，带进度与取消按钮；远程地址可在面板里添加、编辑与移除。凭据放在 <code>state/git.json</code>，不进入设置也不进入配置备份</td>
+</tr>
+<tr>
+<td>单实例</td>
+<td>再次启动时把路径交给已运行的窗口，新增标签并聚焦</td>
+</tr>
+<tr>
+<td>设置</td>
+<td>右键菜单开关、编辑器字号、minimap、界面语言；即时生效并持久化。右键菜单页还会显示当前注册表实际启动的命令，指向别的构建或当前是 debug 构建时给出警告</td>
+</tr>
+<tr>
+<td>语言</td>
+<td>默认跟随系统（中文 Windows 用中文，其它环境用英文），也可在设置里固定为中文或英文。所有文案（含 Rust 侧返回的报错）都走同一张 key 表</td>
+</tr>
+<tr>
+<td>版本更新</td>
+<td>设置 → 关于 可按需检查 GitHub 上的最新版本；启动后与每六小时也会自动检查，发现新版本只提示、不自动安装。安装仍由「下载并安装」触发：下载签名安装包后交给 passive 安装器并自动重启；自动检查可在 设置 → 关于 关闭</td>
+</tr>
+<tr>
+<td>标签分组</td>
+<td>一个分组就是<strong>一组有名字的标签，外加资源管理器停着的目录</strong>。标题栏上的小牌在同一窗口里切换分组，标签、光标位置和目录树一起换</td>
+</tr>
+<tr>
+<td>移动 / 复制标签</td>
+<td>标签右键菜单可把标签归到另一个分组。改的是「哪个分组列着它」，磁盘上的文件不动</td>
+</tr>
+<tr>
+<td>配置备份</td>
+<td>分组、设置、最近文件与文件夹历史的时间戳快照，应用打开和关闭时自动更新，也可手动；超过保留数会删旧的，设置 → 备份 里可任选一份恢复。不含草稿与版本历史</td>
+</tr>
+<tr>
+<td>文件对比</td>
+<td>两个内容只读并排 diff，任一侧可以是磁盘文件或未保存的 buffer（含未命名标签）；同一个文件的未保存版本有专用入口，重跑同一次比对即刷新快照；默认只保留一个比对标签页，可在设置里改回每次新开。未改动的区段会折叠成一行（可再展开），窄窗口自动切到单栏，头部可在并排 / 单栏之间切换</td>
+</tr>
+<tr>
+<td>加密文件</td>
+<td>口令派生密钥、AES-256-GCM 的自描述容器；加密另存为、新建加密文件、改口令、移除加密；空闲自动锁定；可选记住口令到 Windows 凭据管理器；草稿同钥加密</td>
+</tr>
+<tr>
+<td>窗口</td>
+<td>大小、位置、是否最大化都在下次启动时还原。上次所在的显示器不在了，窗口会被拉回还在用的屏幕上，并说明原因</td>
+</tr>
+</tbody></table></div>
+</div>
+    </article>
+
+    <nav class="doc-pager" aria-label="文档翻页"><span class="pager-spacer"></span><a class="pager-link is-next" href="editor.html">
+      <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>下一页</span>
+      <span class="pager-name">编辑器与窗口</span>
+    </a></nav>
+  </div>
+
+  <aside class="docs-toc" aria-label="本页目录">
+    <div class="toc-inner">
+      <p class="toc-title">本页目录</p>
+      <ul class="toc-list"><li class="toc-h2"><a href="#%E5%8A%9F%E8%83%BD%E4%B8%80%E8%A7%88">功能一览</a></li></ul>
+      <a class="toc-top" href="#main">回到顶部</a>
+    </div>
+  </aside>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../index.html" aria-label="WROLP Editor">
+        <img class="brand-mark" src="../../assets/img/logo.svg" alt="" width="28" height="28">
+        <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+      </a>
+      <p class="footer-tagline">一款 Windows 本地文本编辑器。</p>
+      <p class="footer-copy">MIT © 2026 wrolp</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h2 class="footer-heading">产品</h2>
+        <a href="../index.html#features">功能特性</a>
+        <a href="../index.html#download">下载</a>
+        <a href="changelog.html">更新日志</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">资源</h2>
+        <a href="index.html">文档</a>
+        <a href="license.html">MIT 许可证</a>
+        <a href="https://github.com/wrolp/wrolp-editor/issues" rel="noopener noreferrer" target="_blank">问题反馈</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">源码</h2>
+        <a href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="https://github.com/wrolp/wrolp-editor/releases" rel="noopener noreferrer" target="_blank">Releases</a>
+        <a href="https://github.com/wrolp/wrolp-editor.github.io" rel="noopener noreferrer" target="_blank">本站源码</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>

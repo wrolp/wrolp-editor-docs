@@ -1,0 +1,114 @@
+<section class="hero">
+  <div class="shell">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>{{hero_eyebrow}}</p>
+      <h1 class="hero-title">WROLP Editor</h1>
+      <p class="hero-tagline">{{hero_tagline}}</p>
+      <p class="hero-lead">{{hero_lead}}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="{{downloadHref}}" rel="noopener noreferrer" target="_blank">
+          <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>{{hero_download}}
+        </a>
+        <a class="btn btn-ghost btn-lg" href="{{docsHref}}">
+          <svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>{{hero_docs}}
+        </a>
+      </div>
+      <p class="hero-meta">{{hero_meta}} · <a href="{{releasesHref}}" rel="noopener noreferrer" target="_blank">{{hero_allReleases}}</a></p>
+    </div>
+
+    <figure class="hero-figure">
+      <a class="shot" href="{{assets}}img/screenshot-full.png" target="_blank" rel="noopener noreferrer" aria-label="{{figure_zoom}}">
+        <picture>
+          <source srcset="{{assets}}img/screenshot.webp" type="image/webp">
+          <img src="{{assets}}img/screenshot.png" alt="{{figure_aria}}" width="1600" height="952" decoding="async">
+        </picture>
+      </a>
+      <figcaption class="figure-caption">{{figure_caption}}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="shell">
+    <header class="section-head">
+      <h2 class="section-title">{{features_title}}</h2>
+      <p class="section-lead">{{features_lead}}</p>
+    </header>
+    <div class="feature-grid">{{{featureCards}}}</div>
+
+    <div class="more-block">
+      <h3 class="more-title">{{more_title}}</h3>
+      <ul class="more-list">{{{moreItems}}}</ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="local">
+  <div class="shell local-grid">
+    <div class="local-copy">
+      <h2 class="section-title">{{local_title}}</h2>
+      <p class="section-lead">{{local_lead}}</p>
+      <p class="prose-local">{{local_body}}</p>
+      <div class="path-card">
+        <p class="path-label">{{local_path_label}}</p>
+        <code class="path-value">%APPDATA%\com.wrolp.editor</code>
+        <p class="path-hint">{{local_path_hint}}</p>
+      </div>
+    </div>
+    <dl class="fact-list">{{{facts}}}</dl>
+  </div>
+</section>
+
+<section class="section" id="shortcuts">
+  <div class="shell two-col">
+    <div class="panel">
+      <h2 class="panel-title">{{shortcuts_title}}</h2>
+      <ul class="shortcut-list">{{{shortcutRows}}}</ul>
+      <p class="panel-note">{{shortcuts_note}} <a href="{{editorHref}}">{{shortcuts_more}}</a></p>
+    </div>
+    <div class="panel">
+      <h2 class="panel-title">{{stack_title}}</h2>
+      <p class="panel-note panel-note-lead">{{stack_lead}}</p>
+      <ul class="stack-list">{{{stackItems}}}</ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="download">
+  <div class="shell">
+    <header class="section-head">
+      <h2 class="section-title">{{download_title}}</h2>
+      <p class="section-lead">{{download_lead}}</p>
+    </header>
+    <ol class="step-grid">{{{steps}}}</ol>
+    <div class="download-bar">
+      <div class="download-bar-copy">
+        <a class="btn btn-primary btn-lg" href="{{downloadHref}}" rel="noopener noreferrer" target="_blank">
+          <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>{{download_button}}
+        </a>
+        <p class="download-size">{{download_size}}</p>
+      </div>
+      <div class="download-links">
+        <a href="{{changelogHref}}">{{download_notes}}<svg class="icon icon-inline" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="{{releasesHref}}" rel="noopener noreferrer" target="_blank">{{download_all}}<svg class="icon icon-inline" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+    <div class="update-note">
+      <h3 class="update-title">{{update_title}}</h3>
+      <p>{{update_body}}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section cta-section">
+  <div class="shell cta-inner">
+    <div>
+      <h2 class="section-title">{{cta_title}}</h2>
+      <p class="section-lead">{{cta_body}}</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-ghost" href="{{developmentHref}}">{{cta_button}}<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn-ghost" href="{{githubHref}}" rel="noopener noreferrer" target="_blank"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>{{cta_github}}</a>
+    </div>
+  </div>
+</section>

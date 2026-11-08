@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WROLP Editor — a small local text editor for Windows</title>
+<meta name="description" content="A local Windows text editor built on Tauri v2, React and Monaco. Tabs and groups, draft recovery, unsaved-line colouring, Markdown preview, a PDF reader, a picture gallery, version history, built-in Git source control and AES-256-GCM encryption. MIT licensed.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0d0e13">
+<link rel="icon" href="assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="assets/icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/icons/icon-256.png">
+<link rel="stylesheet" href="assets/site.css">
+<script>
+(function(){try{var s=localStorage.getItem('wrolp-theme');var t=s||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
+</head>
+<body class="is-home">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2.4"/><circle cx="6" cy="19" r="2.4"/><circle cx="18" cy="9" r="2.4"/><path d="M6 7.4v9.2M18 11.4c0 3.2-3.6 3.4-6 4.2-1.6.5-3.4 1-3.4 2.4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7M12 14.6v2.2"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24"><path d="M3.6 12a8.4 8.4 0 1 0 2.6-6.1M3.4 4.6v4.2h4.2"/><path d="M12 7.8V12l3 1.9"/></symbol>
+  <symbol id="i-markdown" viewBox="0 0 24 24"><rect x="2.6" y="5.4" width="18.8" height="13.2" rx="2.2"/><path d="M6 15.4V8.6l3 3.6 3-3.6v6.8M16.4 8.6v6.8M16.4 15.4l2-2.2M16.4 15.4l-2-2.2"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M13.4 2.8H7a2 2 0 0 0-2 2v14.4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.4z"/><path d="M13.2 2.9v5.3h5.5M8.4 13h1.2a1.5 1.5 0 0 1 0 3H8.4v-3zM8.4 16v2.4M13.4 13v5.4h1.2a1.6 1.6 0 0 0 1.6-1.6v-2.2a1.6 1.6 0 0 0-1.6-1.6z"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M4.6 5.4A1.8 1.8 0 0 1 6.4 3.6h9.4L20.4 8v10.6a1.8 1.8 0 0 1-1.8 1.8H6.4a1.8 1.8 0 0 1-1.8-1.8z"/><path d="M8 3.8v5h7v-5M8 20.2v-6h8v6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.2A8.4 8.4 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.6v11M7.6 10.2L12 14.6l4.4-4.4M4.4 18.4v1.2a.8.8 0 0 0 .8.8h13.6a.8.8 0 0 0 .8-.8v-1.2"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.6-4.5 4.9.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.2z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.6h6a3 3 0 0 1 3 3v11.8a2.4 2.4 0 0 0-2.4-2.4H4z"/><path d="M20 4.6h-6a3 3 0 0 0-3 3v11.8a2.4 2.4 0 0 1 2.4-2.4H20z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8.4 6.4h11M8.4 12h11M8.4 17.6h11M4.4 6.4h.01M4.4 12h.01M4.4 17.6h.01"/></symbol>
+</svg>
+
+<header class="site-header" data-header>
+  <div class="shell header-inner">
+    <a class="brand" href="index.html" aria-label="WROLP Editor">
+      <img class="brand-mark" src="assets/img/logo.svg" alt="" width="32" height="32">
+      <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <a class="nav-link" href="#features">Features</a>
+      <a class="nav-link" href="docs/index.html">Docs</a>
+      <a class="nav-link" href="docs/changelog.html">Changelog</a>
+      <a class="nav-link nav-link-icon" href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span>GitHub</span>
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="lang-switch" href="zh/index.html" hreflang="zh-CN" lang="zh-CN">中文</a>
+      <button class="icon-btn" type="button" data-theme-toggle data-label-dark="Switch to dark theme" data-label-light="Switch to light theme" aria-label="Switch to light theme" title="Switch to light theme">
+        <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm header-download" href="https://github.com/wrolp/wrolp-editor/releases/latest" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span>Download</span>
+      </a>
+      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+        <svg class="icon icon-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero">
+  <div class="shell">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>v0.0.3 · released 2026-11-07</p>
+      <h1 class="hero-title">WROLP Editor</h1>
+      <p class="hero-tagline">A small local text editor for Windows</p>
+      <p class="hero-lead">Tauri v2 + React + TypeScript, with Monaco Editor in the editing surface. Tabs, draft recovery, Markdown preview, PDF reading, built-in Git source control and AES-256-GCM encryption — all of it on your own machine.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="https://github.com/wrolp/wrolp-editor/releases/download/v0.0.3/WROLP.Editor_0.0.3_x64-setup.exe" rel="noopener noreferrer" target="_blank">
+          <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Download for Windows
+        </a>
+        <a class="btn btn-ghost btn-lg" href="docs/index.html">
+          <svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Read the docs
+        </a>
+      </div>
+      <p class="hero-meta">Windows 10/11 · x64 · 8.6 MB · requires the WebView2 runtime · <a href="https://github.com/wrolp/wrolp-editor/releases" rel="noopener noreferrer" target="_blank">All releases</a></p>
+    </div>
+
+    <figure class="hero-figure">
+      <a class="shot" href="assets/img/screenshot-full.png" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size screenshot in a new tab">
+        <picture>
+          <source srcset="assets/img/screenshot.webp" type="image/webp">
+          <img src="assets/img/screenshot.png" alt="A screenshot of the real WROLP Editor window: view switcher and tab strip at the top, the explorer tree with git markers on the left, the rendered README.md document in the middle, a document outline panel on the right, and a status bar showing branch, encoding and cursor position." width="1600" height="952" decoding="async">
+        </picture>
+      </a>
+      <figcaption class="figure-caption">The real window with README.md open — explorer on the left, the rendered document in the middle, its outline on the right. Click to enlarge.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="shell">
+    <header class="section-head">
+      <h2 class="section-title">Features</h2>
+      <p class="section-lead">Edit, read, compare and commit without leaving the window.</p>
+    </header>
+    <div class="feature-grid"><article class="feature-card">
+      <span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-branch"/></svg></span>
+      <h3>Built-in Git source control</h3>
+      <p>A fourth sidebar view drives the real repositories behind the group folder: staged and unstaged changes, per-file diffs, commits and history, branches, a three-way merge editor, and fetch / pull / push over HTTPS or SSH with progress and cancel.</p>
+      <a class="feature-link" href="docs/git.html" aria-label="Docs — Built-in Git source control">Docs<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article><article class="feature-card">
+      <span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg></span>
+      <h3>AES-256-GCM encrypted files</h3>
+      <p>A self-describing container with a password-derived key. Encrypt-on-save-as, new encrypted file, change password, remove encryption, an idle lock, optional remembering into Windows Credential Manager, and drafts encrypted under the same key.</p>
+      <a class="feature-link" href="docs/encryption.html" aria-label="Docs — AES-256-GCM encrypted files">Docs<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article><article class="feature-card">
+      <span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-history"/></svg></span>
+      <h3>Version history and side-by-side diff</h3>
+      <p>When it is on, every save by hand records what the file said. Any two versions can be compared side by side, or either against what is open now; fold down to the changes, collapse untouched regions, or put a version back into the editor.</p>
+      <a class="feature-link" href="docs/history.html" aria-label="Docs — Version history and side-by-side diff">Docs<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article><article class="feature-card">
+      <span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-markdown"/></svg></span>
+      <h3>Markdown preview</h3>
+      <p>Renders beside the source with GitHub-style syntax, an outline and Monaco-coloured code blocks; mermaid / plantuml / graphviz fences become SVG. HTML written by the document is rendered after a whitelist clean-up — scripts and event handlers never pass.</p>
+      <a class="feature-link" href="docs/index.html" aria-label="Docs — Markdown preview">Docs<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article><article class="feature-card">
+      <span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-pdf"/></svg></span>
+      <h3>PDF reader</h3>
+      <p>Drawn by pdf.js as one continuous scroll, from 25 to 400 %. White, cream, eye-care green, inverted night paper or a colour of your own; hierarchical bookmarks fold branch by branch, auto-scroll runs at a set speed, and the last page read is remembered per file.</p>
+      <a class="feature-link" href="docs/preview.html" aria-label="Docs — PDF reader">Docs<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article><article class="feature-card">
+      <span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-save"/></svg></span>
+      <h3>Drafts, auto-save and line colouring</h3>
+      <p>Drafts hit the disk about 500 ms after you stop typing, and flush at once on a tab switch, a tab close or window blur. Lines that differ from the disk copy are coloured: additions green, replaced text amber. Auto-save lands after a pause, not mid-sentence.</p>
+      <a class="feature-link" href="docs/editor.html" aria-label="Docs — Drafts, auto-save and line colouring">Docs<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article></div>
+
+    <div class="more-block">
+      <h3 class="more-title">Also in the box</h3>
+      <ul class="more-list"><li><a href="docs/editor.html">Tab groups: tabs, cursor positions and the directory tree switch together</a></li><li><a href="docs/preview.html">Picture gallery: a whole folder in natural order, four ways to view it</a></li><li><a href="docs/files.html">Batch rename: pattern tokens or a regular expression, previewed line by line</a></li><li><a href="docs/files.html">Configuration backups: snapshots on open and close, restore any one of them</a></li><li><a href="docs/index.html">Single instance and Windows context-menu integration</a></li><li><a href="docs/editor.html">English and 简体中文, following the system by default</a></li><li><a href="docs/development.html">Signed auto-update that prompts and never installs on its own</a></li><li><a href="docs/editor.html">Window size, position and maximised state restored</a></li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="local">
+  <div class="shell local-grid">
+    <div class="local-copy">
+      <h2 class="section-title">Local first</h2>
+      <p class="section-lead">No account, and every file read and write stays on the machine.</p>
+      <p class="prose-local">The picture gallery reads a local folder only — no image host, no upload, no generated links. Remote sync happens only when you run git fetch / pull / push yourself, and the credentials live in state/git.json, outside both settings and configuration backups.</p>
+      <div class="path-card">
+        <p class="path-label">Application data</p>
+        <code class="path-value">%APPDATA%\com.wrolp.editor</code>
+        <p class="path-hint">Settings → About lists the full paths and opens them in Explorer.</p>
+      </div>
+    </div>
+    <dl class="fact-list"><div class="fact"><dt>MIT</dt><dd>open-source licence</dd></div><div class="fact"><dt>x64</dt><dd>Windows 10/11</dd></div><div class="fact"><dt>0</dt><dd>accounts to register</dd></div></dl>
+  </div>
+</section>
+
+<section class="section" id="shortcuts">
+  <div class="shell two-col">
+    <div class="panel">
+      <h2 class="panel-title">Keyboard shortcuts</h2>
+      <ul class="shortcut-list"><li><span class="shortcut-keys"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>S</kbd></span><span class="shortcut-action">Save (an untitled tab goes to Save as)</span></li><li><span class="shortcut-keys"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>O</kbd></span><span class="shortcut-action">Open files (multi-select)</span></li><li><span class="shortcut-keys"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>N</kbd></span><span class="shortcut-action">New untitled tab</span></li><li><span class="shortcut-keys"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>W</kbd></span><span class="shortcut-action">Close the current tab (its draft is kept)</span></li><li><span class="shortcut-keys"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>B</kbd></span><span class="shortcut-action">Toggle the sidebar</span></li></ul>
+      <p class="panel-note">Scrolling the wheel over the tab strip scrolls it sideways. <a href="docs/editor.html">Full behaviour in the docs</a></p>
+    </div>
+    <div class="panel">
+      <h2 class="panel-title">Stack</h2>
+      <p class="panel-note panel-note-lead">A Rust backend for files, git and encryption; a web frontend for the interface.</p>
+      <ul class="stack-list"><li><span class="stack-name">Tauri v2</span><span class="stack-note">Rust desktop shell</span></li><li><span class="stack-name">React 19</span><span class="stack-note">interface</span></li><li><span class="stack-name">TypeScript 6</span><span class="stack-note">frontend language</span></li><li><span class="stack-name">Monaco 0.57</span><span class="stack-note">editing surface</span></li><li><span class="stack-name">Vite 8</span><span class="stack-note">build</span></li><li><span class="stack-name">git2</span><span class="stack-note">vendored libgit2</span></li><li><span class="stack-name">aes-gcm + argon2</span><span class="stack-note">encryption and key derivation</span></li><li><span class="stack-name">pdf.js</span><span class="stack-note">PDF rendering</span></li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="download">
+  <div class="shell">
+    <header class="section-head">
+      <h2 class="section-title">Download and install</h2>
+      <p class="section-lead">One NSIS installer; afterwards files open from the context menu or the launcher.</p>
+    </header>
+    <ol class="step-grid"><li class="step"><span class="step-n">1</span><h3>Get the installer</h3><p>Take the latest x64 setup.exe from GitHub Releases.</p></li><li class="step"><span class="step-n">2</span><h3>Run it</h3><p>Needs Windows 10/11 and the WebView2 runtime, already built into recent Windows.</p></li><li class="step"><span class="step-n">3</span><h3>Open a file</h3><p>Context-menu integration is a setting; a second launch hands its paths to the running window.</p></li></ol>
+    <div class="download-bar">
+      <div class="download-bar-copy">
+        <a class="btn btn-primary btn-lg" href="https://github.com/wrolp/wrolp-editor/releases/download/v0.0.3/WROLP.Editor_0.0.3_x64-setup.exe" rel="noopener noreferrer" target="_blank">
+          <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Download v0.0.3
+        </a>
+        <p class="download-size">x64 · 8.6 MB</p>
+      </div>
+      <div class="download-links">
+        <a href="docs/changelog.html">Release notes<svg class="icon icon-inline" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="https://github.com/wrolp/wrolp-editor/releases" rel="noopener noreferrer" target="_blank">All releases and checksums<svg class="icon icon-inline" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+    <div class="update-note">
+      <h3 class="update-title">How updating works</h3>
+      <p>The app checks GitHub for a newer release after startup and every six hours, and only prompts — it never installs on its own. Download and install fetches the signed installer, hands it to the passive installer and restarts. The automatic check can be turned off in Settings → About.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section cta-section">
+  <div class="shell cta-inner">
+    <div>
+      <h2 class="section-title">Build from source</h2>
+      <p class="section-lead">Needs the Rust MSVC toolchain, the Visual Studio C++ build tools workload, and Node.js ^20.19 or &gt;=22.12.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-ghost" href="docs/development.html">Development guide<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn-ghost" href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>View source</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="index.html" aria-label="WROLP Editor">
+        <img class="brand-mark" src="assets/img/logo.svg" alt="" width="28" height="28">
+        <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+      </a>
+      <p class="footer-tagline">A small local text editor for Windows.</p>
+      <p class="footer-copy">MIT © 2026 wrolp</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h2 class="footer-heading">Product</h2>
+        <a href="#features">Features</a>
+        <a href="#download">Download</a>
+        <a href="docs/changelog.html">Changelog</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Resources</h2>
+        <a href="docs/index.html">Docs</a>
+        <a href="docs/license.html">MIT licence</a>
+        <a href="https://github.com/wrolp/wrolp-editor/issues" rel="noopener noreferrer" target="_blank">Issues</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Source</h2>
+        <a href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="https://github.com/wrolp/wrolp-editor/releases" rel="noopener noreferrer" target="_blank">Releases</a>
+        <a href="https://github.com/wrolp/wrolp-editor.github.io" rel="noopener noreferrer" target="_blank">Site source</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js" defer></script>
+</body>
+</html>

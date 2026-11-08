@@ -1,0 +1,441 @@
+{
+  "project": {
+    "name": "WROLP Editor",
+    "version": "0.0.3",
+    "releaseDate": "2026-11-07",
+    "installerSize": "8.6 MB",
+    "license": "MIT",
+    "copyright": "2026 wrolp",
+    "github": "https://github.com/wrolp/wrolp-editor",
+    "releases": "https://github.com/wrolp/wrolp-editor/releases",
+    "latest": "https://github.com/wrolp/wrolp-editor/releases/latest",
+    "download": "https://github.com/wrolp/wrolp-editor/releases/download/v0.0.3/WROLP.Editor_0.0.3_x64-setup.exe",
+    "issues": "https://github.com/wrolp/wrolp-editor/issues",
+    "licenseUrl": "https://github.com/wrolp/wrolp-editor/blob/main/LICENSE"
+  },
+  "docs": {
+    "groups": [
+      { "id": "guides", "title": { "zh": "使用指南", "en": "Guides" } },
+      { "id": "reference", "title": { "zh": "参考", "en": "Reference" } }
+    ],
+    "pages": [
+      {
+        "slug": "index",
+        "group": "guides",
+        "sections": [0],
+        "title": { "zh": "概览", "en": "Overview" },
+        "description": {
+          "zh": "WROLP Editor 是什么，以及各模块的行为一览。",
+          "en": "What WROLP Editor is, and what each module does."
+        }
+      },
+      {
+        "slug": "editor",
+        "group": "guides",
+        "sections": [1, 7, 13, 14],
+        "title": { "zh": "编辑器与窗口", "en": "Editor & window" },
+        "description": {
+          "zh": "快捷键、标签分组、窗口状态还原与界面语言。",
+          "en": "Keyboard shortcuts, tab groups, window state and interface language."
+        }
+      },
+      {
+        "slug": "preview",
+        "group": "guides",
+        "sections": [2, 3],
+        "title": { "zh": "PDF 与图片", "en": "PDFs & pictures" },
+        "description": {
+          "zh": "PDF 阅读器的纸张、书签与自动滚动，以及目录级图片画廊的四种视图。",
+          "en": "PDF paper, bookmarks and auto-scroll, plus the four views of the folder gallery."
+        }
+      },
+      {
+        "slug": "files",
+        "group": "guides",
+        "sections": [4, 8, 9],
+        "title": { "zh": "文件操作", "en": "Working with files" },
+        "description": {
+          "zh": "批量重命名、配置备份快照与只读并排对比。",
+          "en": "Batch rename, configuration backup snapshots and read-only side-by-side comparison."
+        }
+      },
+      {
+        "slug": "history",
+        "group": "guides",
+        "sections": [10],
+        "title": { "zh": "版本记录", "en": "Version history" },
+        "description": {
+          "zh": "按文件保存的私有历史：记录、比对、取回，以及与 git 的区别。",
+          "en": "Per-file private history: recording, comparing, restoring, and how it differs from git."
+        }
+      },
+      {
+        "slug": "git",
+        "group": "guides",
+        "sections": [11],
+        "title": { "zh": "源码管理", "en": "Source control" },
+        "description": {
+          "zh": "暂存、提交、分支、三栏合并，以及 HTTPS / SSH 上的 fetch、pull、push。",
+          "en": "Staging, commits, branches, three-way merge, and fetch/pull/push over HTTPS or SSH."
+        }
+      },
+      {
+        "slug": "encryption",
+        "group": "guides",
+        "sections": [12],
+        "title": { "zh": "加密文件", "en": "Encrypted files" },
+        "description": {
+          "zh": "AES-256-GCM 容器格式、三个入口、解锁与空闲锁、记住口令与草稿。",
+          "en": "The AES-256-GCM container, the three ways in, unlocking, the idle lock, passwords and drafts."
+        }
+      },
+      {
+        "slug": "data",
+        "group": "reference",
+        "sections": [6],
+        "title": { "zh": "数据存放位置", "en": "Where data lives" },
+        "description": {
+          "zh": "配置目录下的各个文件，以及前端可调用的 Tauri 命令。",
+          "en": "Every file under the configuration directory, and the Tauri commands the frontend calls."
+        }
+      },
+      {
+        "slug": "development",
+        "group": "reference",
+        "sections": [5],
+        "title": { "zh": "开发指南", "en": "Development" },
+        "description": {
+          "zh": "环境要求、本地开发、打安装包、发布闸门与脚本。",
+          "en": "Requirements, local development, building an installer, release gates and scripts."
+        }
+      },
+      {
+        "slug": "changelog",
+        "group": "reference",
+        "source": "releaseNotes",
+        "title": { "zh": "发行说明", "en": "Release notes" },
+        "description": {
+          "zh": "v0.0.3、v0.0.2 与 v0.0.1 的新特性、修复与内部变更。",
+          "en": "Features, fixes and internal changes in v0.0.3, v0.0.2 and v0.0.1."
+        }
+      },
+      {
+        "slug": "license",
+        "group": "reference",
+        "sections": [15],
+        "source": "license",
+        "title": { "zh": "许可证", "en": "License" },
+        "description": {
+          "zh": "WROLP Editor 以 MIT 许可证发布。",
+          "en": "WROLP Editor is released under the MIT license."
+        }
+      }
+    ]
+  },
+  "ui": {
+    "zh": {
+      "lang": "zh-CN",
+      "langLabel": "中文",
+      "langSwitch": "English",
+      "skipToContent": "跳到正文",
+      "navLabel": "主导航",
+      "nav_features": "功能特性",
+      "nav_docs": "文档",
+      "nav_changelog": "更新日志",
+      "nav_github": "GitHub",
+      "nav_download": "下载",
+      "themeToLight": "切换到浅色主题",
+      "themeToDark": "切换到深色主题",
+      "menuToggle": "打开导航",
+      "docsTitle": "文档",
+      "docsNavLabel": "文档目录",
+      "tocTitle": "本页目录",
+      "tocLabel": "本页目录",
+      "breadcrumbHome": "首页",
+      "breadcrumbLabel": "面包屑",
+      "pagerLabel": "文档翻页",
+      "editOnGithub": "在 GitHub 上查看源文件",
+      "prevPage": "上一页",
+      "nextPage": "下一页",
+      "footerLicense": "MIT 许可证",
+      "footerBuilt": "本站源码",
+      "footerSiteRepo": "https://github.com/wrolp/wrolp-editor.github.io",
+      "docsHubTitle": "WROLP Editor 文档",
+      "docsHubLead": "下面的内容来自项目 README 与发行说明，随版本同步。",
+      "backToTop": "回到顶部"
+    },
+    "en": {
+      "lang": "en",
+      "langLabel": "English",
+      "langSwitch": "中文",
+      "skipToContent": "Skip to content",
+      "navLabel": "Main navigation",
+      "nav_features": "Features",
+      "nav_docs": "Docs",
+      "nav_changelog": "Changelog",
+      "nav_github": "GitHub",
+      "nav_download": "Download",
+      "themeToLight": "Switch to light theme",
+      "themeToDark": "Switch to dark theme",
+      "menuToggle": "Open navigation",
+      "docsTitle": "Documentation",
+      "docsNavLabel": "Documentation pages",
+      "tocTitle": "On this page",
+      "tocLabel": "On this page",
+      "breadcrumbHome": "Home",
+      "breadcrumbLabel": "Breadcrumb",
+      "pagerLabel": "Documentation pages",
+      "editOnGithub": "View source on GitHub",
+      "prevPage": "Previous",
+      "nextPage": "Next",
+      "footerLicense": "MIT license",
+      "footerBuilt": "Site source",
+      "footerSiteRepo": "https://github.com/wrolp/wrolp-editor.github.io",
+      "docsHubTitle": "WROLP Editor documentation",
+      "docsHubLead": "Everything below comes from the project README and release notes, and tracks the release.",
+      "backToTop": "Back to top"
+    }
+  },
+  "landing": {
+    "zh": {
+      "pageTitle": "WROLP Editor — 一款 Windows 本地文本编辑器",
+      "pageDescription": "Tauri v2 + React + Monaco 的 Windows 本地文本编辑器。多标签与分组、草稿恢复、未保存行染色、Markdown 预览、PDF 阅读器、图片画廊、版本记录、内置 Git 源码管理与 AES-256-GCM 加密。MIT 许可。",
+      "hero_eyebrow": "v0.0.3 · 2026-11-07 发布",
+      "hero_tagline": "一款 Windows 本地文本编辑器",
+      "hero_lead": "Tauri v2 + React + TypeScript，编辑区用 Monaco Editor。多标签、草稿恢复、Markdown 预览、PDF 阅读、内置 Git 源码管理和 AES-256-GCM 加密，都在本机完成。",
+      "hero_download": "下载 Windows 安装包",
+      "hero_docs": "阅读文档",
+      "hero_meta": "Windows 10/11 · x64 · 8.6 MB · 需要 WebView2 运行时",
+      "hero_allReleases": "全部版本",
+      "figure_caption": "WROLP Editor 打开 README.md 时的真实窗口截图 —— 左侧资源管理器、中间渲染后的文档、右侧文档目录。点击查看原图。",
+      "figure_aria": "WROLP Editor 的真实窗口截图：顶部是视图切换与标签条，左侧为资源管理器目录树和 git 标记，中间显示渲染后的 README.md 文档，右侧为文档目录面板，底部状态栏显示分支、编码与光标位置。",
+      "figure_zoom": "查看全尺寸截图（在新标签页打开）",
+      "features_title": "功能特性",
+      "features_lead": "一个窗口里完成编辑、阅读、对比和提交。",
+      "features": [
+        {
+          "title": "内置 Git 源码管理",
+          "body": "侧栏第四个视图操作分组目录背后的真实仓库：暂存与未暂存改动、逐文件 diff、提交与历史、分支、三栏合并编辑器，以及 HTTPS / SSH 上的 fetch、pull、push，带进度与取消。",
+          "href": "docs/git.html",
+          "icon": "branch"
+        },
+        {
+          "title": "AES-256-GCM 加密文件",
+          "body": "口令派生密钥的自描述容器。加密另存为、新建加密文件、改口令、移除加密，空闲自动锁定，可选把口令记住到 Windows 凭据管理器，草稿同钥加密。",
+          "href": "docs/encryption.html",
+          "icon": "lock"
+        },
+        {
+          "title": "版本记录与并排对比",
+          "body": "打开后每次手动保存都记下文件当时的内容。任意两条可以并排比对，也可以拿任一版本与当前编辑区比对；只看变更、折叠未改动区段，或直接取回编辑器。",
+          "href": "docs/history.html",
+          "icon": "history"
+        },
+        {
+          "title": "Markdown 预览",
+          "body": "源码右侧渲染 GitHub 风格语法、目录与 Monaco 上色的代码块，mermaid / plantuml / graphviz 围栏画成 SVG。文档自带的 HTML 经白名单清洗后渲染，脚本与事件处理器一律不放行。",
+          "href": "docs/index.html",
+          "icon": "markdown"
+        },
+        {
+          "title": "PDF 阅读器",
+          "body": "pdf.js 绘制，整篇连续滚动，25–400% 缩放。白纸、米黄、护眼绿、夜间反相或自选颜色；层级书签可逐支折叠，自动滚动按设定速度推进，按文件记住上次读到哪一页。",
+          "href": "docs/preview.html",
+          "icon": "pdf"
+        },
+        {
+          "title": "草稿、自动保存与行染色",
+          "body": "编辑后约 500ms 防抖落盘，切标签、关标签、窗口失焦时立即冲刷。与磁盘不一致的行会被染色：新增偏绿、改掉原有文字偏黄。自动保存落在一次停顿之后，而不是句子中间。",
+          "href": "docs/editor.html",
+          "icon": "save"
+        }
+      ],
+      "more_title": "还有",
+      "more": [
+        { "text": "标签分组：标签、光标位置与目录树一起切换", "href": "docs/editor.html" },
+        { "text": "图片画廊：整个目录按自然序，四种视图", "href": "docs/preview.html" },
+        { "text": "批量重命名：规则 token 或正则，逐行预览", "href": "docs/files.html" },
+        { "text": "配置备份：打开与关闭时自动快照，可任选一份恢复", "href": "docs/files.html" },
+        { "text": "单实例与 Windows 右键菜单集成", "href": "docs/index.html" },
+        { "text": "中英双语，默认跟随系统", "href": "docs/editor.html" },
+        { "text": "签名自动更新，只提示不自动安装", "href": "docs/development.html" },
+        { "text": "窗口大小、位置与最大化状态还原", "href": "docs/editor.html" }
+      ],
+      "local_title": "本地优先",
+      "local_lead": "不需要账号，文件读写都在本机。",
+      "local_body": "图片画廊只读本地目录 —— 不接图床、不上传、不生成直链。远程同步只发生在你主动执行 git fetch / pull / push 的时候，凭据放在 state/git.json，不进入设置也不进入配置备份。",
+      "local_path_label": "应用数据目录",
+      "local_path_hint": "设置 → 关于 会列出完整路径，并能直接在资源管理器里打开。",
+      "local_facts": [
+        { "k": "MIT", "v": "开源许可" },
+        { "k": "x64", "v": "Windows 10/11" },
+        { "k": "0", "v": "需要注册的账号" }
+      ],
+      "shortcuts_title": "快捷键",
+      "shortcuts": [
+        { "keys": ["Ctrl", "S"], "action": "保存（未命名标签走另存为）" },
+        { "keys": ["Ctrl", "O"], "action": "打开文件（可多选）" },
+        { "keys": ["Ctrl", "N"], "action": "新建未命名标签" },
+        { "keys": ["Ctrl", "W"], "action": "关闭当前标签（其草稿保留）" },
+        { "keys": ["Ctrl", "B"], "action": "切换侧边栏" }
+      ],
+      "shortcuts_note": "在标签条上滚动滚轮可横向滚动。",
+      "shortcuts_more": "完整行为见文档",
+      "stack_title": "技术栈",
+      "stack_lead": "Rust 后端做文件、git 与加密，Web 前端做界面。",
+      "stack": [
+        { "name": "Tauri v2", "note": "Rust 桌面外壳" },
+        { "name": "React 19", "note": "界面" },
+        { "name": "TypeScript 6", "note": "前端语言" },
+        { "name": "Monaco 0.57", "note": "编辑区" },
+        { "name": "Vite 8", "note": "构建" },
+        { "name": "git2", "note": "vendored libgit2" },
+        { "name": "aes-gcm + argon2", "note": "加密与口令派生" },
+        { "name": "pdf.js", "note": "PDF 渲染" }
+      ],
+      "download_title": "下载与安装",
+      "download_lead": "一个 NSIS 安装包，装完即可从右键菜单或启动器打开文件。",
+      "download_steps": [
+        { "n": "1", "title": "下载安装包", "body": "从 GitHub Releases 取最新版的 x64 setup.exe。" },
+        { "n": "2", "title": "运行安装", "body": "需要 Windows 10/11 与 WebView2 运行时，近年的 Windows 已内置。" },
+        { "n": "3", "title": "打开文件", "body": "设置里可开启右键菜单集成；再次启动会把路径交给已运行的窗口。" }
+      ],
+      "download_button": "下载 v0.0.3",
+      "download_size": "x64 · 8.6 MB",
+      "download_notes": "发行说明",
+      "download_all": "全部版本与校验文件",
+      "update_title": "更新方式",
+      "update_body": "启动后与每六小时会检查 GitHub 上的最新版本，发现新版只提示、不自动安装。安装由「下载并安装」触发：下载签名安装包后交给 passive 安装器并自动重启。自动检查可在 设置 → 关于 关闭。",
+      "cta_title": "从源码构建",
+      "cta_body": "需要 Rust MSVC 工具链、Visual Studio C++ 生成工具，以及 Node.js ^20.19 或 >=22.12。",
+      "cta_button": "开发指南",
+      "cta_github": "查看源码",
+      "footer_tagline": "一款 Windows 本地文本编辑器。",
+      "footer_product": "产品",
+      "footer_resources": "资源",
+      "footer_source": "源码",
+      "footer_issues": "问题反馈",
+      "footer_license": "MIT 许可证"
+    },
+    "en": {
+      "pageTitle": "WROLP Editor — a small local text editor for Windows",
+      "pageDescription": "A local Windows text editor built on Tauri v2, React and Monaco. Tabs and groups, draft recovery, unsaved-line colouring, Markdown preview, a PDF reader, a picture gallery, version history, built-in Git source control and AES-256-GCM encryption. MIT licensed.",
+      "hero_eyebrow": "v0.0.3 · released 2026-11-07",
+      "hero_tagline": "A small local text editor for Windows",
+      "hero_lead": "Tauri v2 + React + TypeScript, with Monaco Editor in the editing surface. Tabs, draft recovery, Markdown preview, PDF reading, built-in Git source control and AES-256-GCM encryption — all of it on your own machine.",
+      "hero_download": "Download for Windows",
+      "hero_docs": "Read the docs",
+      "hero_meta": "Windows 10/11 · x64 · 8.6 MB · requires the WebView2 runtime",
+      "hero_allReleases": "All releases",
+      "figure_caption": "The real window with README.md open — explorer on the left, the rendered document in the middle, its outline on the right. Click to enlarge.",
+      "figure_aria": "A screenshot of the real WROLP Editor window: view switcher and tab strip at the top, the explorer tree with git markers on the left, the rendered README.md document in the middle, a document outline panel on the right, and a status bar showing branch, encoding and cursor position.",
+      "figure_zoom": "Open the full-size screenshot in a new tab",
+      "features_title": "Features",
+      "features_lead": "Edit, read, compare and commit without leaving the window.",
+      "features": [
+        {
+          "title": "Built-in Git source control",
+          "body": "A fourth sidebar view drives the real repositories behind the group folder: staged and unstaged changes, per-file diffs, commits and history, branches, a three-way merge editor, and fetch / pull / push over HTTPS or SSH with progress and cancel.",
+          "href": "docs/git.html",
+          "icon": "branch"
+        },
+        {
+          "title": "AES-256-GCM encrypted files",
+          "body": "A self-describing container with a password-derived key. Encrypt-on-save-as, new encrypted file, change password, remove encryption, an idle lock, optional remembering into Windows Credential Manager, and drafts encrypted under the same key.",
+          "href": "docs/encryption.html",
+          "icon": "lock"
+        },
+        {
+          "title": "Version history and side-by-side diff",
+          "body": "When it is on, every save by hand records what the file said. Any two versions can be compared side by side, or either against what is open now; fold down to the changes, collapse untouched regions, or put a version back into the editor.",
+          "href": "docs/history.html",
+          "icon": "history"
+        },
+        {
+          "title": "Markdown preview",
+          "body": "Renders beside the source with GitHub-style syntax, an outline and Monaco-coloured code blocks; mermaid / plantuml / graphviz fences become SVG. HTML written by the document is rendered after a whitelist clean-up — scripts and event handlers never pass.",
+          "href": "docs/index.html",
+          "icon": "markdown"
+        },
+        {
+          "title": "PDF reader",
+          "body": "Drawn by pdf.js as one continuous scroll, from 25 to 400 %. White, cream, eye-care green, inverted night paper or a colour of your own; hierarchical bookmarks fold branch by branch, auto-scroll runs at a set speed, and the last page read is remembered per file.",
+          "href": "docs/preview.html",
+          "icon": "pdf"
+        },
+        {
+          "title": "Drafts, auto-save and line colouring",
+          "body": "Drafts hit the disk about 500 ms after you stop typing, and flush at once on a tab switch, a tab close or window blur. Lines that differ from the disk copy are coloured: additions green, replaced text amber. Auto-save lands after a pause, not mid-sentence.",
+          "href": "docs/editor.html",
+          "icon": "save"
+        }
+      ],
+      "more_title": "Also in the box",
+      "more": [
+        { "text": "Tab groups: tabs, cursor positions and the directory tree switch together", "href": "docs/editor.html" },
+        { "text": "Picture gallery: a whole folder in natural order, four ways to view it", "href": "docs/preview.html" },
+        { "text": "Batch rename: pattern tokens or a regular expression, previewed line by line", "href": "docs/files.html" },
+        { "text": "Configuration backups: snapshots on open and close, restore any one of them", "href": "docs/files.html" },
+        { "text": "Single instance and Windows context-menu integration", "href": "docs/index.html" },
+        { "text": "English and 简体中文, following the system by default", "href": "docs/editor.html" },
+        { "text": "Signed auto-update that prompts and never installs on its own", "href": "docs/development.html" },
+        { "text": "Window size, position and maximised state restored", "href": "docs/editor.html" }
+      ],
+      "local_title": "Local first",
+      "local_lead": "No account, and every file read and write stays on the machine.",
+      "local_body": "The picture gallery reads a local folder only — no image host, no upload, no generated links. Remote sync happens only when you run git fetch / pull / push yourself, and the credentials live in state/git.json, outside both settings and configuration backups.",
+      "local_path_label": "Application data",
+      "local_path_hint": "Settings → About lists the full paths and opens them in Explorer.",
+      "local_facts": [
+        { "k": "MIT", "v": "open-source licence" },
+        { "k": "x64", "v": "Windows 10/11" },
+        { "k": "0", "v": "accounts to register" }
+      ],
+      "shortcuts_title": "Keyboard shortcuts",
+      "shortcuts": [
+        { "keys": ["Ctrl", "S"], "action": "Save (an untitled tab goes to Save as)" },
+        { "keys": ["Ctrl", "O"], "action": "Open files (multi-select)" },
+        { "keys": ["Ctrl", "N"], "action": "New untitled tab" },
+        { "keys": ["Ctrl", "W"], "action": "Close the current tab (its draft is kept)" },
+        { "keys": ["Ctrl", "B"], "action": "Toggle the sidebar" }
+      ],
+      "shortcuts_note": "Scrolling the wheel over the tab strip scrolls it sideways.",
+      "shortcuts_more": "Full behaviour in the docs",
+      "stack_title": "Stack",
+      "stack_lead": "A Rust backend for files, git and encryption; a web frontend for the interface.",
+      "stack": [
+        { "name": "Tauri v2", "note": "Rust desktop shell" },
+        { "name": "React 19", "note": "interface" },
+        { "name": "TypeScript 6", "note": "frontend language" },
+        { "name": "Monaco 0.57", "note": "editing surface" },
+        { "name": "Vite 8", "note": "build" },
+        { "name": "git2", "note": "vendored libgit2" },
+        { "name": "aes-gcm + argon2", "note": "encryption and key derivation" },
+        { "name": "pdf.js", "note": "PDF rendering" }
+      ],
+      "download_title": "Download and install",
+      "download_lead": "One NSIS installer; afterwards files open from the context menu or the launcher.",
+      "download_steps": [
+        { "n": "1", "title": "Get the installer", "body": "Take the latest x64 setup.exe from GitHub Releases." },
+        { "n": "2", "title": "Run it", "body": "Needs Windows 10/11 and the WebView2 runtime, already built into recent Windows." },
+        { "n": "3", "title": "Open a file", "body": "Context-menu integration is a setting; a second launch hands its paths to the running window." }
+      ],
+      "download_button": "Download v0.0.3",
+      "download_size": "x64 · 8.6 MB",
+      "download_notes": "Release notes",
+      "download_all": "All releases and checksums",
+      "update_title": "How updating works",
+      "update_body": "The app checks GitHub for a newer release after startup and every six hours, and only prompts — it never installs on its own. Download and install fetches the signed installer, hands it to the passive installer and restarts. The automatic check can be turned off in Settings → About.",
+      "cta_title": "Build from source",
+      "cta_body": "Needs the Rust MSVC toolchain, the Visual Studio C++ build tools workload, and Node.js ^20.19 or >=22.12.",
+      "cta_button": "Development guide",
+      "cta_github": "View source",
+      "footer_tagline": "A small local text editor for Windows.",
+      "footer_product": "Product",
+      "footer_resources": "Resources",
+      "footer_source": "Source",
+      "footer_issues": "Issues",
+      "footer_license": "MIT licence"
+    }
+  }
+}

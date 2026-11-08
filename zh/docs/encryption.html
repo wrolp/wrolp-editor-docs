@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>加密文件 · WROLP Editor</title>
+<meta name="description" content="AES-256-GCM 容器格式、三个入口、解锁与空闲锁、记住口令与草稿。">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0d0e13">
+<link rel="icon" href="../../assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../../assets/icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../../assets/icons/icon-256.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>
+(function(){try{var s=localStorage.getItem('wrolp-theme');var t=s||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t;}catch(e){}})();
+</script>
+</head>
+<body class="is-docs">
+<a class="skip-link" href="#main">跳到正文</a>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2.4"/><circle cx="6" cy="19" r="2.4"/><circle cx="18" cy="9" r="2.4"/><path d="M6 7.4v9.2M18 11.4c0 3.2-3.6 3.4-6 4.2-1.6.5-3.4 1-3.4 2.4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7M12 14.6v2.2"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24"><path d="M3.6 12a8.4 8.4 0 1 0 2.6-6.1M3.4 4.6v4.2h4.2"/><path d="M12 7.8V12l3 1.9"/></symbol>
+  <symbol id="i-markdown" viewBox="0 0 24 24"><rect x="2.6" y="5.4" width="18.8" height="13.2" rx="2.2"/><path d="M6 15.4V8.6l3 3.6 3-3.6v6.8M16.4 8.6v6.8M16.4 15.4l2-2.2M16.4 15.4l-2-2.2"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M13.4 2.8H7a2 2 0 0 0-2 2v14.4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.4z"/><path d="M13.2 2.9v5.3h5.5M8.4 13h1.2a1.5 1.5 0 0 1 0 3H8.4v-3zM8.4 16v2.4M13.4 13v5.4h1.2a1.6 1.6 0 0 0 1.6-1.6v-2.2a1.6 1.6 0 0 0-1.6-1.6z"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M4.6 5.4A1.8 1.8 0 0 1 6.4 3.6h9.4L20.4 8v10.6a1.8 1.8 0 0 1-1.8 1.8H6.4a1.8 1.8 0 0 1-1.8-1.8z"/><path d="M8 3.8v5h7v-5M8 20.2v-6h8v6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.2A8.4 8.4 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.6v11M7.6 10.2L12 14.6l4.4-4.4M4.4 18.4v1.2a.8.8 0 0 0 .8.8h13.6a.8.8 0 0 0 .8-.8v-1.2"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.6-4.5 4.9.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.2z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.6h6a3 3 0 0 1 3 3v11.8a2.4 2.4 0 0 0-2.4-2.4H4z"/><path d="M20 4.6h-6a3 3 0 0 0-3 3v11.8a2.4 2.4 0 0 1 2.4-2.4H20z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8.4 6.4h11M8.4 12h11M8.4 17.6h11M4.4 6.4h.01M4.4 12h.01M4.4 17.6h.01"/></symbol>
+</svg>
+
+<header class="site-header" data-header>
+  <div class="shell header-inner">
+    <a class="brand" href="../index.html" aria-label="WROLP Editor">
+      <img class="brand-mark" src="../../assets/img/logo.svg" alt="" width="32" height="32">
+      <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <a class="nav-link" href="../index.html#features">功能特性</a>
+      <a class="nav-link" aria-current=&quot;page&quot; href="index.html">文档</a>
+      <a class="nav-link" href="changelog.html">更新日志</a>
+      <a class="nav-link nav-link-icon" href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span>GitHub</span>
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="lang-switch" href="../../docs/encryption.html" hreflang="en" lang="en">English</a>
+      <button class="icon-btn" type="button" data-theme-toggle data-label-dark="切换到深色主题" data-label-light="切换到浅色主题" aria-label="切换到浅色主题" title="切换到浅色主题">
+        <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm header-download" href="https://github.com/wrolp/wrolp-editor/releases/latest" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span>下载</span>
+      </a>
+      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="打开导航">
+        <svg class="icon icon-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<div class="docs-layout">
+  <button class="docs-nav-toggle" type="button" data-docs-toggle aria-expanded="false" aria-controls="docs-sidebar">
+    <svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>文档目录
+    <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+  </button>
+
+  <aside class="docs-sidebar" id="docs-sidebar" data-docs-sidebar>
+    <nav class="docs-nav" aria-label="文档目录">
+      <div class="docs-nav-group"><p class="docs-nav-heading">使用指南</p><ul class="docs-nav-list"><li><a href="index.html">概览</a></li><li><a href="editor.html">编辑器与窗口</a></li><li><a href="preview.html">PDF 与图片</a></li><li><a href="files.html">文件操作</a></li><li><a href="history.html">版本记录</a></li><li><a href="git.html">源码管理</a></li><li><a href="encryption.html" aria-current="page">加密文件</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">参考</p><ul class="docs-nav-list"><li><a href="data.html">数据存放位置</a></li><li><a href="development.html">开发指南</a></li><li><a href="changelog.html">发行说明</a></li><li><a href="license.html">许可证</a></li></ul></div>
+    </nav>
+  </aside>
+  <div class="docs-backdrop" data-docs-backdrop hidden></div>
+
+  <div class="docs-main">
+    <div class="docs-toolbar">
+      <nav class="breadcrumb" aria-label="面包屑">
+        <a href="../index.html">首页</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <a href="index.html">文档</a>
+        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
+        <span aria-current="page">加密文件</span>
+      </nav>
+      <a class="source-link" href="https://github.com/wrolp/wrolp-editor/blob/main/README.zh.md" rel="noopener noreferrer" target="_blank">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>在 GitHub 上查看源文件
+      </a>
+    </div>
+
+    <article class="doc-article">
+      <header class="doc-header">
+        <h1>加密文件</h1>
+        <p class="doc-description">AES-256-GCM 容器格式、三个入口、解锁与空闲锁、记住口令与草稿。</p>
+      </header>
+      
+      <div class="prose"><p>一个加密文件是<strong>一个自描述的容器</strong>，不是「加了密的 txt」：靠 magic 字节识别，与扩展名无关。</p>
+<blockquote>
+<p><strong>口令丢了，文件就丢了。</strong> 没有主口令、没有恢复码、没有后门。密钥由口令加上每个文件自己的随机 salt
+经 Argon2id 派生，我们只存密文，不存任何能反推出口令的东西。</p>
+</blockquote>
+<h2 id="容器格式">容器格式<a class="anchor-link" href="#%E5%AE%B9%E5%99%A8%E6%A0%BC%E5%BC%8F">#</a></h2>
+<pre data-lang="text"><code class="language-text">偏移  长度  内容
+0     8     magic &quot;WROLPENC&quot;
+8     1     格式版本（当前 1）
+9     1     KDF id（1 = argon2id）
+10    4     m_cost，单位 KiB（u32 LE）
+14    4     t_cost（u32 LE）
+18    4     p_cost（u32 LE）
+22    16    salt，每个文件随机
+38    12    nonce，每次写入重新随机
+50    ...   AES-256-GCM(明文) || 16 字节 tag
+</code></pre>
+<ul>
+<li><strong>整个 50 字节头就是 AEAD 的 associated data。</strong> 改头里任何一个字节——包括把 <code>m_cost</code> 调小好让暴力破解
+快一点——都会验证失败，而不是被照办。</li>
+<li>默认 KDF 参数是 Argon2id，m=65536 KiB、t=3、p=1，本机 release 构建实测约 70 ms 一次派生。参数写在头里，
+所以改了默认值也不会让老文件打不开；<strong>保存沿用文件自己的 salt 与参数</strong>，不重新随机、不悄悄升降成本。
+换口令是唯一换 fresh salt 的操作。</li>
+<li>写入一律是临时文件 + rename 的<strong>原子写</strong>：截断的密文不是「损坏」而是「没了」，这条没得选。</li>
+<li>大小上限按<strong>密文</strong>算，仍是 8 MiB。7.9 MiB 的明文加密后会超线并报 <code>file_too_large</code>，这不是编辑器坏了。</li>
+<li>只有 <code>age</code>（<code>age-encryption.org/</code> 开头）会被明确认出来并拒绝，报 <code>encrypted_foreign_format</code>：不当文本打开、
+不写回去。别的外来二进制仍是「解不出编码」那条错。<strong>不支持读写任何外来加密格式。</strong></li>
+</ul>
+<h2 id="三个入口">三个入口<a class="anchor-link" href="#%E4%B8%89%E4%B8%AA%E5%85%A5%E5%8F%A3">#</a></h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>入口</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>标签右键「加密另存为…」</td>
+<td>先选路径再要口令，把当前 buffer 写成新容器；标签随即变成已加密、已解锁</td>
+</tr>
+<tr>
+<td>资源管理器右键「新建加密文件」</td>
+<td>要口令，写一个空容器，建好即打开；名字被占则拒绝</td>
+</tr>
+<tr>
+<td>标签右键「修改口令…」/「移除加密…」</td>
+<td>前者验旧口令再整文件重加密；后者验口令后把正文按 UTF-8 明文写回</td>
+</tr>
+</tbody></table></div>
+<p>新建时没写扩展名会补 <code>.wrolpenc</code>。用容器自己的扩展名而不是 <code>.txt</code>，是因为这种文件别的程序打不开——一个
+承诺「我是文本」的扩展名只会诱导用户拿记事本去看一堆乱码。识别既然不靠扩展名，任何名字的容器都照样认得出来。
+移除加密会把正文写成 UTF-8：原本是 GBK 的文件，移除之后就是 UTF-8 了。</p>
+<p>改口令<strong>必须验旧口令</strong>，不能拿缓存里的钥代替：用户是在断言旧口令是什么，照一个错误的断言改口令等于把用户
+锁在自己的文件外面。</p>
+<h2 id="解锁缓存与空闲锁">解锁、缓存与空闲锁<a class="anchor-link" href="#%E8%A7%A3%E9%94%81%E7%BC%93%E5%AD%98%E4%B8%8E%E7%A9%BA%E9%97%B2%E9%94%81">#</a></h2>
+<ul>
+<li>口令只用一次：派生出密钥后<strong>口令本身就丢掉</strong>，密钥留在进程内存里按规范化路径索引，从不写盘、从不回前端。</li>
+<li><strong>空闲锁</strong>在设置 → 加密 → <em>加密文件的自动锁定</em>，默认 10 分钟，<code>0</code> = 从不，上限 1440。到点先把草稿全部
+冲刷（此刻还有钥，草稿能加密落盘），再丢掉内存里所有密钥。任何按键与点击都算「在用」，不只是打字。</li>
+<li><strong>锁了不清屏</strong>，这是有意的取舍：屏上的明文是解锁期间合法读到的，锁的意思是「此后不能再保存、不能再落草稿」，
+不是把文档从正在读它的人眼前拿走；换来的是不丢 undo 栈、不丢脏状态。代价是锁定后屏幕仍可被截图或肩窥。
+锁定的标签编辑器变只读，保存会明确失败并弹口令框——不做静默丢弃。</li>
+<li>从没解密过的标签盖一层锁定提示，点它就重新问口令；<strong>不拿占位文本冒充内容</strong>，所以它不进 undo、不进比对、
+不算脏。这类标签也不会被「从磁盘重新载入」清屏。</li>
+<li>会话恢复时加密标签排队问口令，一个对话框逐个来；输错就地重试，不出队。</li>
+</ul>
+<h2 id="记住口令可选默认不记">记住口令（可选，默认不记）<a class="anchor-link" href="#%E8%AE%B0%E4%BD%8F%E5%8F%A3%E4%BB%A4%E5%8F%AF%E9%80%89%E9%BB%98%E8%AE%A4%E4%B8%8D%E8%AE%B0">#</a></h2>
+<ul>
+<li>只有勾了「在这台电脑上记住口令」才存，存进 <strong>Windows 凭据管理器</strong>：service 是 <code>com.wrolp.editor</code>，
+account 是 <code>enc-&lt;路径的 SHA-256 hex&gt;</code>。<strong>存的是路径摘要而不是路径</strong>，所以在凭据管理器里看不到你的文件名。</li>
+<li>上限 64 条，超了拒绝新的记住请求。这不是安全限制（凭据库本来就按用户加密），是为了让堆积可见。</li>
+<li>记住的口令解不开文件时（常见成因：文件在别处被重新加密过），算<strong>没有钥</strong>而不是口令错——照常弹框让你输，
+同时把那条用不了的记住项删掉。用户什么都没输就报「口令错误」，是在说他没做的事。</li>
+<li>设置 → 加密 里能看到记住的条数并「全部忘记」。</li>
+<li><strong>重命名即遗忘</strong>：文件改名后记住项被删掉，下次要手动输口令。凭据库的 account 是路径摘要、不可逆推回路径，
+所以目录改名时无法判断哪些记住项该跟着搬，遗忘是唯一诚实的做法。会话内存里的钥则<strong>跟着路径搬家</strong>：
+改名不动文件内容，正在编辑的文档不该因为改名就被锁掉。</li>
+<li><strong>卸载不会清凭据管理器。</strong> 与右键菜单那条注册表项不同，<code>enc-*</code> 条目属系统级残留，卸载后仍在。要清就在
+卸载前用设置页的「全部忘记」，或自己在凭据管理器里删 <code>com.wrolp.editor</code> 下的条目。</li>
+</ul>
+<h2 id="草稿与删除">草稿与删除<a class="anchor-link" href="#%E8%8D%89%E7%A8%BF%E4%B8%8E%E5%88%A0%E9%99%A4">#</a></h2>
+<ul>
+<li>加密文件的草稿用<strong>同一把文件密钥</strong>密封后落盘，形状是
+<code>{&quot;v&quot;:2,&quot;path&quot;:&quot;&lt;明文路径&gt;&quot;,&quot;nonce&quot;:&quot;&lt;hex&gt;&quot;,&quot;data&quot;:&quot;&lt;hex&gt;&quot;}</code>，<code>data</code> 是原草稿 JSON 的密文。路径留在信封外
+是有意的：路径不是秘密（它就是目录列表里的一个文件名），而留在明文侧才让重命名能在<strong>没有钥</strong>的情况下把
+密文草稿搬到新 key 下。旧的无包装 JSON 草稿照样能读，不需要迁移步骤。</li>
+<li>是否加密<strong>由磁盘说了算</strong>（只读文件头 50 字节判定），不信前端传的标记：另一个窗口可能刚移除了加密，
+文件也可能整个被换掉。</li>
+<li>没有钥时草稿写不下去 → <strong>静默丢弃</strong>（草稿是后台行为，报错是打扰；主保存路径会明确失败并提示解锁，
+不会无声丢数据）。读的时候没有钥 → 当「没有草稿」处理，<strong>但不删档</strong>：解锁后再打开同一文件自然又能解出来。</li>
+<li>草稿与文件共用一把钥，也就共用同一条 nonce 生日界（约 2^32 次写入）。编辑器量级不可达，记录在案。</li>
+<li>删掉一个加密文件时，<code>kept/</code> 里那份救援副本是<strong>明文</strong> —— 有意为之：一个打不开的救援副本不叫救援。
+对话框文案会说清这一点。</li>
+</ul>
+</div>
+    </article>
+
+    <nav class="doc-pager" aria-label="文档翻页"><a class="pager-link is-prev" href="git.html">
+      <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>上一页</span>
+      <span class="pager-name">源码管理</span>
+    </a><a class="pager-link is-next" href="data.html">
+      <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>下一页</span>
+      <span class="pager-name">数据存放位置</span>
+    </a></nav>
+  </div>
+
+  <aside class="docs-toc" aria-label="本页目录">
+    <div class="toc-inner">
+      <p class="toc-title">本页目录</p>
+      <ul class="toc-list"><li class="toc-h2"><a href="#%E5%AE%B9%E5%99%A8%E6%A0%BC%E5%BC%8F">容器格式</a></li><li class="toc-h2"><a href="#%E4%B8%89%E4%B8%AA%E5%85%A5%E5%8F%A3">三个入口</a></li><li class="toc-h2"><a href="#%E8%A7%A3%E9%94%81%E7%BC%93%E5%AD%98%E4%B8%8E%E7%A9%BA%E9%97%B2%E9%94%81">解锁、缓存与空闲锁</a></li><li class="toc-h2"><a href="#%E8%AE%B0%E4%BD%8F%E5%8F%A3%E4%BB%A4%E5%8F%AF%E9%80%89%E9%BB%98%E8%AE%A4%E4%B8%8D%E8%AE%B0">记住口令（可选，默认不记）</a></li><li class="toc-h2"><a href="#%E8%8D%89%E7%A8%BF%E4%B8%8E%E5%88%A0%E9%99%A4">草稿与删除</a></li></ul>
+      <a class="toc-top" href="#main">回到顶部</a>
+    </div>
+  </aside>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../index.html" aria-label="WROLP Editor">
+        <img class="brand-mark" src="../../assets/img/logo.svg" alt="" width="28" height="28">
+        <span class="brand-name">WROLP<span class="brand-name-light"> Editor</span></span>
+      </a>
+      <p class="footer-tagline">一款 Windows 本地文本编辑器。</p>
+      <p class="footer-copy">MIT © 2026 wrolp</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h2 class="footer-heading">产品</h2>
+        <a href="../index.html#features">功能特性</a>
+        <a href="../index.html#download">下载</a>
+        <a href="changelog.html">更新日志</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">资源</h2>
+        <a href="index.html">文档</a>
+        <a href="license.html">MIT 许可证</a>
+        <a href="https://github.com/wrolp/wrolp-editor/issues" rel="noopener noreferrer" target="_blank">问题反馈</a>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">源码</h2>
+        <a href="https://github.com/wrolp/wrolp-editor" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="https://github.com/wrolp/wrolp-editor/releases" rel="noopener noreferrer" target="_blank">Releases</a>
+        <a href="https://github.com/wrolp/wrolp-editor.github.io" rel="noopener noreferrer" target="_blank">本站源码</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>
