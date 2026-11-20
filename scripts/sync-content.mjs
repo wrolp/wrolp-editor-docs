@@ -8,8 +8,6 @@ const source = process.argv[2]
   : resolve(root, '..', 'wrolp-editor');
 
 const files = [
-  ['README.zh.md', 'content/README.zh.md'],
-  ['README.md', 'content/README.en.md'],
   ['RELEASE_NOTES.zh.md', 'content/RELEASE_NOTES.zh.md'],
   ['RELEASE_NOTES.md', 'content/RELEASE_NOTES.en.md'],
   ['LICENSE', 'content/LICENSE'],

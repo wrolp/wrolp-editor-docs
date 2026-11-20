@@ -79,7 +79,7 @@
 
   <aside class="docs-sidebar" id="docs-sidebar" data-docs-sidebar>
     <nav class="docs-nav" aria-label="Documentation pages">
-      <div class="docs-nav-group"><p class="docs-nav-heading">Guides</p><ul class="docs-nav-list"><li><a href="index.html" aria-current="page">Overview</a></li><li><a href="editor.html">Editor &amp; window</a></li><li><a href="preview.html">PDFs &amp; pictures</a></li><li><a href="files.html">Working with files</a></li><li><a href="history.html">Version history</a></li><li><a href="git.html">Source control</a></li><li><a href="encryption.html">Encrypted files</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">Reference</p><ul class="docs-nav-list"><li><a href="data.html">Where data lives</a></li><li><a href="development.html">Development</a></li><li><a href="changelog.html">Release notes</a></li><li><a href="license.html">License</a></li></ul></div>
+      <div class="docs-nav-group"><p class="docs-nav-heading">Guides</p><ul class="docs-nav-list"><li><a href="index.html" aria-current="page">Overview</a></li><li><a href="editor.html">Editor &amp; window</a></li><li><a href="preview.html">PDFs &amp; pictures</a></li><li><a href="archives.html">Archives</a></li><li><a href="office.html">Office documents</a></li><li><a href="files.html">Working with files</a></li><li><a href="history.html">Version history</a></li><li><a href="git.html">Source control</a></li><li><a href="encryption.html">Encrypted files</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">Reference</p><ul class="docs-nav-list"><li><a href="data.html">Where data lives</a></li><li><a href="development.html">Development</a></li><li><a href="changelog.html">Release notes</a></li><li><a href="license.html">License</a></li></ul></div>
     </nav>
   </aside>
   <div class="docs-backdrop" data-docs-backdrop hidden></div>
@@ -93,7 +93,7 @@
         <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
         <span aria-current="page">Overview</span>
       </nav>
-      <a class="source-link" href="https://github.com/wrolp/wrolp-editor/blob/main/README.md" rel="noopener noreferrer" target="_blank">
+      <a class="source-link" href="https://github.com/wrolp/wrolp-editor.github.io/blob/main/content/pages/index.en.md" rel="noopener noreferrer" target="_blank">
         <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>View source on GitHub
       </a>
     </div>
@@ -109,6 +109,12 @@
     </a><a class="hub-card" href="preview.html">
       <span class="hub-card-title">PDFs &amp; pictures<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
       <p>PDF paper, bookmarks and auto-scroll, plus the four views of the folder gallery.</p>
+    </a><a class="hub-card" href="archives.html">
+      <span class="hub-card-title">Archives<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>Browse zip, tar, tar.gz and 7z without unpacking: the read-only cache, the password order, and when the copy goes away.</p>
+    </a><a class="hub-card" href="office.html">
+      <span class="hub-card-title">Office documents<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>Word, spreadsheet and slide files open read-only; Word pagination, zoom, page gaps and paper.</p>
     </a><a class="hub-card" href="files.html">
       <span class="hub-card-title">Working with files<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
       <p>Batch rename, configuration backup snapshots and read-only side-by-side comparison.</p>
@@ -129,7 +135,7 @@
       <p>Requirements, local development, building an installer, release gates and scripts.</p>
     </a><a class="hub-card" href="changelog.html">
       <span class="hub-card-title">Release notes<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
-      <p>Features, fixes and internal changes in v0.0.3, v0.0.2 and v0.0.1.</p>
+      <p>Features, fixes and internal changes in v0.0.4, v0.0.3, v0.0.2 and v0.0.1.</p>
     </a><a class="hub-card" href="license.html">
       <span class="hub-card-title">License<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
       <p>WROLP Editor is released under the MIT license.</p>
@@ -191,6 +197,14 @@
 <tr>
 <td>Picture gallery</td>
 <td>A whole folder in one tab, in natural order (<code>IMG_2</code> before <code>IMG_10</code>): stacked, one at a time, slideshow, or a grid. Subfolders are opt-in and walked four levels deep; one listing stops at 2,000 pictures and says so. Pictures are drawn through the asset protocol, so the editor&#39;s text-size limit does not apply. HEIC and TIFF are listed and marked as formats this renderer cannot draw</td>
+</tr>
+<tr>
+<td>Archives</td>
+<td>zip, tar, tar.gz and 7z are browsed in the Explorer, unpacked into a read-only cache every viewer can use; pictures inside open in the gallery without being unpacked. An encrypted archive takes a password from the session, a rule on its name, the default password, or a prompt. See <a href="archives.html">Archives</a></td>
+</tr>
+<tr>
+<td>Office documents</td>
+<td><code>.docx</code>, <code>.xlsx</code> and <code>.pptx</code> files open in the app, read-only. A Word document is paged, zoomed, fitted to the width and tinted from a floating button in the corner. See <a href="office.html">Office documents</a></td>
 </tr>
 <tr>
 <td>Batch rename</td>

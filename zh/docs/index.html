@@ -79,7 +79,7 @@
 
   <aside class="docs-sidebar" id="docs-sidebar" data-docs-sidebar>
     <nav class="docs-nav" aria-label="文档目录">
-      <div class="docs-nav-group"><p class="docs-nav-heading">使用指南</p><ul class="docs-nav-list"><li><a href="index.html" aria-current="page">概览</a></li><li><a href="editor.html">编辑器与窗口</a></li><li><a href="preview.html">PDF 与图片</a></li><li><a href="files.html">文件操作</a></li><li><a href="history.html">版本记录</a></li><li><a href="git.html">源码管理</a></li><li><a href="encryption.html">加密文件</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">参考</p><ul class="docs-nav-list"><li><a href="data.html">数据存放位置</a></li><li><a href="development.html">开发指南</a></li><li><a href="changelog.html">发行说明</a></li><li><a href="license.html">许可证</a></li></ul></div>
+      <div class="docs-nav-group"><p class="docs-nav-heading">使用指南</p><ul class="docs-nav-list"><li><a href="index.html" aria-current="page">概览</a></li><li><a href="editor.html">编辑器与窗口</a></li><li><a href="preview.html">PDF 与图片</a></li><li><a href="archives.html">压缩包</a></li><li><a href="office.html">Office 文档</a></li><li><a href="files.html">文件操作</a></li><li><a href="history.html">版本记录</a></li><li><a href="git.html">源码管理</a></li><li><a href="encryption.html">加密文件</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">参考</p><ul class="docs-nav-list"><li><a href="data.html">数据存放位置</a></li><li><a href="development.html">开发指南</a></li><li><a href="changelog.html">发行说明</a></li><li><a href="license.html">许可证</a></li></ul></div>
     </nav>
   </aside>
   <div class="docs-backdrop" data-docs-backdrop hidden></div>
@@ -93,7 +93,7 @@
         <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
         <span aria-current="page">概览</span>
       </nav>
-      <a class="source-link" href="https://github.com/wrolp/wrolp-editor/blob/main/README.zh.md" rel="noopener noreferrer" target="_blank">
+      <a class="source-link" href="https://github.com/wrolp/wrolp-editor.github.io/blob/main/content/pages/index.zh.md" rel="noopener noreferrer" target="_blank">
         <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>在 GitHub 上查看源文件
       </a>
     </div>
@@ -109,6 +109,12 @@
     </a><a class="hub-card" href="preview.html">
       <span class="hub-card-title">PDF 与图片<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
       <p>PDF 阅读器的纸张、书签与自动滚动，以及目录级图片画廊的四种视图。</p>
+    </a><a class="hub-card" href="archives.html">
+      <span class="hub-card-title">压缩包<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>不解压就浏览 zip、tar、tar.gz 与 7z：只读缓存、口令顺序，以及缓存在何时消失。</p>
+    </a><a class="hub-card" href="office.html">
+      <span class="hub-card-title">Office 文档<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      <p>Word、表格与幻灯片在应用内只读打开；Word 的分页、缩放、页间空白与纸张。</p>
     </a><a class="hub-card" href="files.html">
       <span class="hub-card-title">文件操作<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
       <p>批量重命名、配置备份快照与只读并排对比。</p>
@@ -129,7 +135,7 @@
       <p>环境要求、本地开发、打安装包、发布闸门与脚本。</p>
     </a><a class="hub-card" href="changelog.html">
       <span class="hub-card-title">发行说明<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
-      <p>v0.0.3、v0.0.2 与 v0.0.1 的新特性、修复与内部变更。</p>
+      <p>v0.0.4、v0.0.3、v0.0.2 与 v0.0.1 的新特性、修复与内部变更。</p>
     </a><a class="hub-card" href="license.html">
       <span class="hub-card-title">许可证<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
       <p>WROLP Editor 以 MIT 许可证发布。</p>
@@ -191,6 +197,14 @@
 <tr>
 <td>图片浏览</td>
 <td>整个目录在一个标签里按自然序查看（<code>IMG_2</code> 排在 <code>IMG_10</code> 前）：上下排列、一张张、轮播、整页网格。子文件夹默认不含，打开后最多走四层；单次列表最多 2000 张并明确提示。图片走 asset 协议显示，不受编辑器文本大小上限约束。HEIC 与 TIFF 会被列出，并标明本渲染器画不出来</td>
+</tr>
+<tr>
+<td>压缩包</td>
+<td>zip、tar、tar.gz 与 7z 在资源管理器里直接浏览，展开到只读缓存后现有查看器全部可用；包里的图片不解压就能进画廊。加密包按「会话 → 名称规则 → 默认口令 → 询问」取口令。详见<a href="archives.html">压缩包</a></td>
+</tr>
+<tr>
+<td>Office 文档</td>
+<td><code>.docx</code>、<code>.xlsx</code>、<code>.pptx</code> 在应用内只读打开；Word 可分页、缩放、适应宽度，并在角落的浮动按钮里改纸张颜色。详见<a href="office.html">Office 文档</a></td>
 </tr>
 <tr>
 <td>批量重命名</td>

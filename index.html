@@ -74,12 +74,12 @@
 <section class="hero">
   <div class="shell">
     <div class="hero-copy">
-      <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>v0.0.3 · released 2026-11-07</p>
+      <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>v0.0.4 · released 2026-11-20</p>
       <h1 class="hero-title">WROLP Editor</h1>
       <p class="hero-tagline">A small local text editor for Windows</p>
       <p class="hero-lead">Tauri v2 + React + TypeScript, with Monaco Editor in the editing surface. Tabs, draft recovery, Markdown preview, PDF reading, built-in Git source control and AES-256-GCM encryption — all of it on your own machine.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary btn-lg" href="https://github.com/wrolp/wrolp-editor/releases/download/v0.0.3/WROLP.Editor_0.0.3_x64-setup.exe" rel="noopener noreferrer" target="_blank">
+        <a class="btn btn-primary btn-lg" href="https://github.com/wrolp/wrolp-editor/releases/download/v0.0.4/WROLP.Editor_0.0.4_x64-setup.exe" rel="noopener noreferrer" target="_blank">
           <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Download for Windows
         </a>
         <a class="btn btn-ghost btn-lg" href="docs/index.html">
@@ -137,11 +137,21 @@
       <h3>Drafts, auto-save and line colouring</h3>
       <p>Drafts hit the disk about 500 ms after you stop typing, and flush at once on a tab switch, a tab close or window blur. Lines that differ from the disk copy are coloured: additions green, replaced text amber. Auto-save lands after a pause, not mid-sentence.</p>
       <a class="feature-link" href="docs/editor.html" aria-label="Docs — Drafts, auto-save and line colouring">Docs<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article><article class="feature-card">
+      <span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg></span>
+      <h3>Archives, browsed in place</h3>
+      <p>zip, tar, tar.gz and 7z open in the Explorer without unpacking first: the listing is read, then the archive is unpacked into a read-only cache that behaves like any other folder, so every existing viewer opens what is inside; pictures in an archive reach the gallery without being unpacked. An encrypted archive asks for its password in turn from the session, the rules matched on its name, the default password and a prompt, a Chinese password tried as UTF-8 and then GBK. The cache goes on exit, or stays for a set number of days; Close and clean removes it at once.</p>
+      <a class="feature-link" href="docs/archives.html" aria-label="Docs — Archives, browsed in place">Docs<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article><article class="feature-card">
+      <span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span>
+      <h3>Office documents</h3>
+      <p>Word, spreadsheet and slide files open in the app instead of the default program. The Word preview pages by the breaks the document saved and by measured page height, and offers zoom, fit width, hidden page gaps, a paper colour and a page number on a floating button in the corner.</p>
+      <a class="feature-link" href="docs/office.html" aria-label="Docs — Office documents">Docs<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </article></div>
 
     <div class="more-block">
       <h3 class="more-title">Also in the box</h3>
-      <ul class="more-list"><li><a href="docs/editor.html">Tab groups: tabs, cursor positions and the directory tree switch together</a></li><li><a href="docs/preview.html">Picture gallery: a whole folder in natural order, four ways to view it</a></li><li><a href="docs/files.html">Batch rename: pattern tokens or a regular expression, previewed line by line</a></li><li><a href="docs/files.html">Configuration backups: snapshots on open and close, restore any one of them</a></li><li><a href="docs/index.html">Single instance and Windows context-menu integration</a></li><li><a href="docs/editor.html">English and 简体中文, following the system by default</a></li><li><a href="docs/development.html">Signed auto-update that prompts and never installs on its own</a></li><li><a href="docs/editor.html">Window size, position and maximised state restored</a></li></ul>
+      <ul class="more-list"><li><a href="docs/editor.html">Tab groups: tabs, cursor positions and the directory tree switch together</a></li><li><a href="docs/preview.html">Picture gallery: a whole folder in natural order, four ways to view it</a></li><li><a href="docs/preview.html">Stacked view: pictures scroll as one column, at a speed set as a number</a></li><li><a href="docs/archives.html">Archive cache: removed on exit, or kept for a set number of days</a></li><li><a href="docs/files.html">Batch rename: pattern tokens or a regular expression, previewed line by line</a></li><li><a href="docs/files.html">Configuration backups: snapshots on open and close, restore any one of them</a></li><li><a href="docs/index.html">Single instance and Windows context-menu integration</a></li><li><a href="docs/editor.html">English and 简体中文, following the system by default</a></li><li><a href="docs/development.html">Signed auto-update that prompts and never installs on its own</a></li><li><a href="docs/editor.html">Window size, position and maximised state restored</a></li></ul>
     </div>
   </div>
 </section>
@@ -186,8 +196,8 @@
     <ol class="step-grid"><li class="step"><span class="step-n">1</span><h3>Get the installer</h3><p>Take the latest x64 setup.exe from GitHub Releases.</p></li><li class="step"><span class="step-n">2</span><h3>Run it</h3><p>Needs Windows 10/11 and the WebView2 runtime, already built into recent Windows.</p></li><li class="step"><span class="step-n">3</span><h3>Open a file</h3><p>Context-menu integration is a setting; a second launch hands its paths to the running window.</p></li></ol>
     <div class="download-bar">
       <div class="download-bar-copy">
-        <a class="btn btn-primary btn-lg" href="https://github.com/wrolp/wrolp-editor/releases/download/v0.0.3/WROLP.Editor_0.0.3_x64-setup.exe" rel="noopener noreferrer" target="_blank">
-          <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Download v0.0.3
+        <a class="btn btn-primary btn-lg" href="https://github.com/wrolp/wrolp-editor/releases/download/v0.0.4/WROLP.Editor_0.0.4_x64-setup.exe" rel="noopener noreferrer" target="_blank">
+          <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Download v0.0.4
         </a>
         <p class="download-size">x64 · 8.6 MB</p>
       </div>

@@ -5,9 +5,7 @@ import { marked } from 'marked';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const LANGS = ['zh', 'en'];
-const README_FILE = { zh: 'README.zh.md', en: 'README.en.md' };
 const NOTES_FILE = { zh: 'RELEASE_NOTES.zh.md', en: 'RELEASE_NOTES.en.md' };
-const SOURCE_FILE = { zh: 'README.zh.md', en: 'README.md' };
 
 const read = (p) => readFile(join(root, p), 'utf8');
 const config = JSON.parse(await read('content/site.json'));
@@ -132,58 +130,27 @@ function cleanPreamble(preamble) {
   return out.join('\n').trim();
 }
 
-function dropLeadingHeadingAndPromote(body) {
-  const lines = body.split(/\r?\n/);
-  if (/^##[ \t]/.test(lines[0])) lines.shift();
-  const state = { char: null };
-  const out = [];
-  for (const line of lines) {
-    if (toggleFence(state, line) || state.char !== null) { out.push(line); continue; }
-    out.push(line.replace(/^(#{3,6})([ \t])/, (_, hashes, space) => hashes.slice(1) + space));
-  }
-  return out.join('\n').trim();
-}
-
 /* Load and assemble -------------------------------------------------------------- */
 
 const docs = {};
 for (const lang of LANGS) {
-  const readme = splitSections(await read(`content/${README_FILE[lang]}`));
   const notes = splitSections(await read(`content/${NOTES_FILE[lang]}`));
-  if (readme.sections.length !== 16) {
-    throw new Error(`${README_FILE[lang]}: expected 16 H2 sections, found ${readme.sections.length}`);
-  }
-  docs[lang] = { readme, notes, license: await read('content/LICENSE') };
-}
-
-const assigned = pages.flatMap((page) => page.sections ?? []).sort((a, b) => a - b);
-const expected = Array.from({ length: 16 }, (_, i) => i);
-if (assigned.join() !== expected.join()) {
-  throw new Error(`content/site.json: page sections must cover 0–15 exactly once, got [${assigned}]`);
+  docs[lang] = { notes, license: await read('content/LICENSE') };
 }
 
 const pageMarkdown = {};
-const pageSourceTitles = {};
 for (const lang of LANGS) {
   pageMarkdown[lang] = new Map();
-  pageSourceTitles[lang] = new Map();
   for (const page of pages) {
     let md;
-    let titles = [];
     if (page.source === 'releaseNotes') {
-      titles = docs[lang].notes.sections.map((s) => s.title);
       md = [cleanPreamble(docs[lang].notes.preamble), ...docs[lang].notes.sections.map((s) => s.body)]
         .filter(Boolean).join('\n\n');
     } else {
-      const bodies = (page.sections ?? []).map((i) => docs[lang].readme.sections[i]?.body);
-      if (bodies.some((b) => !b)) throw new Error(`${lang}/${page.slug}: missing section`);
-      titles = (page.sections ?? []).map((i) => docs[lang].readme.sections[i].title);
-      md = bodies.join('\n\n');
-      if (bodies.length === 1 && page.slug !== 'index') md = dropLeadingHeadingAndPromote(md);
-      if (page.slug === 'index') md = `${cleanPreamble(docs[lang].readme.preamble)}\n\n${md}`;
+      if (!page.file) throw new Error(`${lang}/${page.slug}: content/site.json has no "file"`);
+      md = await read(`content/${page.file}.${lang}.md`);
     }
     pageMarkdown[lang].set(page.slug, md.trim());
-    pageSourceTitles[lang].set(page.slug, titles);
   }
 }
 
@@ -207,16 +174,12 @@ for (const lang of LANGS) {
     }
     pageHeadings[lang].set(page.slug, headings);
   }
-  // A single-section page drops its own H2, so links aimed at that section from
-  // elsewhere in the README must resolve to the page itself rather than a dead fragment.
+  // A page's own title doubles as an anchor alias for its top, so a link written
+  // against a heading the page no longer prints still lands on the page itself.
   for (const page of pages) {
-    const headings = pageHeadings[lang].get(page.slug);
-    for (const title of pageSourceTitles[lang].get(page.slug)) {
-      const key = slugify(title);
-      if (!key || anchorMap[lang].has(key)) continue;
-      const surviving = headings.find((h) => h.text === title);
-      anchorMap[lang].set(key, { page: page.slug, id: surviving ? surviving.id : null });
-    }
+    const key = slugify(page.title[lang]);
+    if (!key || anchorMap[lang].has(key)) continue;
+    anchorMap[lang].set(key, { page: page.slug, id: null });
   }
 }
 
@@ -451,7 +414,9 @@ for (const lang of LANGS) {
       changelogActive: page.slug === 'changelog' ? ' aria-current="page"' : '',
       docTitle: page.title[lang],
       docDescription: page.description[lang],
-      sourceHref: `${project.github}/blob/main/${SOURCE_FILE[lang]}`,
+      sourceHref: page.file
+        ? `${config.ui[lang].footerSiteRepo}/blob/main/content/${page.file}.${lang}.md`
+        : `${config.ui[lang].footerSiteRepo}/blob/main/content/RELEASE_NOTES.${lang}.md`,
       sidebarNav: sidebarNav(lang, from, page.slug),
       toc: tocHtml(headings),
       tocHead: headings.length ? `<p class="toc-title">${escapeHtml(config.ui[lang].tocTitle)}</p>` : '',

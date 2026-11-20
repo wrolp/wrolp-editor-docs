@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Release notes · WROLP Editor</title>
-<meta name="description" content="Features, fixes and internal changes in v0.0.3, v0.0.2 and v0.0.1.">
+<meta name="description" content="Features, fixes and internal changes in v0.0.4, v0.0.3, v0.0.2 and v0.0.1.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0d0e13">
 <link rel="icon" href="../assets/icons/favicon.ico" sizes="any">
@@ -79,7 +79,7 @@
 
   <aside class="docs-sidebar" id="docs-sidebar" data-docs-sidebar>
     <nav class="docs-nav" aria-label="Documentation pages">
-      <div class="docs-nav-group"><p class="docs-nav-heading">Guides</p><ul class="docs-nav-list"><li><a href="index.html">Overview</a></li><li><a href="editor.html">Editor &amp; window</a></li><li><a href="preview.html">PDFs &amp; pictures</a></li><li><a href="files.html">Working with files</a></li><li><a href="history.html">Version history</a></li><li><a href="git.html">Source control</a></li><li><a href="encryption.html">Encrypted files</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">Reference</p><ul class="docs-nav-list"><li><a href="data.html">Where data lives</a></li><li><a href="development.html">Development</a></li><li><a href="changelog.html" aria-current="page">Release notes</a></li><li><a href="license.html">License</a></li></ul></div>
+      <div class="docs-nav-group"><p class="docs-nav-heading">Guides</p><ul class="docs-nav-list"><li><a href="index.html">Overview</a></li><li><a href="editor.html">Editor &amp; window</a></li><li><a href="preview.html">PDFs &amp; pictures</a></li><li><a href="archives.html">Archives</a></li><li><a href="office.html">Office documents</a></li><li><a href="files.html">Working with files</a></li><li><a href="history.html">Version history</a></li><li><a href="git.html">Source control</a></li><li><a href="encryption.html">Encrypted files</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">Reference</p><ul class="docs-nav-list"><li><a href="data.html">Where data lives</a></li><li><a href="development.html">Development</a></li><li><a href="changelog.html" aria-current="page">Release notes</a></li><li><a href="license.html">License</a></li></ul></div>
     </nav>
   </aside>
   <div class="docs-backdrop" data-docs-backdrop hidden></div>
@@ -93,7 +93,7 @@
         <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
         <span aria-current="page">Release notes</span>
       </nav>
-      <a class="source-link" href="https://github.com/wrolp/wrolp-editor/blob/main/README.md" rel="noopener noreferrer" target="_blank">
+      <a class="source-link" href="https://github.com/wrolp/wrolp-editor.github.io/blob/main/content/RELEASE_NOTES.en.md" rel="noopener noreferrer" target="_blank">
         <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>View source on GitHub
       </a>
     </div>
@@ -101,12 +101,39 @@
     <article class="doc-article">
       <header class="doc-header">
         <h1>Release notes</h1>
-        <p class="doc-description">Features, fixes and internal changes in v0.0.3, v0.0.2 and v0.0.1.</p>
+        <p class="doc-description">Features, fixes and internal changes in v0.0.4, v0.0.3, v0.0.2 and v0.0.1.</p>
       </header>
       
-      <div class="prose"><h2 id="v003-2026-11-07">v0.0.3 — 2026-11-07<a class="anchor-link" href="#v003-2026-11-07">#</a></h2>
-<p>The third release: PDFs get a reader of their own, the tab menu grows a flyout for the per-file settings, and files can be pasted or dropped into the Explorer from Windows.</p>
+      <div class="prose"><h2 id="v004-2026-11-20">v0.0.4 — 2026-11-20<a class="anchor-link" href="#v004-2026-11-20">#</a></h2>
+<p>The fourth release: archives open inside the Explorer, Office documents get readers of their own, entries move through the tree by drag or cut and paste, and the PDF reader&#39;s pages can be selected and copied.</p>
 <h3 id="features">Features<a class="anchor-link" href="#features">#</a></h3>
+<ul>
+<li><strong>Archives</strong> — zip, tar, tar.gz and 7z archives are browsed in the Explorer without unpacking first: the listing is read, then the archive is safely unpacked into a read-only cache root that behaves like any other folder, so every existing viewer works on the files inside. Pictures inside an archive open in the gallery straight from the archive; an encrypted archive is asked for a password in turn from the session, the rules matched on its name, the default password, and a prompt, with Chinese passwords tried as UTF-8 and then GBK. The cache is deleted on exit or kept for a set number of days, and <em>Close and clean</em> removes it at once.</li>
+<li><strong>Office documents</strong> — Word, spreadsheet and slide files open in the app instead of the default program. The Word preview pages by the breaks the document saved and by measured page height, and offers zoom, fit width, hidden page gaps, a paper colour and a page indicator from a floating button in the corner.</li>
+<li><strong>PDF reader</strong> — pages can be selected as text and copied, with a right-click menu for copy, the current page and select all; the bookmark column can be dragged to a width of its own, and its scrollbar matches the Markdown preview.</li>
+<li><strong>Pictures</strong> — a folder&#39;s pictures open in a gallery tab that remembers its last mode: one by one, stacked (continuous scrolling like a PDF), slideshow or grid. Stacked pages scroll on their own at a speed set as a number, and a double-click or the wheel stops it.</li>
+<li><strong>Explorer</strong> — entries move within the tree by dragging or by cut and paste; the tree sorts by name, date, type or size; a tab can be saved from its menu; hover hints are drawn once for the whole app; and the two paste rows were folded into one <em>Paste</em> entry.</li>
+<li><strong>Source control</strong> — clone from the panel with areas that resize; long file and folder names are cut in the middle; the history refreshes on demand; a self-signed HTTPS certificate is accepted after a prompt.</li>
+<li><strong>AI</strong> — a commit message is written from the staged changes, the key is kept encrypted in settings with the model list fetched from the endpoint, and several endpoints can be kept with one in use.</li>
+<li><strong>Smaller additions</strong> — the titlebar drags from the whole bar, the editor language can be chosen, a cut tab names itself on hover, and the select list is drawn in the app&#39;s own theme.</li>
+</ul>
+<h3 id="fixes">Fixes<a class="anchor-link" href="#fixes">#</a></h3>
+<ul>
+<li>A file keeps the case its name was given when it is created, renamed or pasted.</li>
+<li>The open-files panel stays inside the window, and its next and previous arrows wrap around the list.</li>
+<li>A hover bubble sizes to its text and keeps clear of the arrow it sits beside.</li>
+<li>The PDF reader hides while a comparison owns the pane.</li>
+<li>The HTML preview no longer scrolls itself while the wheel turns.</li>
+</ul>
+<h3 id="internal">Internal<a class="anchor-link" href="#internal">#</a></h3>
+<ul>
+<li>Version bumped to 0.0.4</li>
+<li>Explorer labels are read and written in one batch, and the git walks run on the blocking pool</li>
+</ul>
+<hr>
+<h2 id="v003-2026-11-07">v0.0.3 — 2026-11-07<a class="anchor-link" href="#v003-2026-11-07">#</a></h2>
+<p>The third release: PDFs get a reader of their own, the tab menu grows a flyout for the per-file settings, and files can be pasted or dropped into the Explorer from Windows.</p>
+<h3 id="features-1">Features<a class="anchor-link" href="#features-1">#</a></h3>
 <ul>
 <li><strong>PDF reader</strong> — a PDF opens in its own tab drawn by a reader: pages are read by byte range and drawn on demand, the view scrolls on its own, and the page is remembered so a reopened document continues where it was left. The status bar names the file as a PDF, shows the page and seeks to it, bookmarks fold out as a scale tree with expand and collapse all, and the reader&#39;s tools sit behind a corner tab.</li>
 <li><strong>Markdown outline</strong> — the contents column lives behind a corner tab and can open by default.</li>
@@ -117,7 +144,7 @@
 <li><strong>Settings</strong> — the General page is grouped into cards, the status bar can be hidden, and the language and theme follow the system by default.</li>
 <li><strong>Updates</strong> — a new release is looked for after startup and every six hours, and the updater reads every published release.</li>
 </ul>
-<h3 id="fixes">Fixes<a class="anchor-link" href="#fixes">#</a></h3>
+<h3 id="fixes-1">Fixes<a class="anchor-link" href="#fixes-1">#</a></h3>
 <ul>
 <li>A hover bubble shows its path whole rather than cutting it, and stays inside the window; the Source panel&#39;s bubble names the folder instead of repeating the file name.</li>
 <li>Tooltips stay clear of the pointer and of the row name they describe.</li>
@@ -129,7 +156,7 @@
 <li>A picture keeps its own colours on a turned page.</li>
 <li>Saves stay durable and git secrets stay out of the configuration file.</li>
 </ul>
-<h3 id="internal">Internal<a class="anchor-link" href="#internal">#</a></h3>
+<h3 id="internal-1">Internal<a class="anchor-link" href="#internal-1">#</a></h3>
 <ul>
 <li>Version bumped to 0.0.3</li>
 <li>The release build cleans <code>target/</code> and <code>dist/</code> before it starts</li>
@@ -137,7 +164,7 @@
 <hr>
 <h2 id="v002-2026-10-31">v0.0.2 — 2026-10-31<a class="anchor-link" href="#v002-2026-10-31">#</a></h2>
 <p>The second release: source control arrives, comparison learns to fold and wrap, Markdown gains export, and the editor and preview get their own right-click menus.</p>
-<h3 id="features-1">Features<a class="anchor-link" href="#features-1">#</a></h3>
+<h3 id="features-2">Features<a class="anchor-link" href="#features-2">#</a></h3>
 <ul>
 <li><strong>Source control</strong> — a fourth sidebar view for the real git repositories behind the group&#39;s folder: staged and unstaged changes, diffs, stage / unstage / discard, commits and amend, history with the commit graph, branches, and fetch / pull / push over HTTPS or SSH with progress, cancellation and a trusted-host check. A merge resolves conflict blocks one by one in a three-pane editor, and a folder can hold more than one repository.</li>
 <li><strong>Local-only git state</strong> — ignore an untracked path through <code>.git/info/exclude</code>, or assume a tracked file unchanged in the index; both are reversible from <em>Local Git Settings</em>.</li>
@@ -149,7 +176,7 @@
 <li><strong>Explorer</strong> — batch rename, each tab group keeps its own folder, names sort naturally, and a folder&#39;s pictures open in a gallery tab. The Source Control panel can point the Explorer at a repository&#39;s folder, and a file the editor cannot read opens with the default app.</li>
 <li><strong>Smaller additions</strong> — a colour behind transparent pictures, recent files can be cleared or removed in bulk, and the history is refreshed when HEAD or a remote ref moves.</li>
 </ul>
-<h3 id="fixes-1">Fixes<a class="anchor-link" href="#fixes-1">#</a></h3>
+<h3 id="fixes-2">Fixes<a class="anchor-link" href="#fixes-2">#</a></h3>
 <ul>
 <li>The printed PDF is named after the document instead of the app.</li>
 <li>A hovered toast waits a moment before it closes.</li>
@@ -169,7 +196,7 @@
 <li>Asset paths are matched case-insensitively before the scope check.</li>
 <li>The Markdown outline stays in step with the preview, and the preview keeps its slot when the outline appears.</li>
 </ul>
-<h3 id="internal-1">Internal<a class="anchor-link" href="#internal-1">#</a></h3>
+<h3 id="internal-2">Internal<a class="anchor-link" href="#internal-2">#</a></h3>
 <ul>
 <li>Version bumped to 0.0.2</li>
 <li>Git commit wrappers kept behind <code>cfg(test)</code>; the merge test call collapsed by rustfmt</li>
@@ -211,7 +238,7 @@
   <aside class="docs-toc" aria-label="On this page">
     <div class="toc-inner">
       <p class="toc-title">On this page</p>
-      <ul class="toc-list"><li class="toc-h2"><a href="#v003-2026-11-07">v0.0.3 — 2026-11-07</a></li><li class="toc-h3"><a href="#features">Features</a></li><li class="toc-h3"><a href="#fixes">Fixes</a></li><li class="toc-h3"><a href="#internal">Internal</a></li><li class="toc-h2"><a href="#v002-2026-10-31">v0.0.2 — 2026-10-31</a></li><li class="toc-h3"><a href="#features-1">Features</a></li><li class="toc-h3"><a href="#fixes-1">Fixes</a></li><li class="toc-h3"><a href="#internal-1">Internal</a></li><li class="toc-h2"><a href="#v001-2026-10-21">v0.0.1 — 2026-10-21</a></li><li class="toc-h3"><a href="#what-it-is">What it is</a></li><li class="toc-h3"><a href="#what-it-does">What it does</a></li></ul>
+      <ul class="toc-list"><li class="toc-h2"><a href="#v004-2026-11-20">v0.0.4 — 2026-11-20</a></li><li class="toc-h3"><a href="#features">Features</a></li><li class="toc-h3"><a href="#fixes">Fixes</a></li><li class="toc-h3"><a href="#internal">Internal</a></li><li class="toc-h2"><a href="#v003-2026-11-07">v0.0.3 — 2026-11-07</a></li><li class="toc-h3"><a href="#features-1">Features</a></li><li class="toc-h3"><a href="#fixes-1">Fixes</a></li><li class="toc-h3"><a href="#internal-1">Internal</a></li><li class="toc-h2"><a href="#v002-2026-10-31">v0.0.2 — 2026-10-31</a></li><li class="toc-h3"><a href="#features-2">Features</a></li><li class="toc-h3"><a href="#fixes-2">Fixes</a></li><li class="toc-h3"><a href="#internal-2">Internal</a></li><li class="toc-h2"><a href="#v001-2026-10-21">v0.0.1 — 2026-10-21</a></li><li class="toc-h3"><a href="#what-it-is">What it is</a></li><li class="toc-h3"><a href="#what-it-does">What it does</a></li></ul>
       <a class="toc-top" href="#main">Back to top</a>
     </div>
   </aside>

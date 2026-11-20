@@ -79,7 +79,7 @@
 
   <aside class="docs-sidebar" id="docs-sidebar" data-docs-sidebar>
     <nav class="docs-nav" aria-label="文档目录">
-      <div class="docs-nav-group"><p class="docs-nav-heading">使用指南</p><ul class="docs-nav-list"><li><a href="index.html">概览</a></li><li><a href="editor.html">编辑器与窗口</a></li><li><a href="preview.html" aria-current="page">PDF 与图片</a></li><li><a href="files.html">文件操作</a></li><li><a href="history.html">版本记录</a></li><li><a href="git.html">源码管理</a></li><li><a href="encryption.html">加密文件</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">参考</p><ul class="docs-nav-list"><li><a href="data.html">数据存放位置</a></li><li><a href="development.html">开发指南</a></li><li><a href="changelog.html">发行说明</a></li><li><a href="license.html">许可证</a></li></ul></div>
+      <div class="docs-nav-group"><p class="docs-nav-heading">使用指南</p><ul class="docs-nav-list"><li><a href="index.html">概览</a></li><li><a href="editor.html">编辑器与窗口</a></li><li><a href="preview.html" aria-current="page">PDF 与图片</a></li><li><a href="archives.html">压缩包</a></li><li><a href="office.html">Office 文档</a></li><li><a href="files.html">文件操作</a></li><li><a href="history.html">版本记录</a></li><li><a href="git.html">源码管理</a></li><li><a href="encryption.html">加密文件</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">参考</p><ul class="docs-nav-list"><li><a href="data.html">数据存放位置</a></li><li><a href="development.html">开发指南</a></li><li><a href="changelog.html">发行说明</a></li><li><a href="license.html">许可证</a></li></ul></div>
     </nav>
   </aside>
   <div class="docs-backdrop" data-docs-backdrop hidden></div>
@@ -93,7 +93,7 @@
         <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
         <span aria-current="page">PDF 与图片</span>
       </nav>
-      <a class="source-link" href="https://github.com/wrolp/wrolp-editor/blob/main/README.zh.md" rel="noopener noreferrer" target="_blank">
+      <a class="source-link" href="https://github.com/wrolp/wrolp-editor.github.io/blob/main/content/pages/preview.zh.md" rel="noopener noreferrer" target="_blank">
         <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>在 GitHub 上查看源文件
       </a>
     </div>
@@ -120,6 +120,7 @@
 <li><strong>轮播</strong>：同一个画面按间隔自动前进。鼠标停在画面上会暂停，窗口失焦也会停；间隔与是否循环在设置里，也可从画廊工具条直接改。</li>
 <li><strong>整页网格</strong>：方形缩略图，可选大、小两档。点任意一张就按该位置进入「一张张」。</li>
 </ul>
+<p>上下排列还可以自己滚动：速度用数字设定（10–240 像素/秒），工具条或右键菜单都能改，双击或滚轮即停。这一视图里单击不会打开图片——「用一张张打开」在右键菜单里——所以选文字或拖动列表都不会丢失位置。压缩包里的图片同样能在这里打开，不必先解压；在压缩包内，画廊上方带面包屑，点到子目录就直接换过去，不必退出压缩包。</p>
 <p>普通标签里打开的图片，工具条上有「浏览所在文件夹」，会打开该目录并停在当前这张。画廊只读本地目录——不接图床、不上传、不生成直链。</p>
 <p>图片的透明像素背后默认垫一层跟随主题的棋盘格。工具条上的几个色块（设置 → 常规 里也有同样一排）可以把它换成白色、黑色，或者用系统取色器自选一个颜色——白色 logo 不再消失在浅色底上就是靠这个；画廊的缩略图一起跟着变，选完对所有图片都记住。</p>
 <p>只有视口附近的图片会挂载，离开两屏的 <code>&lt;img&gt;</code> 会从 DOM 移除，让 Chromium 释放已解码的位图；上下排列会用已量到的高度占位，滚回来不会跳位。上下排列里 ↑/↓ 滚动列表、←/→ 换图；「一张张」与轮播里 ←/→ 换图。<code>Home</code>/<code>End</code> 跳首末，<code>Space</code> 播放/暂停轮播（在上下排列里翻一屏），<code>Esc</code> 回到「一张张」。资源管理器里改名、删除或粘贴后，开着的画廊会重新取列表。<code>gallery://</code> 标签不会写进分组存档，重启只恢复文件标签。</p>
@@ -130,9 +131,9 @@
     <nav class="doc-pager" aria-label="文档翻页"><a class="pager-link is-prev" href="editor.html">
       <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>上一页</span>
       <span class="pager-name">编辑器与窗口</span>
-    </a><a class="pager-link is-next" href="files.html">
+    </a><a class="pager-link is-next" href="archives.html">
       <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>下一页</span>
-      <span class="pager-name">文件操作</span>
+      <span class="pager-name">压缩包</span>
     </a></nav>
   </div>
 

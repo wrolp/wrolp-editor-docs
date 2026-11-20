@@ -79,7 +79,7 @@
 
   <aside class="docs-sidebar" id="docs-sidebar" data-docs-sidebar>
     <nav class="docs-nav" aria-label="Documentation pages">
-      <div class="docs-nav-group"><p class="docs-nav-heading">Guides</p><ul class="docs-nav-list"><li><a href="index.html">Overview</a></li><li><a href="editor.html">Editor &amp; window</a></li><li><a href="preview.html" aria-current="page">PDFs &amp; pictures</a></li><li><a href="files.html">Working with files</a></li><li><a href="history.html">Version history</a></li><li><a href="git.html">Source control</a></li><li><a href="encryption.html">Encrypted files</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">Reference</p><ul class="docs-nav-list"><li><a href="data.html">Where data lives</a></li><li><a href="development.html">Development</a></li><li><a href="changelog.html">Release notes</a></li><li><a href="license.html">License</a></li></ul></div>
+      <div class="docs-nav-group"><p class="docs-nav-heading">Guides</p><ul class="docs-nav-list"><li><a href="index.html">Overview</a></li><li><a href="editor.html">Editor &amp; window</a></li><li><a href="preview.html" aria-current="page">PDFs &amp; pictures</a></li><li><a href="archives.html">Archives</a></li><li><a href="office.html">Office documents</a></li><li><a href="files.html">Working with files</a></li><li><a href="history.html">Version history</a></li><li><a href="git.html">Source control</a></li><li><a href="encryption.html">Encrypted files</a></li></ul></div><div class="docs-nav-group"><p class="docs-nav-heading">Reference</p><ul class="docs-nav-list"><li><a href="data.html">Where data lives</a></li><li><a href="development.html">Development</a></li><li><a href="changelog.html">Release notes</a></li><li><a href="license.html">License</a></li></ul></div>
     </nav>
   </aside>
   <div class="docs-backdrop" data-docs-backdrop hidden></div>
@@ -93,7 +93,7 @@
         <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chevron"/></svg>
         <span aria-current="page">PDFs &amp; pictures</span>
       </nav>
-      <a class="source-link" href="https://github.com/wrolp/wrolp-editor/blob/main/README.md" rel="noopener noreferrer" target="_blank">
+      <a class="source-link" href="https://github.com/wrolp/wrolp-editor.github.io/blob/main/content/pages/preview.en.md" rel="noopener noreferrer" target="_blank">
         <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>View source on GitHub
       </a>
     </div>
@@ -120,6 +120,7 @@
 <li><strong>Slideshow</strong>: the same pane advancing on a timer. Hovering the picture pauses it, and so does leaving the window; the pace and looping are settings, and also reachable from the gallery toolbar.</li>
 <li><strong>Grid</strong>: square thumbnails, small or large. Clicking any picture opens it one-by-one at that position.</li>
 </ul>
+<p>In the stacked view the column can also move on its own: the speed is typed as a number (10–240 pixels per second) from the toolbar or from the right-click menu, and a double click or the wheel stops it. A click in this view never opens a picture — <em>Open one by one</em> sits in the right-click menu — so selecting text or dragging the column does not lose your place. Pictures inside an archive open here too, without being unpacked first, and inside an archive the gallery keeps a breadcrumb of the folders it is showing, so a subfolder opens without leaving it.</p>
 <p>A picture opened in a normal tab has a <strong>Browse folder</strong> button that opens its folder and lands on it. The gallery reads only local folders — it does not contact an image host, upload anything or produce links.</p>
 <p>Behind a picture&#39;s transparent pixels sits a checkerboard taken from the theme. The row of swatches in the picture&#39;s toolbar — the same ones are in Settings → General — swaps that for white, black, or any colour the system picker gives you, which is how a white logo stops vanishing into a light backdrop; the choice covers the gallery&#39;s thumbnails as well, and is remembered for every picture.</p>
 <p>Only pictures near the viewport are mounted, and ones two screens away are removed from the DOM so Chromium can release the decoded bitmap; in the stacked view the space they occupied is kept, so scrolling back does not jump. In the stacked view <code>Up</code>/<code>Down</code> scroll the column and <code>Left</code>/<code>Right</code> move between pictures; in one-by-one and slideshow <code>Left</code>/<code>Right</code> move between pictures. <code>Home</code>/<code>End</code> jump to the ends, <code>Space</code> plays or pauses a slideshow (and pages the stacked view), and <code>Esc</code> returns to one-by-one. Folder changes made in the Explorer refresh an open gallery. <code>gallery://</code> tabs are never written into a saved group, so restarting brings back files only.</p>
@@ -130,9 +131,9 @@
     <nav class="doc-pager" aria-label="Documentation pages"><a class="pager-link is-prev" href="editor.html">
       <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Previous</span>
       <span class="pager-name">Editor &amp; window</span>
-    </a><a class="pager-link is-next" href="files.html">
+    </a><a class="pager-link is-next" href="archives.html">
       <span class="pager-dir"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Next</span>
-      <span class="pager-name">Working with files</span>
+      <span class="pager-name">Archives</span>
     </a></nav>
   </div>
 
