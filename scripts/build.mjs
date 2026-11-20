@@ -365,6 +365,7 @@ function baseContext(lang, from, title, description) {
     developmentHref: rel(from, pagePath('development', lang)),
     licenseHref: rel(from, pagePath('license', lang)),
     githubHref: project.github,
+    giteeHref: project.gitee,
     releasesHref: project.releases,
     latestHref: project.latest,
     downloadHref: project.download,
